@@ -2,7 +2,7 @@
 
 <b>A set of Python scripts that operate on the Project Gutenberg collection and its data. </b>
 
-This is not a mirror of Project Gutenberg; it is a collection of scripts for working with thier data. 
+This is not a mirror of Project Gutenberg. 
 
 Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
 
