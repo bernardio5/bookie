@@ -1,0 +1,13 @@
+*.mp3
+*.ogg
+*.spx
+*.m4b
+*.iso
+*.rar
+*.iso.*
+*-mp3.zip
+*-ogg.zip
+*-spx.zip
+*-m4b.zip
+*.iso.zip
+*.rar.zip

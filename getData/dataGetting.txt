@@ -1,0 +1,22 @@
+
+Getting all the data: 
+
+1) Getting the books:
+
+Install cygwin so you can use the "rsync" command
+
+This is the command to pull the gutenberg directory tree from the "slow" server:
+
+> rsync -av --exclude-from='excl.txt' --del ftp.ibiblio.org::gutenberg /cygdrive/d/gbg
+
+Note presence of 'excl.txt', which contains regular expressions describing files to skip,
+mostly sound and CD/DVD data.
+
+This command can take a day or more to run. It can crash, but the "rsync" program is 
+able to resume downloads, so if you run restart it, you don't start over. 
+
+
+
+2) Getting the bibliography: 
+
+
