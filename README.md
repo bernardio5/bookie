@@ -1,24 +1,26 @@
 # bookie
 
-<b>A set of Python scripts that operate on the Project Gutenberg collection and its data. </b>
+<b>A set of Python scripts that operate on the Project Gutenberg collection and its metadata. </b>
 
-This is not a mirror of Project Gutenberg; it is a collection of scripts for working with thier data. 
+This is not a mirror of Project Gutenberg (URL: www.gutenberg.org)
+
+In the repo you will be able to find: 
+1) Code that traverses the PG bibliographic records set and parses them into Python "book" objects
+2) Code that takes a "book" object and loads the book's content (txt, HTML)
+3) Code that outputs "book" objects as "epub"-formatted files
+4) Docs discussing the data formats involved
+5) Notes on organization
+6) Notes on the polite way to get the data
 
 Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
 
-How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. 
+How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. Also, talk about a worthwhile charity: www.gutenberg.org/donate 
 
-In the repo you will be able to find: 
-1) Code that traverses the PG bibliographic records set and parses them into Python objects
-2) Code that takes a record object and loads the corresponding TXT, HTML, or other-format object into a Python object
-3) Code that outputs the book objects as "epub"-formatted books
-4) Docs discussing the data formats involved
-5) Notes on organization
-6) There are non-book things in the PG archive; they are ignored. 
+There are non-book things in the PG archive; they are ignored. 
 
 <b>About the EPub format, and the version these scripts make: </b>
 
-The EPub format is open, but there are many flavors. It's basically a TAR archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
+The EPub format is open, but there are many flavors. It's basically a zip archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
 
 There are several EPub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
 
