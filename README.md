@@ -2,11 +2,11 @@
 
 <b>A set of Python scripts that operate on the Project Gutenberg collection and its data. </b>
 
-This is not a mirror of Project Gutenberg. 
+This is not a mirror of Project Gutenberg (URL: www.gutenberg.org)
 
 Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
 
-How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. 
+How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. I describe how to do this in the files in the "dataGetting" directory. Also, talk about a worthwhile charity: give them money! 
 
 In the repo you will be able to find: 
 1) Code that traverses the PG bibliographic records set and parses them into Python objects
