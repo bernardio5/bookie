@@ -1,13 +1,13 @@
 # bookie
 
-<b>A set of Python scripts that operate on the Project Gutenberg collection and its data. </b>
+<b>A set of Python scripts that operate on the Project Gutenberg collection and its metadata. </b>
 
 This is not a mirror of Project Gutenberg (URL: www.gutenberg.org)
 
 In the repo you will be able to find: 
-1) Code that traverses the PG bibliographic records set and parses them into Python objects
-2) Code that takes a record object and loads the corresponding TXT, HTML, or other-format object into a Python object
-3) Code that outputs the book objects as "epub"-formatted books
+1) Code that traverses the PG bibliographic records set and parses them into Python "book" objects
+2) Code that takes a "book" object and loads the book's content (txt, HTML)
+3) Code that outputs "book" objects as "epub"-formatted files
 4) Docs discussing the data formats involved
 5) Notes on organization
 6) Notes on the polite way to get the data
