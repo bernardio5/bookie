@@ -24,21 +24,21 @@ There are several EPub format checkers, and they're helpful, but they don't solv
 
 -- Apple Books, which is not great at dealing with much of the CSS formatting in the PG collection. Seriously Apple: unit tests maybe? But Apple at least is willing to try to let you use EPubs, and when they do load, provide a graceful reading experience, esp. on iPad minis!
 
--- Kindles mostly will not load epubs. Most Kindles will view web pages, so blame me-- Amazon is forcing you to buy public-domain data in their secret, propritary Kindle format. Yes, there are Kindle-exporting tools-- feel free. 
+-- Kindles mostly will not load epubs. Most Kindles will view web pages, so don't blame me-- Amazon is trying to force you to buy public-domain data in their propritary, ever-mutating, eyeball-tracking, arbitrarily-revokable Kindle format. Yes, there are Kindle-exporting tools: nah. 
 
 -- CaLibre is great because you can single-operation add a directory full of EPubs, whereupon it automatically generates a searchable library database from embedded data. It also can act as a web server for your collection, which has excellent support for browsing. CaLibre, as of 2019, does not do a great job of handling book collections the size of PG, but it is lovely software for a lot of reasons. 
 
--- Web browsers are nice because they have debuggers that throw errors that I can get rid of, but the reading experiences they provide are not great. 
+-- Web browsers are nice because they have debuggers that throw errors that I can get rid of, but the reading experiences they provide are not great. I've tested in Edge, Chrome, Safari, and Firefox. 
 
 -- There are other e-book readers, but I don't own them. 
 
--- I have used several online and downloadable EPub format checkers, which are comparable to the browsers-- they generate bug reports that I can respond to, but they're not readers, and don't always lead to fixes that add support. 
+-- I have used several online and downloadable EPub format checkers, which are comparable to the browsers-- they generate bug reports that I can respond to, but they're not readers, and don't always lead to fixes that add support. These include: ___. 
 
 So, the main goal of this EPub generator is multi-platform support, and presentation of a maximum amount of bibliographic data, for the sake of search and browsing. The beauty of the books in the reader is a TBA. 
 
 I do not have automated testing for this.
 
-<b>About the covers:</b>
+<b>About the covers and formatting:</b>
 
 I want to have distinctive covers for all the books that include legible author/title. Apple Books, Calibre, and the Internet Archive present book cover images as part of browsing. It helps, when you've got a little set of books in your reader, to have a distinctive image for the book cover, so the EPub scripts generate cover JPGs for all the books. 
 
@@ -46,12 +46,13 @@ EPub supports having a cover HTML page, but the sketchiness of CSS support means
 
 The covers my scripts make are fabulously ugly, like granny's-panties ugly. It's kind of deliberate? I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, and ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
 
-When there are scans of book covers, they almost never have legible Author/Title. They can be elegant, but usually in a generic way. They are usually really beat-up. If a cover image can be automatically identified (I esimate I can, for ~15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random. I have a collection ~20 "book front" images that I tint to some awful random pastel shade, paste on a black on white Author/Title label, paste on a from-the-book image, and that's the cover.png. 
+When the PG data has a scan of a book's cover, it almost never has a legible Author/Title. The covers can be elegant, but usually in a generic way, and they're usually really beat-up. If a cover image can be automatically identified (maybe ~15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random. I have a collection ~20 "book front" images that I tint to some awful random pastel shade, paste on a black on white Author/Title label, paste on the from-the-book image, and that's the cover.png. 
 
+Page formatting is mostly TBA. Most readers do a fine job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML page formatting is something to avoid. I intend to look into this more; it seems like some minimal work that removes formatting could improve a lot of things. 
 
 <b>About Organizing your University-Scale Library: </b>
 
-If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- you've never owned a library so big you can't know what's in it! The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
+If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- it's library so big that you can't know what's in it. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
 
 PG maintains a set of XML bibliographic records, and they're pretty good about Author/Title/Subject, really Author(Translator,Second Author,Editor)/Title(Subtitle,Subsubtitle)/Subject(LOC classification)/Date(of generation). Librarians get advanced degrees about sorting this many books! 
 
@@ -59,7 +60,7 @@ The Library Of Congress (of the United States) publishes a well-documented sorti
 
 Amazon has much better similarity data for books, and is probably worth a crawl for the sake of gathering that. TBD! 
 
-I'd like to generate an HTML library tree as a user interface, but WIP. 
+I'd like to generate an HTML library tree as a user interface: WIP. 
 
 I am aware of the Kiwix project, and respect it. I'm kind of working in parallel. 
 
