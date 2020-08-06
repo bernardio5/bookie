@@ -65,6 +65,7 @@ I'd like to generate an HTML library tree as a user interface: WIP.
 I am aware of the Kiwix project, and respect it. I'm kind of working in parallel. 
 
 <b>About the racism</b>
+
 Project Gutenberg is about the preservation of public-domain texts, which are mostly old books from the United States, and so, sadly, largely written and illustrated by flaming sexist bigots. The scripts don't scan for content. The cover generator therefore does kick out a fair amount of racist awfulness that is just not seen in today's book market. 
 
 I'm sorry about that. 
