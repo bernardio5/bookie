@@ -19,7 +19,7 @@ There are non-book things in the PG archive; they are ignored.
 
 <b>About the EPub format, and the version these scripts make: </b>
 
-The EPub format is open, but there are many flavors. It's basically a TAR archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
+The EPub format is open, but there are many flavors. It's basically a zip archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
 
 There are several EPub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
 
