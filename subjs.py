@@ -18,23 +18,6 @@ import numpy as np
 # so that's the role of the two-letter "LC"'s
 # so, prepend those if you can. 
 
-class author: 
-    def __init__(self):
-        self.gutenId = " "
-        self.name = " "
-        self.birth = " "
-        self.death = " "
-        self.workIds = []
-        self.wikiLink = " "
-
-    def authTag(self):
-        nm = self.name.replace(" ","_")
-        nm += "_" + self.gutenId 
-        return nm
-
-    def calDir(self):
-        return "D:\\library\\newCal\\" + self.authTag()
-
 
 # all the book data
 class book:

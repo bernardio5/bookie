@@ -1,0 +1,115 @@
+Calibre library "format"
+
+Is a directory layout
+
+root dir is the name of the library
+
+One directory per author
+	Dir name is Lastname, First Middle, Prefix, born yr - died yr 
+	eg Newton, Isaac, Sir, 1642-1727
+
+	but I don't think calibre cares very much
+	also: character limit, 
+
+
+Sub dir in author dir
+	Book Title
+
+Sub dir in each book dir
+	cover.jpg
+	book as whatever format, file name is book_dir_name + ' - ' + author_dir_name
+	metadata.opf
+
+
+
+What's in an .opf?
+
+-- says this is xml
+<?xml version='1.0' encoding='utf-8'?>
+-- says this xml is doc'd at 
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+-- more same
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+-- is calibre doc
+        <dc:identifier opf:scheme="calibre" id="calibre_id">16</dc:identifier>
+-- is 
+        <dc:identifier opf:scheme="uuid" id="uuid_id">a479fce7-8cf2-46e9-980f-89e02b0a4963</dc:identifier>
+        
+
+        <dc:title>The Journal and Essays of John Woolman</dc:title>
+        <dc:creator opf:file-as="1720-1772, Woolman John" opf:role="aut">Woolman John 1720-1772</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (3.47.1) [https://calibre-ebook.com]</dc:contributor>
+        <dc:date>2015-08-12T04:00:00+00:00</dc:date>
+        <dc:description>
+        &lt;div&gt;&lt;p&gt;
+        This work has been selected by scholars as being culturally important, and is part of the knowledge base of civilization as we know it. This work was reproduced from the original artifact, and remains as true to the original work as possible. Therefore, you will see the original copyright references, library stamps (as most of these works have been housed in our most important libraries around the world), and other notations in the work.  
+         &lt;/p&gt;
+&lt;p&gt;This work is in the public domain in the United States of America, and possibly other nations. Within the United States, you may freely copy and distribute this work, as no entity (individual or corporate) has a copyright on the body of the work.  &lt;/p&gt;
+&lt;p&gt;As a reproduction of a historical artifact, this work may contain missing or blurred pages, poor pictures, errant marks, etc. Scholars believe, and we concur, that this work is important enough to be preserved, reproduced, and made generally available to the public. We appreciate your support of the preservation process, and thank you for being an important part of keeping this knowledge alive and relevant.  &lt;/p&gt;
+&lt;p&gt;**&lt;/p&gt;&lt;/div&gt;</dc:description>
+        <dc:publisher>Andesite Press</dc:publisher>
+        <dc:identifier opf:scheme="GOOGLE">T1izvQEACAAJ</dc:identifier>
+        <dc:identifier opf:scheme="ISBN">9780343055523</dc:identifier>
+        <dc:identifier opf:scheme="AMAZON">1296814807</dc:identifier>
+        <dc:language>eng</dc:language>
+        <dc:subject>http://www.archive.org/details/journalofjohnwoo00woolrich</dc:subject>
+        <meta content="{&quot;Woolman John 1720-1772&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2019-09-07T16:05:28+00:00" name="calibre:timestamp"/>
+        <meta content="Journal and Essays of John Woolman, The" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>
+
+
+
+
+272kb * 60,182 books = ~15GB-- say 32. 
+
+
+
+
+//////////////////// made by giving CaLibre a .txt, then editing metatdata in its dialog
+
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">8</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">c70ab2ea-ad66-40e0-8fb8-3d5ecf7c5ba7</dc:identifier>
+        <dc:title>Webster's Dictionary</dc:title>
+        <dc:creator opf:file-as="Webster, Nathaniel" opf:role="aut">Nathaniel Webster</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (3.47.1) [https://calibre-ebook.com]</dc:contributor>
+        <dc:date>0101-01-01T00:00:00+00:00</dc:date>
+        <dc:language>en</dc:language>
+        <meta content="{&quot;Nathaniel Webster&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2019-09-20T11:19:20.320000+00:00" name="calibre:timestamp"/>
+        <meta content="Webster's Dictionary" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>
+
+
+/////////////////////////////////////////// giving it an htm and editing
+////////////////////// doesn't work: calibre doesn't attempt htm-- just opens dir. 
+
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">9</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">5d640768-07c6-4567-abbc-24cbacc7bce8</dc:identifier>
+        <dc:title>How to Write Letters</dc:title>
+        <dc:creator opf:file-as="Crowther, Mary Owens" opf:role="aut">Mary Owens Crowther</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (3.47.1) [https://calibre-ebook.com]</dc:contributor>
+        <dc:date>0101-01-01T00:00:00+00:00</dc:date>
+        <dc:language>eng</dc:language>
+        <meta content="{&quot;Mary Owens Crowther&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2019-09-20T11:24:16.198000+00:00" name="calibre:timestamp"/>
+        <meta content="How to Write Letters" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>
