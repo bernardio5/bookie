@@ -1,0 +1,10 @@
+
+
+
+Book 
+http://www.nltk.org/book/ch01.html
+
+Data for book exercises
+http://www.nltk.org/data.html
+
+

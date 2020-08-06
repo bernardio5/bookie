@@ -1,0 +1,533 @@
+Gutenfmt
+
+
+D:/library/gutenbergRecs/cache/epub/X/pgX.rdf
+
+where X is a number 0 - 34737
+X is the directory name, and in all the dir I've looked in, there's one file. 
+ if (child.tag == "dcterms:hasFormat"):
+                rsc = child[0].get("rdf:about")
+                if (rsc.Contains("jpg")): 
+                    #it's the cover? or just scan the dir for images? 
+
+            if (child.tag == "dcterms:hasFormat"):
+                rsc = child[0].get("rdf:about")
+                if (rsc.Contains(".epub.images")): 
+                    book.EpubImageURL = rsc
+
+            if (child.tag == "dcterms:hasFormat"):
+                rsc = child[0].get("rdf:about")
+                if (rsc.Contains(".epub.noimages")):
+                   
+                    book.EpubNoImageURL = rsc
+
+ <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.epub.images">
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-11-01T01:02:23.803522</dcterms:modified>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">129184</dcterms:extent>
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="Ne3894cbad98a4655b13b4e2d3739333d">
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">application/epub+zip</rdf:value>
+          </rdf:Description>
+        </dcterms:format>
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+
+
+            if (child.tag == "dcterms:hasFormat"):
+                rsc = child[0].get("rdf:about")
+                if (rsc.Contains(".txt")): 
+                    book.TextURL = rsc
+
+            if (child.tag == "dcterms:creator"):
+                rsc = child[0].get("rdf:about")
+                book.authorIds.Append(rsc)
+                for gchild in child[0]:
+                    if (gchild.tag == "pgterms:name"):
+                        book.AuthorNames.Append(gchild.text)  # um no
+                    if (gchild.tag == "pgterms:birth"):
+                        book.AuthorNames.Append(gchild.text)
+                    if (gchild.tag == "pgterms:death"):
+                        book.AuthorNames.Append(gchild.text)
+
+            if (child.tag == "dcterms:title"):
+                book.title = child.text
+            if (child.tag == "dcterms:language"):
+                book.language = child[0][0].text
+            if (child.tag == "dcterms:type"):
+                memOf = child[0].find("rdf:value").text
+
+for x=21
+
+The book's displayed title is "Aesop's Fables by Aesop"
+There is a "bibliographic record page"
+
+All "dcterms" and "macrel" records are in a block of
+	<rdf:RDF xml:base="http://www.gutenberg.org/" ...>
+	  	<pgterms:ebook rdf:about="ebooks/21">              
+	    ...
+	    </pgterms>
+	</rdf:RDF>
+
+  root = rdf:RDF
+  root[0] = pgterms:ebook
+  relevent data is in root[0][i]
+
+DOWNLOADS PAGE -- "no cover available"
+	<dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/cache/epub/2600/pg2600.cover.medium.jpg">
+        <dcterms:isFormatOf rdf:resource="ebooks/2600"/>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">21542</dcterms:extent>
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="N841c86d42c8d4bbeb328c7f033f04c00">
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">image/jpeg</rdf:value>
+          </rdf:Description>
+        </dcterms:format>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-08-18T13:42:08.680939</dcterms:modified>
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    if (root[0][i].tag == "dcterms:hasFormat"):
+      rsc = root[0][i][0].get("rdf:about")
+      if (rsc.Contains("jpg")): 
+        it's the cover? or just scan the dir for images? 
+
+    
+Read this book online: HTML 	406 kB 			
+	dc
+
+EPUB (with images) 	126 kB 			
+ 	<dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.epub.images">
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-11-01T01:02:23.803522</dcterms:modified>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">129184</dcterms:extent>
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="Ne3894cbad98a4655b13b4e2d3739333d">
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">application/epub+zip</rdf:value>
+          </rdf:Description>
+        </dcterms:format>
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+      </pgterms:file>
+    </dcterms:hasFormat>
+    Note: no sizes
+
+  if (root[0][i].tag == "dcterms:hasFormat"):
+    rsc = root[0][i][0].get("rdf:about")
+    if (rsc.Contains(".epub.images")): 
+      book.EpubImageURL = rsc
+
+	Note! link is as given by dcterms:hasFormat . pgterms:file -> rdf:about 
+       BUT WITH THE ADDITION OF A SESSION ID, presumably b/c crawls. 
+
+EPUB (no images) 	126 kB 			
+ 	<dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.epub.noimages">
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="N8f8004d76220451c835ff92ac5e0447c">
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">application/epub+zip</rdf:value>
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+          </rdf:Description>
+        </dcterms:format>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-11-01T01:02:24.118521</dcterms:modified>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">129185</dcterms:extent>
+      </pgterms:file>
+    </dcterms:hasFormat>
+    Note! link is as given by dcterms:hasFormat . pgterms:file -> rdf:about 
+       BUT WITH THE ADDITION OF A SESSION ID, presumably b/c crawls. 
+       but the plain link with no sesh loads fine. 
+
+  if (root[0][i].tag == "dcterms:hasFormat"):
+    rsc = root[0][i][0].get("rdf:about")
+    if (rsc.Contains(".epub.noimages")): 
+      book.EpubNoImageURL = rsc
+
+
+Kindle (with images) 	577 kB 			
+    dc
+Kindle (no images) 	577 kB 			
+	dc
+
+Plain Text UTF-8 	243 kB 			
+	<dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/21-0.txt">
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-10-28T12:49:54</dcterms:modified>
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">249131</dcterms:extent>
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="N71aba69b534c410a9993e6cfaa5ee020">
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">text/plain; charset=utf-8</rdf:value>
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+          </rdf:Description>
+        </dcterms:format>
+      </pgterms:file>
+    </dcterms:hasFormat>
+    Link is dcterms:hasFormat . pgterms.file -> rdf:about 
+    Note: make list of values found in dcterms:hasFormat . pgterms:file dcterms
+
+  if (root[0][i].tag == "dcterms:hasFormat"):
+    rsc = root[0][i][0].get("rdf:about")
+    if (rsc.Contains(".txt")): 
+      book.TextURL = rsc
+
+
+More File Types…
+	dc keep out
+
+BIBLIOGRAPHIC PAGE 	
+
+Author 	Aesop, 620? BCE-564? BCE  (is link to wikip page)
+	<dcterms:creator>
+      <pgterms:agent rdf:about="2009/agents/18">
+        <pgterms:alias>Æsop</pgterms:alias>
+        <pgterms:webpage rdf:resource="http://en.wikipedia.org/wiki/Aesop"/>
+        <pgterms:name>Aesop</pgterms:name>
+      </pgterms:agent>
+    </dcterms:creator>
+    Note: presence of dates => they have a DB separate from RDF
+
+  if (root[0][i].tag == "dcterms:creator"):
+    rsc = root[0][i][0].get("rdf:about")
+    book.authorIds.Append(rsc)
+    for child in root[0][i][0]:
+      if (child.tag == "pgterms:name"):
+        book.AuthorNames.Append(child.text)
+      
+
+Translator 	Townsend, George Fyler, 1814-1900  (is link to wikip page)
+	<marcrel:trl>
+      <pgterms:agent rdf:about="2009/agents/19">
+        <pgterms:birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1814</pgterms:birthdate>
+        <pgterms:deathdate rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1900</pgterms:deathdate>
+        <pgterms:webpage rdf:resource="http://en.wikipedia.org/wiki/George_Fyler_Townsend"/>
+        <pgterms:name>Townsend, George Fyler</pgterms:name>
+        <pgterms:alias>Townsend, George Tyler</pgterms:alias>
+      </pgterms:agent>
+    </marcrel:trl>
+
+    bah bored
+
+Title 	Aesop's Fables Translated by George Fyler Townsend
+	<dcterms:title>Aesop's Fables&#13;
+		Translated by George Fyler Townsend</dcterms:title>
+
+  if (root[0][i].tag == "dcterms:title"):
+    book.title = root[0][i].text
+      
+
+
+
+Note 	See also the early PG version #28, and comprehensive versions PG#11339 
+		tr. by V. S. Vernon Jones, and illustrated PG#18732.
+	<dcterms:description>See also the early PG version #28, 
+		and comprehensive versions PG#11339 tr. by V. S. Vernon Jones, 
+		and illustrated PG#18732.</dcterms:description>
+
+Language 	English
+	<dcterms:language>
+      <rdf:Description rdf:nodeID="Nc315bd09971a4af0b554f8a571959da1">
+        <rdf:value rdf:datatype="http://purl.org/dc/terms/RFC4646">en</rdf:value>
+      </rdf:Description>
+    </dcterms:language>
+  if (root[0][i].tag == "dcterms:language"):
+    book.title = root[0][i][0][0].text
+      
+
+
+LoC Class 	PA: Language and Literatures: Classical Languages and Literature
+LoC Class 	PZ: Language and Literatures: Juvenile belles lettres
+ 	<dcterms:subject>
+      <rdf:Description rdf:nodeID="N251d03ade4604f458fb9b77a24aa4a7e">
+          <dcam:memberOf rdf:resource="http://purl.org/dc/terms/LCC"/>
+          <rdf:value>PA</rdf:value>
+      </rdf:Description>
+    </dcterms:subject>
+
+    <dcterms:subject>
+      <rdf:Description rdf:nodeID="N7c162392f74948e0994c45d3ed1e0420">
+          <dcam:memberOf rdf:resource="http://purl.org/dc/terms/LCC"/>
+          <rdf:value>PZ</rdf:value>
+      </rdf:Description>
+    </dcterms:subject>
+
+Subject 	Fables, Greek -- Translations into English
+Subject 	Aesop's fables -- Translations into English
+
+    <dcterms:subject>
+      <rdf:Description rdf:nodeID="N853492e7b6b94d17a76a7c6419d9239b">
+ 	        <rdf:value>Aesop's fables -- Translations into English</rdf:value>
+      </rdf:Description>
+	</dcterms:subject>
+
+	<dcterms:subject>
+      <rdf:Description rdf:nodeID="N7547ef0dba474110a58537f652f6a1da">
+          <rdf:value>Fables, Greek -- Translations into English</rdf:value>
+          <dcam:memberOf rdf:resource="http://purl.org/dc/terms/LCSH"/>
+      </rdf:Description>
+    </dcterms:subject>
+	Note: multiples
+
+    if (root[0][i].tag == "dcterms:subject"):
+      memOf = root[0][i][0].find("dcam.memberOf")
+ok this is a mess
+
+    Note: need an index for "PA" => "Classical Languages and Literature"
+      http://www.loc.gov/catdir/cpso/lcco/
+
+
+Category 	Text
+ 	<dcterms:type>
+      <rdf:Description rdf:nodeID="Nb99883eeeeae4c54811d26c1d2a9a296">
+        <rdf:value>Text</rdf:value>
+        <dcam:memberOf rdf:resource="http://purl.org/dc/terms/DCMIType"/>
+      </rdf:Description>
+    </dcterms:type>
+    if (root[0][i].tag == "dcterms:type"):
+      memOf = root[0][i][0].find("rdf:value").text
+
+
+EBook-No. 	21
+	Hah got that already
+
+Release Date 	Jun 25, 2008
+	Huh who cares.
+
+Copyright Status 	Public domain in the USA.
+	<dcterms:rights>Public domain in the USA.</dcterms:rights>
+  Nah.
+
+Downloads 	581 downloads in the last 30 days.
+	dc
+Price 	$0.00
+	dc
+
+
+==============================================================================
+==============================================================================
+==============================================================================
+==============================================================================
+==============================================================================
+==============================================================================
+whole pgX.rdf:
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xml:base="http://www.gutenberg.org/"
+  xmlns:marcrel="http://id.loc.gov/vocabulary/relators/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:cc="http://web.resource.org/cc/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:dcam="http://purl.org/dc/dcam/"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:pgterms="http://www.gutenberg.org/2009/pgterms/"
+>
+
+
+  <pgterms:ebook rdf:about="ebooks/21">
+    <marcrel:trl>
+      <pgterms:agent rdf:about="2009/agents/19">
+        <pgterms:birthdate rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1814</pgterms:birthdate>
+        <pgterms:deathdate rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1900</pgterms:deathdate>
+        <pgterms:webpage rdf:resource="http://en.wikipedia.org/wiki/George_Fyler_Townsend"/>
+        <pgterms:name>Townsend, George Fyler</pgterms:name>
+        <pgterms:alias>Townsend, George Tyler</pgterms:alias>
+      </pgterms:agent>
+    </marcrel:trl>
+
+
+
+    <dcterms:subject>
+      <rdf:Description rdf:nodeID="N853 492e 7b6b 94d1 7a76 a7c6 419d 9239 b">
+        <rdf:value>Aesop's fables -- Translations into English</rdf:value>
+        <dcam:memberOf rdf:resource="http://purl.org/dc/terms/LCSH"/>
+      </rdf:Description>
+    </dcterms:subject>
+
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/21-0.zip">
+      ...
+
+    <pgterms:downloads rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">374</pgterms:downloads>
+ 
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/21.zip">
+      ...
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:rights>Public domain in the USA.</dcterms:rights>
+
+    <dcterms:subject>
+      <rdf:Description rdf:nodeID="N251d03ade4604f458fb9b77a24aa4a7e">
+        <dcam:memberOf rdf:resource="http://purl.org/dc/terms/LCC"/>
+        <rdf:value>PA</rdf:value>
+      </rdf:Description>
+    </dcterms:subject>
+
+    <dcterms:subject>
+      <rdf:Description rdf:nodeID="N7c162392f74948e0994c45d3ed1e0420">
+        <dcam:memberOf rdf:resource="http://purl.org/dc/terms/LCC"/>
+        <rdf:value>PZ</rdf:value>
+      </rdf:Description>
+    </dcterms:subject>
+
+    <dcterms:type>
+      <rdf:Description rdf:nodeID="Nb99883eeeeae4c54811d26c1d2a9a296">
+        <rdf:value>Text</rdf:value>
+        <dcam:memberOf rdf:resource="http://purl.org/dc/terms/DCMIType"/>
+      </rdf:Description>
+    </dcterms:type>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.kindle.noimages">
+      ...
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/21.txt">
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">246891</dcterms:extent>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-07-14T12:49:14</dcterms:modified>
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="N164ca275868545e488ee93d8bc79d107">
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">text/plain; charset=us-ascii</rdf:value>
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+          </rdf:Description>
+        </dcterms:format>
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:license rdf:resource="license"/>
+    <dcterms:title>Aesop's Fables&#13;
+Translated by George Fyler Townsend</dcterms:title>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/21-0.txt">
+      ..
+        </dcterms:format>
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.rdf">
+       ...
+    </dcterms:hasFormat>
+
+    <dcterms:subject>
+      <rdf:Description rdf:nodeID="N7547ef0dba474110a58537f652f6a1da">
+        <rdf:value>Fables, Greek -- Translations into English</rdf:value>
+        <dcam:memberOf rdf:resource="http ://p url. org/ dc/t erms / LCSH"/>
+      </rdf:Description>
+    </dcterms:subject>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.epub.images">
+      ...
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:language>
+      <rdf:Description rdf:nodeID="Nc315bd09971a4af0b554f8a571959da1">
+        <rdf:value rdf:datatype="http://purl.org/dc/terms/RFC4646">en</rdf:value>
+      </rdf:Description>
+    </dcterms:language>
+
+    <dcterms:description>See also the early PG version #28, and comprehensive versions PG#11339 tr. by V. S. Vernon Jones, and illustrated PG#18732.</dcterms:description>
+    
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.epub.noimages">
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="N8f8004d76220451c835ff92ac5e0447c">
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">application/epub+zip</rdf:value>
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+          </rdf:Description>
+        </dcterms:format>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-11-01T01:02:24.118521</dcterms:modified>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">129185</dcterms:extent>
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/21-h/21-h.htm">
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="N819a0c4e8d3c4b018f907628561b7dce">
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">text/html; charset=utf-8</rdf:value>
+          </rdf:Description>
+        </dcterms:format>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">415975</dcterms:extent>
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-10-28T12:53:12</dcterms:modified>
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2008-06-25</dcterms:issued>
+
+    <dcterms:publisher>Project Gutenberg</dcterms:publisher>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/bnote-21.txt">
+        <dcterms:format>
+          <rdf:Description rdf:nodeID="N0b036e5dc0ea49de9791c3fc5862214c">
+            <dcam:memberOf rdf:resource="http://purl.org/dc/terms/IMT"/>
+            <rdf:value rdf:datatype="http://purl.org/dc/terms/IMT">text/plain; charset=us-ascii</rdf:value>
+          </rdf:Description>
+        </dcterms:format>
+        <dcterms:isFormatOf rdf:resource="ebooks/21"/>
+        <dcterms:extent rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">203</dcterms:extent>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2008-06-25T05:14:06</dcterms:modified>
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:creator>
+      <pgterms:agent rdf:about="2009/agents/18">
+        <pgterms:alias>Æsop</pgterms:alias>
+        <pgterms:webpage rdf:resource="http://en.wikipedia.org/wiki/Aesop"/>
+        <pgterms:name>Aesop</pgterms:name>
+      </pgterms:agent>
+    </dcterms:creator>
+    
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/21-h.zip">
+        ..
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/files/21/aesop.zip.info.txt">
+      ..
+    </dcterms:hasFormat>
+
+    <dcterms:hasFormat>
+      <pgterms:file rdf:about="http://www.gutenberg.org/ebooks/21.kindle.images">
+       ...
+      </pgterms:file>
+    </dcterms:hasFormat>
+
+  </pgterms:ebook>
+
+  <cc:Work rdf:about="">
+    <cc:license rdf:resource="https://creativecommons.org/publicdomain/zero/1.0/"/>
+    <rdfs:comment>Archives containing the RDF files for *all* our books can be downloaded at
+            http://www.gutenberg.org/wiki/Gutenberg:Feeds#The_Complete_Project_Gutenberg_Catalog</rdfs:comment>
+  </cc:Work>
+
+  <rdf:Description rdf:about="http://en.wikipedia.org/wiki/George_Fyler_Townsend">
+    <dcterms:description>Wikipedia</dcterms:description>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="http://en.wikipedia.org/wiki/Aesop">
+    <dcterms:description>Wikipedia</dcterms:description>
+  </rdf:Description>
+
+</rdf:RDF>
+
