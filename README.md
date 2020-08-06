@@ -44,19 +44,19 @@ I want to have distinctive covers for all the books that include legible author/
 
 EPub supports having a cover HTML page, but the sketchiness of CSS support means your best bet is a full-page JPG of the cover. 
 
-The covers my scripts make are fabulously ugly, like granny's-panties ugly. It's kind of deliberate? I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, and ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
+The covers my scripts make are fabulously ugly-- deliberately. I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, and ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is the one included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
 
-When the PG data has a scan of a book's cover, it almost never has a legible Author/Title. The covers can be elegant, but usually in a generic way, and they're usually really beat-up. If a cover image can be automatically identified (maybe ~15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random. I have a collection ~20 "book front" images that I tint to some awful random pastel shade, paste on a black on white Author/Title label, paste on the from-the-book image, and that's the cover.png. 
+When the PG data has a scan of a book's cover, it almost never has a legible Author/Title. The covers can be elegant, but usually in a generic way, and they're usually really beat-up. If a cover image can be automatically identified (maybe 15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random, otherwise I use a randomly-chosen image from a different PG book. I have a collection ~20 "book front" images that I tint to some a random pastel shade, paste on a black on white Author/Title label, paste on the from-the-book image, and that's the cover.png. Image + color + title + author + image => memorable.
 
-Page formatting is mostly TBA. Most readers do a fine job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML page formatting is something to avoid. I intend to look into this more; it seems like some minimal work that removes formatting could improve a lot of things. 
+Page formatting is mostly TBA. Most readers do a fine job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML page formatting is something to avoid. Attempts to embed images usually fight with the refonting and remargining and just make a mess. I intend to look into this more; it seems like low-hanging fruit. 
 
 <b>About Organizing your University-Scale Library: </b>
 
-If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- it's library so big that you can't know what's in it. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
+If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- it's a library so big that you can't know what's in it. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
 
 PG maintains a set of XML bibliographic records, and they're pretty good about Author/Title/Subject, really Author(Translator,Second Author,Editor)/Title(Subtitle,Subsubtitle)/Subject(LOC classification)/Date(of generation). Librarians get advanced degrees about sorting this many books! 
 
-The Library Of Congress (of the United States) publishes a well-documented sorting regime, though it is rather parochial. The Dewey Decimal System is proprietary, owned by OCLC, so I'm not using that.
+The Library Of Congress (of the United States) publishes a well-documented sorting regime, though it is rather parochial. The Dewey Decimal System is proprietary, owned by OCLC, so I'm not using that. PG often includes LOC classification, but not always. PG often includes ISBN numbers, but I don't think you can use those to organize, though I'm sure there would be a way to use them to find bibliographic data. 
 
 Amazon has much better similarity data for books, and is probably worth a crawl for the sake of gathering that. TBD! 
 
