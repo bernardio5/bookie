@@ -1,30 +1,66 @@
 # bookie
 
-A set of Python scripts that operate on a the Project Gutenberg collection. I have used them to convert most of PG's books to a standard "epub" format. 
+A set of Python scripts that operate on a the Project Gutenberg collection. 
 
-Project Gutenberg hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all publically-visible public-domain collections are one massive lawsuit from the "Writer's Guild" from obliteration. 
+Project Gutenberg hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized publically-visible public-domain collections are one massive lawsuit from the "Writer's Guild" from obliteration. 
 
-How I wish I had mined Google Books. Anyway, I have downloaded PG's content. This repo does not contain that.
+How I wish I had mined Google Books. Anyway, I have downloaded PG's content. This repo works with that data.
 
 This repo is not well-organized yet, because I am still feeling around for exactly what I want to do, and it's very much a side-project. 
 
 In the repo you will be able to find: 
 1) Code that traverses the PG bibliographics records set and parses those records into a Python object
 2) Code that takes a record object and loads the corresponding TXT, HTML, or other-format object into a Python object
-3) Code that outputs a Python book object as an "epub"-formatted book.
+3) Code that outputs a Python book object as an "epub"-formatted book
+4) Docs discussing the data formats involved
+5) Notes on organization
 
-Caveat: the epub format is open, but there are many flavors. It's basically a TAR archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that is "fairly pretty" and works with the maximum number of different readers. 
+About Organizing your University-Scale Library: 
 
-There are several EPub format checkers, and they're helpful, but they don't solve the problem entirely. 
+If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- you've never owned a library so big you can't know what's in it! The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
 
-My complete list of checkers and target viewling platforms is TBA, but does include Apple Books, CaLibre.
+PG maintains a set of XML bibliographic records, and they're pretty good about Author/Title/Subject, really Author(Translator,Second Author,Editor)/Title(Subtitle,Subsubtitle)/Subject(LOC classification)/Date(of generation). Librarians get advanced degrees about sorting this many books! 
 
-Kindles mostly will not load epubs. Most Kindles will view web pages, so don't yell at me-- Amazon is forcing you to buy public-domain data in their secret, propritary Kindle format. Yes, there are Kindle-exporting tools-- you do it.  
+The Library Of Congress (of the United States) publishes a well-documented sorting regime, though it is rather parochial. The Dewey Decimal System is proprietary, owned by OCLC, so I'm not using that.
 
-Apple Books is, surprise surprise, full of quirky demands, and is not great at dealing with much of the CSS formatting in the PG collection. Seriously Apple: unit tests maybe? But Apple at least is willing to try to let you use EPubs, and when they do load, provide a graceful reading experience. 
+Amazon has much better similarity data for books, and is probably worth a crawl for the sake of gathering that. TBD! 
 
-CaLibre is great because you can add a directory full of EPubs and it can populate a searchable database using embedded EPub bibliographical data. CaLibre, as of 2019, does not do a great job of handling books collections the size of PG.  
- 
-If you have 50 books, or 500, you can organize them informally, but 50,000 is another matter. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. There is a set of XML bibliographic records. 
 
-I'd like to make an HTML library tree as a user interface, but WIP. 
+About the EPub format, and the version these scripts make: 
+
+The epub format is open, but there are many flavors. It's basically a TAR archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
+
+There are several EPub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
+
+-- Apple Books, which is not great at dealing with much of the CSS formatting in the PG collection. Seriously Apple: unit tests maybe? But Apple at least is willing to try to let you use EPubs, and when they do load, provide a graceful reading experience, esp on iPad minis!
+
+-- Kindles mostly will not load epubs. Most Kindles will view web pages, so don't yell at me-- Amazon is forcing you to buy public-domain data in their secret, propritary Kindle format. Yes, there are Kindle-exporting tools-- feel free!  
+
+-- CaLibre is great because you can single-operation add a directory full of EPubs, whereupon it automatically generates a searchable library database from embedded data. It also can act as a web server for your collection. CaLibre, as of 2019, does not do a great job of handling books collections the size of PG, but it is lovely software for a lot of reasons. 
+
+-- Web browsers are nice because they have debuggers that throw errors that I can get rid of, but the reading experiences the provide are not great. 
+
+-- There are other e-book readers, but I don't own them. 
+
+-- I have used several online and downloadable EPub format checkers, which are comparable to the browsers-- they generate bug reports that I can respond to, but they're not readers, and don't always lead to fixes that add support. 
+
+So, the main goal of this EPub generator is multi-platform support, and presentation of a maximum amount of bibliographic data, for the sake of search and browsing. The beauty of the books in the reader is a TBA. 
+
+
+About the covers:
+
+I want to have distinctive covers for all the books that include legible author/title. Apple Books, Calibre, and the Internet Archive present book cover images as part of browsing. It helps, when you've got a little set of books in your reader, to have a distinctive image for the book cover, so the EPub scripts generate cover JPGs for all the books. 
+
+EPub supports having a cover HTML page, but the sketchiness of CSS support means your best bet is a full-page JPG of the cover. 
+
+The resulting covers are fabulously ugly! I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: uuuugly!! 
+
+I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is included, and so, so ugly. Kerning? Bah. 
+
+When there are scans of book covers, they almost never have legible Author/Title. They can be elegant, but usually in a generic way. They are usually really beat-up. If a cover image can be automatically identified (15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random. I have a collection ~20 "book front" images that I tint to some awful random pastel shade, paste on a black on white Author/Title label, paste on a from-the-book image, and that's the cover.png. 
+
+
+Etc:
+I'd like to generate an HTML library tree as a user interface, but WIP. 
+I am aware of the Kiwix project, and respect it. I'm kind of working in parallel. 
+
