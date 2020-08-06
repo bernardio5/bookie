@@ -9,12 +9,12 @@ Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly
 How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. 
 
 In the repo you will be able to find: 
-1) Code that traverses the PG bibliographics records set and parses those records into a Python object
+1) Code that traverses the PG bibliographic records set and parses them into Python objects
 2) Code that takes a record object and loads the corresponding TXT, HTML, or other-format object into a Python object
-3) Code that outputs a Python book object as an "epub"-formatted book
+3) Code that outputs the book objects as "epub"-formatted books
 4) Docs discussing the data formats involved
 5) Notes on organization
-6) There are non-book things in their archive; they are ignored. 
+6) There are non-book things in the PG archive; they are ignored. 
 
 <b>About the EPub format, and the version these scripts make: </b>
 
