@@ -1,12 +1,12 @@
 # bookie
 
-A set of Python scripts that operate on a the Project Gutenberg collection. 
+<b>A set of Python scripts that operate on a the Project Gutenberg collection. </b>
+
+This is not a mirror of Project Gutenberg. 
 
 Project Gutenberg hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized publically-visible public-domain collections are one massive lawsuit from the "Writer's Guild" from obliteration. 
 
-How I wish I had mined Google Books. Anyway, I have downloaded PG's content. This repo works with that data.
-
-This repo is not well-organized yet, because I am still feeling around for exactly what I want to do, and it's very much a side-project. 
+How I wish I had mined Google Books. 
 
 In the repo you will be able to find: 
 1) Code that traverses the PG bibliographics records set and parses those records into a Python object
@@ -14,19 +14,9 @@ In the repo you will be able to find:
 3) Code that outputs a Python book object as an "epub"-formatted book
 4) Docs discussing the data formats involved
 5) Notes on organization
+6) There are non-book things in their archive; they are ignored. 
 
-About Organizing your University-Scale Library: 
-
-If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- you've never owned a library so big you can't know what's in it! The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
-
-PG maintains a set of XML bibliographic records, and they're pretty good about Author/Title/Subject, really Author(Translator,Second Author,Editor)/Title(Subtitle,Subsubtitle)/Subject(LOC classification)/Date(of generation). Librarians get advanced degrees about sorting this many books! 
-
-The Library Of Congress (of the United States) publishes a well-documented sorting regime, though it is rather parochial. The Dewey Decimal System is proprietary, owned by OCLC, so I'm not using that.
-
-Amazon has much better similarity data for books, and is probably worth a crawl for the sake of gathering that. TBD! 
-
-
-About the EPub format, and the version these scripts make: 
+<b>About the EPub format, and the version these scripts make: </b>
 
 The epub format is open, but there are many flavors. It's basically a TAR archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
 
@@ -47,7 +37,7 @@ There are several EPub format checkers, and they're helpful, but they don't solv
 So, the main goal of this EPub generator is multi-platform support, and presentation of a maximum amount of bibliographic data, for the sake of search and browsing. The beauty of the books in the reader is a TBA. 
 
 
-About the covers:
+<b>About the covers:</b>
 
 I want to have distinctive covers for all the books that include legible author/title. Apple Books, Calibre, and the Internet Archive present book cover images as part of browsing. It helps, when you've got a little set of books in your reader, to have a distinctive image for the book cover, so the EPub scripts generate cover JPGs for all the books. 
 
@@ -60,7 +50,17 @@ I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is 
 When there are scans of book covers, they almost never have legible Author/Title. They can be elegant, but usually in a generic way. They are usually really beat-up. If a cover image can be automatically identified (15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random. I have a collection ~20 "book front" images that I tint to some awful random pastel shade, paste on a black on white Author/Title label, paste on a from-the-book image, and that's the cover.png. 
 
 
-Etc:
+<b>About Organizing your University-Scale Library: </b>
+
+If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- you've never owned a library so big you can't know what's in it! The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
+
+PG maintains a set of XML bibliographic records, and they're pretty good about Author/Title/Subject, really Author(Translator,Second Author,Editor)/Title(Subtitle,Subsubtitle)/Subject(LOC classification)/Date(of generation). Librarians get advanced degrees about sorting this many books! 
+
+The Library Of Congress (of the United States) publishes a well-documented sorting regime, though it is rather parochial. The Dewey Decimal System is proprietary, owned by OCLC, so I'm not using that.
+
+Amazon has much better similarity data for books, and is probably worth a crawl for the sake of gathering that. TBD! 
+
 I'd like to generate an HTML library tree as a user interface, but WIP. 
+
 I am aware of the Kiwix project, and respect it. I'm kind of working in parallel. 
 
