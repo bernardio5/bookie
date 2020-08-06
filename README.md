@@ -4,16 +4,17 @@
 
 This is not a mirror of Project Gutenberg (URL: www.gutenberg.org)
 
-Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
-
-How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. I describe how to do this in the files in the "dataGetting" directory. Also, talk about a worthwhile charity: give them money! 
-
 In the repo you will be able to find: 
 1) Code that traverses the PG bibliographic records set and parses them into Python objects
 2) Code that takes a record object and loads the corresponding TXT, HTML, or other-format object into a Python object
 3) Code that outputs the book objects as "epub"-formatted books
 4) Docs discussing the data formats involved
 5) Notes on organization
+6) Notes on the polite way to get the data
+
+Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
+
+How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. Also, talk about a worthwhile charity: www.gutenberg.org/donate 
 
 There are non-book things in the PG archive; they are ignored. 
 
