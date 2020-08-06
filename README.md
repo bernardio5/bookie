@@ -14,7 +14,8 @@ In the repo you will be able to find:
 3) Code that outputs the book objects as "epub"-formatted books
 4) Docs discussing the data formats involved
 5) Notes on organization
-6) There are non-book things in the PG archive; they are ignored. 
+
+There are non-book things in the PG archive; they are ignored. 
 
 <b>About the EPub format, and the version these scripts make: </b>
 
