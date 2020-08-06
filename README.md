@@ -2,11 +2,11 @@
 
 <b>A set of Python scripts that operate on a the Project Gutenberg collection. </b>
 
-This is not a mirror of Project Gutenberg. 
+This is not a mirror of Project Gutenberg; it is a collection of scripts for working with thier data. 
 
-Project Gutenberg hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized publically-visible public-domain collections are one massive lawsuit from the "Writer's Guild" from obliteration. 
+Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
 
-How I wish I had mined Google Books. 
+How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. 
 
 In the repo you will be able to find: 
 1) Code that traverses the PG bibliographics records set and parses those records into a Python object
@@ -18,17 +18,17 @@ In the repo you will be able to find:
 
 <b>About the EPub format, and the version these scripts make: </b>
 
-The epub format is open, but there are many flavors. It's basically a TAR archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
+The EPub format is open, but there are many flavors. It's basically a TAR archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
 
 There are several EPub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
 
--- Apple Books, which is not great at dealing with much of the CSS formatting in the PG collection. Seriously Apple: unit tests maybe? But Apple at least is willing to try to let you use EPubs, and when they do load, provide a graceful reading experience, esp on iPad minis!
+-- Apple Books, which is not great at dealing with much of the CSS formatting in the PG collection. Seriously Apple: unit tests maybe? But Apple at least is willing to try to let you use EPubs, and when they do load, provide a graceful reading experience, esp. on iPad minis!
 
--- Kindles mostly will not load epubs. Most Kindles will view web pages, so don't yell at me-- Amazon is forcing you to buy public-domain data in their secret, propritary Kindle format. Yes, there are Kindle-exporting tools-- feel free!  
+-- Kindles mostly will not load epubs. Most Kindles will view web pages, so blame me-- Amazon is forcing you to buy public-domain data in their secret, propritary Kindle format. Yes, there are Kindle-exporting tools-- feel free. 
 
--- CaLibre is great because you can single-operation add a directory full of EPubs, whereupon it automatically generates a searchable library database from embedded data. It also can act as a web server for your collection. CaLibre, as of 2019, does not do a great job of handling books collections the size of PG, but it is lovely software for a lot of reasons. 
+-- CaLibre is great because you can single-operation add a directory full of EPubs, whereupon it automatically generates a searchable library database from embedded data. It also can act as a web server for your collection, which has excellent support for browsing. CaLibre, as of 2019, does not do a great job of handling book collections the size of PG, but it is lovely software for a lot of reasons. 
 
--- Web browsers are nice because they have debuggers that throw errors that I can get rid of, but the reading experiences the provide are not great. 
+-- Web browsers are nice because they have debuggers that throw errors that I can get rid of, but the reading experiences they provide are not great. 
 
 -- There are other e-book readers, but I don't own them. 
 
@@ -36,6 +36,7 @@ There are several EPub format checkers, and they're helpful, but they don't solv
 
 So, the main goal of this EPub generator is multi-platform support, and presentation of a maximum amount of bibliographic data, for the sake of search and browsing. The beauty of the books in the reader is a TBA. 
 
+I do not have automated testing for this.
 
 <b>About the covers:</b>
 
@@ -43,11 +44,9 @@ I want to have distinctive covers for all the books that include legible author/
 
 EPub supports having a cover HTML page, but the sketchiness of CSS support means your best bet is a full-page JPG of the cover. 
 
-The resulting covers are fabulously ugly! I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: uuuugly!! 
+The covers my scripts make are fabulously ugly, like granny's-panties ugly. It's kind of deliberate? I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, and ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
 
-I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is included, and so, so ugly. Kerning? Bah. 
-
-When there are scans of book covers, they almost never have legible Author/Title. They can be elegant, but usually in a generic way. They are usually really beat-up. If a cover image can be automatically identified (15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random. I have a collection ~20 "book front" images that I tint to some awful random pastel shade, paste on a black on white Author/Title label, paste on a from-the-book image, and that's the cover.png. 
+When there are scans of book covers, they almost never have legible Author/Title. They can be elegant, but usually in a generic way. They are usually really beat-up. If a cover image can be automatically identified (I esimate I can, for ~15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random. I have a collection ~20 "book front" images that I tint to some awful random pastel shade, paste on a black on white Author/Title label, paste on a from-the-book image, and that's the cover.png. 
 
 
 <b>About Organizing your University-Scale Library: </b>
@@ -63,4 +62,14 @@ Amazon has much better similarity data for books, and is probably worth a crawl 
 I'd like to generate an HTML library tree as a user interface, but WIP. 
 
 I am aware of the Kiwix project, and respect it. I'm kind of working in parallel. 
+
+<b>About the racism</b>
+Project Gutenberg is about the preservation of public-domain texts, which are mostly old books from the United States, and so, sadly, largely written and illustrated by flaming sexist bigots. The scripts don't scan for content. The cover generator therefore does kick out a fair amount of racist awfulness that is just not seen in today's book market. 
+
+I'm sorry about that. 
+
+It would be worthwhile for PG to add a bigotry tag, but it would be a huge, huge job. 
+
+
+
 
