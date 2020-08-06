@@ -1,6 +1,6 @@
 # bookie
 
-<b>A set of Python scripts that operate on a the Project Gutenberg collection. </b>
+<b>A set of Python scripts that operate on the Project Gutenberg collection and its data. </b>
 
 This is not a mirror of Project Gutenberg; it is a collection of scripts for working with thier data. 
 
