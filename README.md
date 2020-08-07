@@ -34,7 +34,7 @@ There are several EPub format checkers, and they're helpful, but they don't solv
 
 -- There are other e-book readers, but I don't own them. 
 
--- I have used several online and downloadable EPub format checkers, which are comparable to the browsers-- they generate bug reports that I can respond to, but they're not readers, and don't always lead to fixes that add support. These include: ___. 
+-- I have used several online and downloadable EPub format checkers, which are comparable to the browsers-- they generate bug reports that I can respond to, but they're not readers, and don't always lead to fixes that add support. These include: EPUB-Checker and some web sites. 
 
 So, the main goal of this EPub generator is multi-platform support, and presentation of a maximum amount of bibliographic data, for the sake of search and browsing. The beauty of the books in the reader is a TBA. 
 
@@ -47,6 +47,8 @@ It helps, when you've got a little set of books in your reader, for the books to
 The cover JPGs my scripts make are fabulously ugly-- deliberately. I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is the one included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
 
 When the PG data has a scan of a book's cover, it almost never has a legible Author/Title. The covers can be elegant, but usually in a generic way, and they're usually really beat-up. If a cover image can be automatically identified (maybe 15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random, otherwise I use a randomly-chosen image from a different PG book. I have a collection ~20 "book front" images that I tint to some a random pastel shade, paste on a black on white Author/Title label, paste on the from-the-book image, and that's the cover.png. Image + color + title + author + image => memorable.
+
+Also, I'm a used-bookstore guy. I *love* elderly books. Though the dust is less tolerable than it used to be. No dust in this project!
 
 Page formatting is mostly TBA. Most readers do a fine job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML page formatting is something to avoid. Attempts to embed images usually fight with the refonting and remargining and just make a mess. I intend to look into this more; it seems like low-hanging fruit. 
 
@@ -70,20 +72,20 @@ Project Gutenberg is about the preservation of public-domain texts, which are mo
 
 <b>Project organization</b>
 There are folders: 
-  classes: Python base classes: author, book, a direcotry scanner, 
-  clipart: One of the scripts crawls the GB book data and copies image files out to a "clipart" directory. This is a sample, so you don't have to run that script before making books. All the images are from PG, and in the public domain. 
-  covers: Black-and-white images of old book covers, ready to be tinted and pasted on by the cover-generator
-  data: directory of other data files, mainly the Library of Congress classifications, to be used when I start making my library interface.
-  formats: text files with samples of the different XML formats, along with text about my guesses about what they mean/do/get used for
-  getData: instructions and helper files for retreiving PG data sets
-  The Python files in the root directory are the scripts themselves.
-  The other files are template/input XML and HTML files-- book parts. 
+1) classes: Python base classes: author, book, a direcotry scanner, 
+2) clipart: One of the scripts crawls the GB book data and copies image files out to a "clipart" directory. This is a sample, so you don't have to run that script before making books. All the images are from PG, and in the public domain. 
+3) covers: Black-and-white images of old book covers, ready to be tinted and pasted on by the cover-generator
+4) data: directory of other data files, mainly the Library of Congress classifications, to be used when I start making my library interface.
+5) formats: text files with samples of the different XML formats, along with text about my guesses about what they mean/do/get used for
+6) getData: instructions and helper files for retreiving PG data sets
+7) The Python files in the root directory are the scripts themselves.
+8) The other files in root are template/input XML and HTML files-- book parts. 
   
 <b>Future Work</b>
 1) Code that removes more of the CSS formatting in PG HTML files, and generally makes better main book texts. Removing the CSS is a priority; about 30% of EPubs with CSS fail to load in one reader or other, esp. Apple Books. 
 2) Code/Knowledge for mining and converting books from the Internet Archive & other sources, esp. books identified as being in the public domain.
 3) OCR experimentation for converting page images to text to EPub. It seems like research on this mostly petered out 5-10y ago, fine, the utilities should work pretty well now. 
-4) An HTML library interface that uses the LOC data to make a map of books, so you can wander the stacks. It looks like you could have the whole librrary in a 30GB directory, so with a Node server, it could go on most phones, a Raspberry Pi, a dongle on your router, etc. I'm imagining a "little Free library" with just a pi server, or a library kiosk. 
+4) An HTML library interface that uses the LOC data to make a map of books, so you can wander the stacks. It looks like you could have the whole librrary in a 30GB directory, so with a Node server, it could go on most phones, a Raspberry Pi, a dongle on your router, etc. I'm imagining a "little Free library" that is just a pi server, or a library kiosk. 
 5) Thinking about our world, in which ordinary citizens can own 50,000 books. : ) 
   
 
