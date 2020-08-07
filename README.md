@@ -12,7 +12,7 @@ In the repo you will be able to find:
 5) Notes on organization
 6) Notes on the polite way to get the data
 
-Project Gutenberg (PG) hosts a collection of ~65,000 public-domain texts, mostly books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
+Project Gutenberg (PG) hosts a collection of ~45,000 public-domain books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
 
 How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. Also, talk about a worthwhile charity: www.gutenberg.org/donate 
 
@@ -42,11 +42,9 @@ I do not have automated testing for this.
 
 <b>About the covers and formatting:</b>
 
-I want to have distinctive covers for all the books that include legible author/title. Apple Books, Calibre, and the Internet Archive present book cover images as part of browsing. It helps, when you've got a little set of books in your reader, to have a distinctive image for the book cover, so the EPub scripts generate cover JPGs for all the books. 
+It helps, when you've got a little set of books in your reader, for the books to have cover images-- basically, icons. So the scripts make covers. EPub supports having a cover HTML page, but the sketchiness of CSS support means it's better to just make a single JPG cover image. 
 
-EPub supports having a cover HTML page, but the sketchiness of CSS support means your best bet is a full-page JPG of the cover. 
-
-The covers my scripts make are fabulously ugly-- deliberately. I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, and ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is the one included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
+The cover JPGs my scripts make are fabulously ugly-- deliberately. I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is the one included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
 
 When the PG data has a scan of a book's cover, it almost never has a legible Author/Title. The covers can be elegant, but usually in a generic way, and they're usually really beat-up. If a cover image can be automatically identified (maybe 15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random, otherwise I use a randomly-chosen image from a different PG book. I have a collection ~20 "book front" images that I tint to some a random pastel shade, paste on a black on white Author/Title label, paste on the from-the-book image, and that's the cover.png. Image + color + title + author + image => memorable.
 
@@ -68,12 +66,25 @@ I am aware of the Kiwix project, and respect it. I'm kind of working in parallel
 
 <b>About the racism</b>
 
-Project Gutenberg is about the preservation of public-domain texts, which are mostly old books from the United States, and so, sadly, largely written and illustrated by flaming sexist bigots. The scripts don't scan for content. The cover generator therefore does kick out a fair amount of racist awfulness that is just not seen in today's book market. 
+Project Gutenberg is about the preservation of public-domain texts, which are mostly old books from the United States, and so, sadly, largely written and illustrated by flaming sexist bigots. Seriously, Punch Magazine: uugh. The scripts don't scan for content. The cover generator therefore does kick out a fair amount of racist awfulness. I'm sorry about that. 
 
-I'm sorry about that. 
-
-It would be worthwhile for PG to add a bigotry tag, but it would be a huge, huge job. 
-
-
+<b>Project organization</b>
+There are folders: 
+  classes: Python base classes: author, book, a direcotry scanner, 
+  clipart: One of the scripts crawls the GB book data and copies image files out to a "clipart" directory. This is a sample, so you don't have to run that script before making books. All the images are from PG, and in the public domain. 
+  covers: Black-and-white images of old book covers, ready to be tinted and pasted on by the cover-generator
+  data: directory of other data files, mainly the Library of Congress classifications, to be used when I start making my library interface.
+  formats: text files with samples of the different XML formats, along with text about my guesses about what they mean/do/get used for
+  getData: instructions and helper files for retreiving PG data sets
+  The Python files in the root directory are the scripts themselves.
+  The other files are template/input XML and HTML files-- book parts. 
+  
+<b>Future Work</b>
+1) Code that removes more of the CSS formatting in PG HTML files, and generally makes better main book texts. Removing the CSS is a priority; about 30% of EPubs with CSS fail to load in one reader or other, esp. Apple Books. 
+2) Code/Knowledge for mining and converting books from the Internet Archive & other sources, esp. books identified as being in the public domain.
+3) OCR experimentation for converting page images to text to EPub. It seems like research on this mostly petered out 5-10y ago, fine, the utilities should work pretty well now. 
+4) An HTML library interface that uses the LOC data to make a map of books, so you can wander the stacks. It looks like you could have the whole librrary in a 30GB directory, so with a Node server, it could go on most phones, a Raspberry Pi, a dongle on your router, etc. I'm imagining a "little Free library" with just a pi server, or a library kiosk. 
+5) Thinking about our world, in which ordinary citizens can own 50,000 books. : ) 
+  
 
 
