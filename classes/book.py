@@ -90,7 +90,8 @@ class book:
 
     # returns the path in e:\gbg that contains the book
     def makeGBGDir(self): 
-        res = "E:\\gbg\\"
+        thePaths = paths()
+        res = thePaths.contentDir
         lng = len(self.gutenId); 
         if (lng==1):
             res += "0\\"
@@ -236,7 +237,7 @@ class book:
         htPth = self.gbgDir + "\\" + self.gutenId + "-h\\"
         htmPath1 = htPth + self.gutenId + "-h.htm"
         htmPath2 = htPth + self.gutenId + "-h.html"
-        htmPath3 = htPth + self.gutenId + "-h.xhtml"# fucking pick one, kk?
+        htmPath3 = htPth + self.gutenId + "-h.xhtml"# jeez pick one, kk?
         self.imgPath = htPth + "images"
         scan = os.listdir(self.gbgDir)
         if (not os.path.isfile(self.txtPath)):
