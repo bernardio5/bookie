@@ -29,9 +29,6 @@ import sys
 #       make toc.ncx
 #       populate dir with .txt, cover, xml, htm, images
 
-# these are not the most beautiful books ever. 
-# eh, you can read them. 
-
 class author: 
     def __init__(self):
         self.gutenId = " "

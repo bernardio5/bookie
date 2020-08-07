@@ -4,118 +4,17 @@ import os
 from shutil import copyfile
 import xml.etree.ElementTree as ET 
 
-# how to make a personal library with 40k books in it. 
+from classes.paths import paths
+from classes.book import book
+from classes.scanner import scanner
 
-# unix/cygwin command to pull the gutenberg directory tree from the "slow" server.
-# note presence of 'excl.txt', which contains reg.expr for files to skip
-#   mostly sound and CD/DVD data. We're here for books, mister. 
-# rsync -av --exclude-from='excl.txt' --del ftp.ibiblio.org::gutenberg /cygdrive/d/gbg
-
-# steps: scan gb records for each record:
-#     read the record into a book object
-# after all are scanned
-# For each book
-#     add author to unique author list
-#     add subjects to unique subjs list
-#     add LibOfCongress entries to that
-#     check that you've got .txt, .htm, images, a cover
-#     make a CL directory
-#       populate dir with .txt, cover, xml, htm, images
-
-
-# same rec for author and translator. I prefer Homer by Chapman, y'know? 
-class author: 
-    def __init__(self):
-        self.gutenId = " "
-        self.name = " "
-        self.birth = " "
-        self.death = " "
-        self.workIds = []
-        self.wikiLink = " "
-
-    def authTag(self):
-        nm = self.name.replace(" ","_")
-        nm += "_" + self.gutenId 
-        return nm
-
-    def calDir(self):
-        return "D:\\library\\newCal\\" + self.authTag()
-
+# this program scans some or all of the GB data and enumerates authors 
+# and translators. A CaLibre library is a directory tree, root/author/book,
+# This makes that tree.
 
 # all the book data
 class book:
-    def __init__(self):
-        # pulled from GBg XML collection
-        self.gutenId = -1
-        self.title = " "
-        self.auths = []      # authors and translators
-        self.trns = []
-        self.auth = author() # scratch for parsing
-        self.subjects = []   # refine: lots of kitchen-sinking
-        self.formats = []    # do we care? we have to verify anyway.
-        self.language = " "
-        self.date = " "      # !! not present in GB XML! smh
-        # set by scanning the gbg dirs; set to "-" if absent
-        self.gbgDir = "-"    
-        self.txtPath = "-"    
-        self.htmPath = "-"
-        self.imgDir = "-"
-        self.coverImgPath = "-"
-
-    def bookTag(self):
-        nm = self.title.replace(" ","_") # del all chars not legal for windows paths! 
-        nm = nm.replace(":","_")
-        nm = nm.replace('"','') # also spaces cause they don't belong! 
-        nm = nm.replace("\r","_") # '"' y u no good?
-        nm = nm.replace("\n","") # ugh! newlines? scram
-        nm = nm[0:30]
-        return nm
-
-    # authTag for the whichth author or translator
-    def authTag(self, which):
-        ath = "-"
-        na = len(self.auths)
-        if (which<na):
-            ath = self.auths[which].authTag();
-        else:
-            wh = which - na
-            nt = len(self.trns)
-            if (wh<nt):
-                ath = self.trns[which].authTag();
-        return ath
-
-    # hah, a book report
-    def printSelf(self):
-        print("title:", self.title)
-        print("   ID:", self.gutenId)
-        for ath in self.auths:
-            print(" auth:", ath.authTag())
-        for ath in self.trns:
-            print(" trns:", ath.authTag())
-        fmts = "  fmt:"
-        for fm in self.formats:
-            fmts += fm[-16:] + " - "
-        print(fmts)            
-        for fm in self.subjects:
-            print(" subj:", fm)
-        print(" txt:" + self.txtPath)    
-        print(" htm:" + self.htmPath)
-        print(" img:" + self.imgDir)
-        print("  cv:" + self.coverImgPath)
-        print(" lang:", self.language)
-        print("--")
-
-    # returns the path in e:\gbg that contains the book
-    def makeGBGDir(self): 
-        res = "E:\\gbg\\"
-        lng = len(self.gutenId); 
-        if (lng==1):
-            res += "0\\"
-        for i in range(0,lng-1):
-            res += self.gutenId[i] + "\\"
-        res += self.gutenId;
-        return res
-
+  
     # looks in the gbg for the book's .txt, .htm, and images dir
     # if there are images, chooses one to use as the cover image
     # empty records are set to "-"
@@ -153,75 +52,6 @@ class book:
                     self.coverImgPath = self.imgPath + "\\" + fn
         print("    self.coverImgPath", self.coverImgPath)
         
-    # given a Gb ID and a path to an XML for it, scan the XML
-    def readGbXML(self, gid, xmlfile): 
-        self.gutenId = gid
-        self.gbgDir = self.makeGBGDir()
-        self.txtPath = self.gbgDir + "\\" + self.gutenId + ".txt"
-        tree = ET.parse(xmlfile) # create element tree object 
-        root = tree.getroot()  # get root element 
-        # print(xmlfile)
-        for rec in root:
-            tg = rec.tag.split('}',1)[-1]
-            if (tg == "ebook"):
-                bookRecs = rec
-        for child in bookRecs:
-            tg = child.tag.split('}',1)[-1]
-            # print(tg)
-            if (tg == "title"):
-                self.title = child.text
-            if (tg == "bookshelf"):
-                for gchild in child[0]:
-                    gctg = gchild.tag.split('}',1)[-1]
-                    if (gctg == "value"):
-                        self.subjects.append("Bookshelf: " + gchild.text)
-            if (tg == "hasFormat"):
-                vals = list(child[0].attrib.values())
-                self.formats.append(vals[0])
-            if (tg == "subject"):
-                for gchild in child[0]:
-                    gctg = gchild.tag.split('}',1)[-1]
-                    if (gctg == "value"):
-                        self.subjects.append(gchild.text)
-                    #if (gctg == "memberOf"):
-                    #   self.subjects.append(gchild.text)
-            if (tg == "creator"):
-                vals = list(child[0].attrib.values()) #23702
-                self.auth.gutenId = vals[0][12:]
-                for gchild in child[0]:
-                    gctg = gchild.tag.split('}',1)[-1]
-                    # print("  gctg:", gctg)
-                    if (gctg == "webpage"):
-                        vals = list(gchild.attrib.values())
-                        self.auth.wikiLink = vals[0]
-                    if (gctg == "name"):
-                        self.auth.name = gchild.text 
-                    if (gctg == "birthdate"):
-                        self.auth.birth = gchild.text 
-                    if (gctg == "deathdate"):
-                        self.auth.death = gchild.text
-                self.auths.append(self.auth)
-                self.auth = author()
-            if (tg == "trl"):
-                vals = list(child[0].attrib.values())
-                self.auth.gutenId = vals[0][12:]
-                for gchild in child[0]:
-                    gctg = gchild.tag.split('}',1)[-1]
-                    # print("  gctg:", gctg)
-                    if (gctg == "webpage"):
-                        vals = list(gchild.attrib.values())
-                        self.auth.wikiLink = vals[0]
-                    if (gctg == "name"):
-                        self.auth.name = gchild.text
-                    if (gctg == "birthdate"):
-                        self.auth.birth = gchild.text 
-                    if (gctg == "deathdate"):
-                        self.auth.death = gchild.text
-                self.trns.append(self.auth)
-                self.auth = author()
-            if (tg == "language"):
-                self.language = child[0][0].text
-        # self.printSelf()
 
     # ouput an XML suitable for Calibre for this book -- an ".opf"
     # --into the specified directory, since we're duplicating books. 
@@ -340,39 +170,6 @@ class book:
         for n in range(0,ntrs):
             self.calSingleOutput(n+nath)
 
-
-# mech for finding all records; iterator counter
-# we don't have a dir for every integer, so 
-# the index is not==GB book id; it's just a counter
-# get the GB ID for the dir contents by 
-# converting the dir's name to an int
-class scanner:
-    def __init__(self):
-        self.dirIndex = 0
-        self.allFiles = []
-        self.counter = 1
-        self.gbID = '-1'
-        self.last = -1
-        # find the top dir
-        dir = "D:\\library\\gutenbergRecs\\cache\\epub"
-        mess = [x[1] for x in os.walk(dir)]
-        self.allFiles = mess[0]
-        self.last = len(self.allFiles)
-        print("found ", self.last, " records")
-        if (self.last>0):
-            self.counter = 1
-
-    def getNextPath(self):
-        res = ''
-        dir = "D:\\library\\gutenbergRecs\\cache\\epub\\"
-        if (self.counter!=-1 and self.counter<self.last):
-            fls = self.allFiles[self.counter]
-            self.gbID = fls  # fls is the dir name. fls!=counter !
-            self.counter +=1
-            res = dir + fls + "\\pg" + fls + ".rdf"
-        else:
-            self.counter = -1
-        return res
 
 
 # iterator class. reads all PGb catalog records, 

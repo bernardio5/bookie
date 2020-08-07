@@ -68,25 +68,6 @@ class library:
             else: 
                 notDone = False
 
-    # instead of making an epub, you just move images to the clip art dir
-    def makeCovers(self):
-        notDone = True
-        ctr = 3000
-        self.scanner.skipTo(ctr)
-        while notDone:
-            ctr = ctr +1
-            if (ctr>4000):
-                notDone = False
-            pt = self.scanner.getNextPath();
-            if (len(pt)>0):
-                booky = book()
-                booky.readGbXML(self.scanner.gbID, pt)
-                if (booky.scanGBDir()==1):
-                    booky.addImagesToClips()
-                    print("Output rec#:", ctr, " -- ID:", self.scanner.gbID, " :", booky.title)
-                    print("-----------------")
-            else: 
-                notDone = False
 
     # a dignostic! try reading the GB XML's & print tally of various results
     def scanClassifier(self):

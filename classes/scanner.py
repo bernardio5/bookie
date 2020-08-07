@@ -1,7 +1,7 @@
 import os
 import sys
 
-from c_paths import paths
+from classes.paths import paths
 
 
 # mech for finding all records; iterator counter
@@ -17,9 +17,9 @@ class scanner:
         self.gbID = '-1'
         self.last = -1
         # find the top dir
-        paths = paths()
-        self.dir = paths.recordsDir
-        mess = [x[1] for x in os.walk(dir)]
+        thePaths = paths()
+        self.dir = thePaths.recordsDir
+        mess = [x[1] for x in os.walk(self.dir)]
         self.allFiles = mess[0]
         self.last = len(self.allFiles)
         print("found ", self.last, " records")

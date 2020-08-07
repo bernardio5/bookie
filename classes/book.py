@@ -4,8 +4,8 @@ import os
 from shutil import copyfile
 import xml.etree.ElementTree as ET 
 
-from c_paths import paths
-from c_author import author
+from classes.paths import paths
+from classes.author import author
 
 
 # all the book data
@@ -280,14 +280,13 @@ class book:
 
 
     # copies all the image from a book's /images to the clipart dir
-    def addImagesToClips(self):
-        base = "D:\\library\\pythonic\\clipart"
+    def addImagesToClips(self, clipDir):
         # write images
         if (self.imgPath!="-"):
             for fn in self.imgs:
                 if (".png" in fn) or ("jpg" in fn) or ("jpeg" in fn):
                     fromPt =self.imgPath + "\\" + fn
-                    toPt = base + "\\" + self.gutenId + "_" + fn
+                    toPt = clipDir + self.gutenId + "_" + fn
                     if os.path.isfile(fromPt):
                         copyfile(fromPt, toPt)
     # only needs to run once a year or so, right?

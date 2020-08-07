@@ -13,10 +13,10 @@ class paths:
 
         # dir in which the epub is assembled; will contain XML, HTML, & image files 
         # final step is zipping it up
-        self.scratchDir = 'D:\\library\\pythonic\\scratch'
+        self.scratchDir = 'D:\\library\\pythonic\\scratch\\'
         
         # root dir for the collection of gutenberg bibliographic records (.rdf)
-        self.recordsDir = "D:\\library\\gutenbergRecs\\cache\\epub"
+        self.recordsDir = "D:\\library\\gutenbergRecs\\cache\\epub\\"
 
         # root dir of all of the Gutenberg content 
         self.contentDir = "E:\\gbg\\"
