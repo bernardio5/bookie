@@ -71,11 +71,11 @@ There are folders:
 1) classes: Python base classes: author, book, a direcotry scanner, 
 2) clipart: One of the scripts crawls the GB book data and copies image files out to a "clipart" directory. This is a sample, so you don't have to run that script before making books. All the images are from PG, and in the public domain. 
 3) covers: Black-and-white images of old book covers, ready to be tinted and pasted on by the cover-generator
-4) data: directory of other data files, mainly the Library of Congress classifications, to be used when I start making my library interface
+4) data: directory of templates and other data files, mainly the Library of Congress classifications, to be used when I start making my library interface
 5) formats: text files with samples of the different XML formats, along with text about my guesses about what they mean/do/get used for
 6) getData: instructions and helper files for retreiving PG data sets
-7) The Python files in the root directory are the scripts themselves. They have internal comments that describe what they do. 
-8) The other files in root are template/input XML and HTML files-- book parts.
+7) scratch: the directory in which the epubs are assembled. As checked in, it contains the parts of the last book I made.
+8) The Python files in the root directory are the scripts themselves. They have internal comments that describe what they do. 
 
 <b>Future Work</b>
 1) Code that removes more of the CSS formatting in PG HTML files, and generally makes better main book texts. Removing the CSS is a priority; about 30% of EPubs with CSS fail to load in one reader or other, esp. Apple Books. 
