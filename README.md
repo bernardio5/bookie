@@ -12,7 +12,7 @@ In the repo you will be able to find:
 5) Notes on organization
 6) Notes on the polite way to get the data
 
-Project Gutenberg (PG) hosts a collection of ~45,000 public-domain books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centalized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
+Project Gutenberg (PG) hosts a collection of ~45,000 public-domain books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centralized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
 
 How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. Also, talk about a worthwhile charity: www.gutenberg.org/donate 
 
