@@ -42,11 +42,11 @@ I do not have automated testing for this. I need it.
 
 <b>About the covers and formatting:</b>
 
-It helps, when you've got a little set of books in your reader, for the books to have cover images-- basically, icons. So the scripts make covers. EPub supports having a cover HTML page, but the sketchiness of CSS support means it's better to just make a single JPG cover image. 
+It helps, when you've got a little set of books in your reader, for the books to have cover images-- basically, icons. So the scripts make covers. EPub supports having a cover HTML page, but the sketchiness of CSS support means it's better to just make a single PNG cover image. 
 
 The scripts use OpenCV to paste together the cover images. The background is a pastel-tinted image of an old book cover. On that, I paste a big black-and-white label with title, author(s), and the PG ID number. Then I add one image, either of the book's cover (if there is one), or any image from the book. If neither is available, I use an image chosen randomly from another PG book. 
 
-Which, of course, is super ugly-- but I love ugly old books, obviously. I'm trying for the "Library Bindings" you see in university libraries, with the brutal font labels printed on dot-matrix printers from the 80s. 
+Which, of course, is super ugly-- but I love ugly old books, obviously. I'm trying for the "Library Bindings" you see in university libraries, with the brutal font labels printed on dot-matrix printers from the 80s. The repo has a cover.png in root; I'm telling you: it's just what I had in mind. 
 
 Inside the books, page formatting is mostly TBA. Most readers do an OK job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML/CSS page formatting is something to avoid. Attempts to embed images usually just make a mess. I intend to look into this more; it seems like low-hanging fruit. Some widely-implemented subset of CSS? 
 
