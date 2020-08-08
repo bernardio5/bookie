@@ -69,18 +69,19 @@ There are folders:
 1) classes: Python base classes: author, book, a direcotry scanner, 
 2) clipart: One of the scripts crawls the GB book data and copies image files out to a "clipart" directory. This is a sample, so you don't have to run that script before making books. All the images are from PG, and in the public domain. 
 3) covers: Black-and-white images of old book covers, ready to be tinted and pasted on by the cover-generator
-4) data: directory of other data files, mainly the Library of Congress classifications, to be used when I start making my library interface.
+4) data: directory of other data files, mainly the Library of Congress classifications, to be used when I start making my library interface
 5) formats: text files with samples of the different XML formats, along with text about my guesses about what they mean/do/get used for
 6) getData: instructions and helper files for retreiving PG data sets
-7) The Python files in the root directory are the scripts themselves. They have internal comments that describewhat they do. 
-8) The other files in root are template/input XML and HTML files-- book parts. 
-  
+7) The Python files in the root directory are the scripts themselves. They have internal comments that describe what they do. 
+8) The other files in root are template/input XML and HTML files-- book parts.
+
 <b>Future Work</b>
 1) Code that removes more of the CSS formatting in PG HTML files, and generally makes better main book texts. Removing the CSS is a priority; about 30% of EPubs with CSS fail to load in one reader or other, esp. Apple Books. 
 2) Code/Knowledge for mining and converting books from the Internet Archive & other sources, esp. books identified as being in the public domain.
-3) OCR experimentation for converting page images to text to EPub. It seems like research on this mostly petered out 5-10y ago, fine, the utilities should work pretty well now. 
-4) An HTML library interface that uses the LOC data to make a map of books, so you can wander the stacks. It looks like you could have the whole librrary in a 30GB directory, so with a Node server, it could go on most phones, a Raspberry Pi, a dongle on your router, etc. I'm imagining a "little Free library" that is just a pi server, or a library kiosk. 
+3) OCR experimentation for converting page images to text to EPub. It seems like research on this mostly petered out 5-10y ago: fine, the utilities should work pretty well now. 
+4) An HTML library interface that uses the LOC data to make a map of books, so you can wander the stacks. It looks like you could have the whole librrary in a 30GB directory, so with a Node server, it could go on most phones, a Raspberry Pi, a dongle on your router, etc. 
+I'm imagining a "Little Free 50k Library" that is just a solar-powered Pi server, or a library kiosk that is a sign on a desk with a crappy old laptop under it. 
 5) Thinking about our world, in which ordinary citizens can own 50,000 books. : ) 
-  
+
 
 
