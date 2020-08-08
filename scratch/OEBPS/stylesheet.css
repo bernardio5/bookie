@@ -1,0 +1,31 @@
+@page{
+  padding:0pt;
+  margin:0pt;
+}
+body {
+  font-family: sans-serif;     
+  font-family: 'Courier New';
+  color: black;
+  padding:0pt;
+  margin:0pt;
+  background-color: white;
+}
+.titlepage {
+	text-align: center;
+	padding: 0pt; margin:0pt;
+    padding:0pt; margin: 0pt;
+}
+.container {
+	position:relative;
+}
+/* Bottom right text */
+.covertext {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 60%;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+}

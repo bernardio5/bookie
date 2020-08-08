@@ -44,30 +44,6 @@ class library:
         self.clips = os.listdir(paths.clipDir)
         self.results = [0, 0, 0,  0, 0, 0,  0, 0, 0, 0,0,0, 0,0,0, 0]
 
-    def exportAll(self):
-        notDone = True
-        ctr = 1  # set to 1 to start at the beginning, !=1 if it crashes
-        nco = len(self.covers)
-        ncl = len(self.clips)
-        self.scanner.skipTo(ctr)
-        while notDone:
-            ctr = ctr +1
-            #if (ctr>120):
-            #    notDone = False
-            pt = self.scanner.getNextPath()
-            if (len(pt)>0 and not (".delete" in pt)):
-                booky = book()
-                booky.readGbXML(self.scanner.gbID, pt)
-                if (booky.langOK() and booky.scanGBDir()==1):
-                    #if (ctr%30==0):
-                    #    print(ctr, ":", booky.gutenId)
-                    coverImg = self.covers[ctr%nco]
-                    clipImg = self.clips[(ctr+500)%ncl]
-                    if (booky.makeEpub(coverImg, clipImg)==0):
-                        print("skipped id ", booky.gutenId)
-            else: 
-                notDone = False
-
 
     # a dignostic! try reading the GB XML's & print tally of various results
     def scanClassifier(self):

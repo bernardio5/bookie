@@ -12,6 +12,8 @@ from classes.scanner import scanner
 # and translators. A CaLibre library is a directory tree, root/author/book,
 # This makes that tree.
 
+# 
+
 # all the book data
 class book:
   
@@ -213,13 +215,11 @@ class library:
 
 print("defined")
 
-# formality: just do it. I guess. whatever. 
 def main():
     lb = library()
     lb.readAll()
 
 if __name__ == "__main__":   
-    # calling main function 
     main() 
 
 print("ok then")

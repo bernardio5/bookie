@@ -3,6 +3,9 @@ import csv
 import os
 from shutil import copyfile
 import xml.etree.ElementTree as ET 
+import zipfile
+import numpy as np
+import cv2
 
 from classes.paths import paths
 from classes.author import author
@@ -54,7 +57,7 @@ class book:
                 ath = self.trns[which].authTag();
         return self.safeString(ath)
 
-
+    # return false if the unicode for the declared language can make trouble
     def langOK(self):
         if (self.language == "ch"):
             return False
@@ -62,7 +65,7 @@ class book:
             return False
         return True
 
-    # hah, a book report runtime monitoring and 
+    # make a book report for runtime monitoring
     def printSelf(self, ctr):
         try:
             print("count:", ctr)
@@ -88,7 +91,8 @@ class book:
         except:
             cnt=1; # don't care just don't crash ok? 
 
-    # returns the path in e:\gbg that contains the book
+    # paths.contentDir points to the root of your local GB all-books 
+    # collection. Returns the path in that, that contains self's book
     def makeGBGDir(self): 
         thePaths = paths()
         res = thePaths.contentDir
@@ -100,6 +104,7 @@ class book:
         res += self.gutenId;
         return res
 
+    # safe for using as a file name or directory name or HTML URL component
     def safeString(self, inStr):
         safe = inStr
         alloweds = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_~+=:;?><-, 1234567890"
@@ -108,7 +113,7 @@ class book:
                 safe = safe.replace(inStr[i], "")
         return safe
 
-    # given a Gb ID and a path to an XML for it, scan the XML
+    # given a Gb ID and a path to an XML for it, scan that XML
     def readGbXML(self, gid, xmlfile): 
         self.gutenId = gid
         self.subjects.append("GB# " + str(gid))
@@ -280,13 +285,13 @@ class book:
         
 
 
-    # copies all the image from a book's /images to the clipart dir
+    # copies all the images from a book's /images to the clipart dir
     def addImagesToClips(self, clipDir):
         # write images
         if (self.imgPath!="-"):
             for fn in self.imgs:
                 if (".png" in fn) or ("jpg" in fn) or ("jpeg" in fn):
-                    fromPt =self.imgPath + "\\" + fn
+                    fromPt = self.imgPath + "\\" + fn
                     toPt = clipDir + self.gutenId + "_" + fn
                     if os.path.isfile(fromPt):
                         copyfile(fromPt, toPt)
@@ -387,12 +392,13 @@ class book:
         img.set('href', "title.xhtml")
         img.set('title', "Cover")
         img.set('type', "cover")
+        thePaths = paths()
         tree = ET.ElementTree(package)          
-        tree.write("D:\\library\\pythonic\\scratch.opf")    
-        finalVers = open('D:\\library\\pythonic\\scratch\\OEBPS\\content.opf', 'w+')
+        tree.write(thePaths.dataDir + "scratch.opf")    
+        finalVers = open(thePaths.scratchDir + 'OEBPS\\content.opf', 'w+')
         # write in 
         finalVers.write("<?xml version='1.0' encoding='utf-8'?>")
-        xmlvers = open("D:\\library\\pythonic\\scratch.opf", 'r+')
+        xmlvers = open(thePaths.dataDir + 'scratch.opf', 'r+')
         irm = xmlvers.read()
         finalVers.write(irm)
         finalVers.close()
@@ -427,15 +433,16 @@ class book:
         text.text = "Start"
         content = ET.SubElement(navPoint, "content")
         content.set('src', 'content.xhtml#startyStart')
+        thePaths = paths()
         tree = ET.ElementTree(ncx)
-        tree.write("D:\\library\\pythonic\\scratch.ncx")
+        tree.write(thePaths.dataDir + "scratch.ncx")
         # open file at
-        finalVers = open('D:\\library\\pythonic\\scratch\\OEBPS\\toc.ncx', 'w+')
+        finalVers = open(thePaths.scratchDir +'OEBPS\\toc.ncx', 'w+')
         # write in 
         finalVers.write("<?xml version='1.0' encoding='utf-8'?>")
         finalVers.write('<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"')
         finalVers.write(' "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">')
-        xmlvers = open("D:\\library\\pythonic\\scratch.ncx", 'r+')
+        xmlvers = open(thePaths.dataDir + "scratch.ncx", 'r+')
         irm = xmlvers.read()
         finalVers.write(irm)
         finalVers.close()
@@ -501,7 +508,8 @@ class book:
             authNames = "Unknown"
         aut1, aut2, aut3, autInd = self.brutalString(authNames)
         # make bg image by loading the cover
-        coverDir = "D:\\library\\pythonic\\covers\\"
+        thePaths = paths()
+        coverDir = thePaths.coversDir
         coverPath = coverDir + coverFn
         resultImg = cv2.imread(coverPath, cv2.IMREAD_COLOR)
         covHt, covWd, covCh = resultImg.shape
@@ -569,12 +577,12 @@ class book:
         ysz = int((newWd / 500.0) * (y+10.0))
         reszTxt = cv2.resize(cropTxt, (newWd, ysz))
         # a clipart image is available
-        clipDir = "D:\\library\\pythonic\\clipArt\\"
+        clipDir = thePaths.clipDir
         clipPath = clipDir + clipFn
         if (self.imgPath!="-"):
             if (self.coverImgPath!=-1):
                 # but if there's an image from the book, use that.
-                imgdir = "D:\\library\\pythonic\\scratch\\OEBPS\\images\\"
+                imgdir = thePaths.scratchDir + "OEBPS\\images\\"
                 clipPath = imgdir +self.imgs[self.coverImgPath]
         clipImg = cv2.imread(clipPath, cv2.IMREAD_COLOR)
         if not clipImg is None:
@@ -593,10 +601,11 @@ class book:
             sty = int(centery - (clpy/2.0))
             resultImg[sty:sty+clpy, stx:stx+clpx] = reszClp[0:clpy, 0:clpx] # paste clip first
         resultImg[20:20+ysz, 20:20+newWd] = reszTxt # then text block
-        resPath = "D:\\library\\pythonic\\scratch\\OEBPS\\cover.png"
+        resPath = thePaths.scratchDir + "OEBPS\\cover.png"
         cv2.imwrite(resPath, resultImg)
         
 
+    # epub supports an HTML cover page; this make that out of the cover image
     def writeCover(self):   
         html = ET.Element("html")
         html.set('xmlns', "http://www.w3.org/1999/xhtml")
@@ -611,13 +620,15 @@ class book:
         img =ET.SubElement(body, "img")
         img.set("src", "cover.png")
         tree = ET.ElementTree(html)
-        tree.write("D:\\library\\pythonic\\scratch\\OEBPS\\title.xhtml")
+        thePaths = paths()
+        tree.write(thePaths.scratchDir + "OEBPS\\title.xhtml")
 
 
 
     def writeContent(self):   
+        thePaths = paths()
         if (self.htmPath!="-"):
-            targPath = "D:\\library\\pythonic\\scratch\\OEBPS\\content.xhtml"
+            targPath = thePaths.scratchDir + "OEBPS\\content.xhtml"
             content = []
             try: 
                 with open(self.htmPath) as f:
@@ -644,7 +655,7 @@ class book:
                     copyfile(self.htmPath, targPath)    
                     return 1
         if (self.txtPath=="-"):
-            return 0 # no data, I guess. fuck off!
+            return 0 # no data, I guess. 
         html = ET.Element("html")
         html.set("xmlns", "http://www.w3.org/1999/xhtml")
         head = ET.SubElement(html, "head")
@@ -655,21 +666,22 @@ class book:
         link.set('rel', "stylesheet")
         link.set('href', "stylesheet.css")
         body = ET.SubElement(html, "body")
-        # body.set("id", "startyStart") # so fucking do it you cunt. 
+        # body.set("id", "startyStart")  
         pre = ET.SubElement(body, "pre")
-        pre.set("id", "startyStart") # so fucking do it you cunt. 
+        pre.set("id", "startyStart") 
         txf = open(self.txtPath, 'r+')
         try:
             wholeText = txf.read()
             pre.text = wholeText
             tree = ET.ElementTree(html)
-            tree.write("D:\\library\\pythonic\\scratch\\OEBPS\\content.xhtml")
+            tree.write(thePaths.scratchDir + "OEBPS\\content.xhtml")
         except:
             return 0
         return 1
 
    # yep
-    def writenavx(self):   
+    def writenavx(self):  
+        thePaths = paths()
         html = ET.Element("html")
         html.set('xmlns', "http://www.w3.org/1999/xhtml")
         html.set('xmlns:epub', "http://www.idpf.org/2007/ops")
@@ -685,7 +697,7 @@ class book:
         aref.set('href', "content.xhtml")
         aref.text = "Start"
         tree = ET.ElementTree(html)
-        tree.write('D:\\library\\pythonic\\scratch\\OEBPS\\nav.xhtml')
+        tree.write(thePaths.scratchDir + "OEBPS\\nav.xhtml")
 
 
     def safeFn(self, inStr):
@@ -698,8 +710,17 @@ class book:
 
 
     # after you've read the XML and scanned the gbg, 
-    # for each book, put in book opf, ncx, cover, htm
-    # maybe mess with cover and formatting soonish.
+
+#   make an epub!
+#       in scratch/OEBPS/
+#       use the .htm if there is one
+#       ow make a content.html with all the text in a <PRE>       
+#       if there's a cover, make the title.html with it
+#       make content.opf
+#       make toc.ncx
+#       populate dir with .txt, cover, xml, htm, images
+
+
     def makeEpub(self, coverPt, clipPt):
         # self.printSelf()
         if (self.type!="Text"):
@@ -711,21 +732,22 @@ class book:
         if (len(self.title)<1):
             return 0 # no title? fuck you
         #clean out all the last book's files  
-        base = "D:\\library\\pythonic\\scratch\\OEBPS"
+        thePaths = paths()
+        base = thePaths.scratchDir + "OEBPS\\"
         src_files = os.listdir(base)
         for fn in src_files:
             if (fn != "stylesheet.css"): # del everything but the stylesheet
-                pt = base + "\\" + fn
+                pt = base  + fn
                 if os.path.isfile(pt):
                     os.remove(pt)
         # gbg has all the images in *-h/images, darn it. 
-        imgdir = "D:\\library\\pythonic\\scratch\\OEBPS\\images"
+        imgdir = base + "images"
         src_files = os.listdir(imgdir)
         for fn in src_files:
             pt = imgdir + "\\" + fn
             if os.path.isfile(pt):
                 os.remove(pt)
-        htmpath = base + "\\content.xhtml"
+        htmpath = base + "content.xhtml"
         # write content
         if (self.writeContent()==0):
             return 0 # could not convert
@@ -742,7 +764,7 @@ class book:
         self.writeNCX()
         self.writenavx()
         # write index! 
-        bookPath = "pubs/" + self.safeFn(self.bookTag()) + ".epub"
+        bookPath = thePaths.outputDir + self.safeFn(self.bookTag()) + ".epub"
         if (os.path.isfile(bookPath)):
             os.remove(bookPath)
         zipf = zipfile.ZipFile(bookPath, 'a', zipfile.ZIP_DEFLATED)
