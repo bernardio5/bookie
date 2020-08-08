@@ -16,11 +16,11 @@ Project Gutenberg (PG) hosts a collection of ~45,000 public-domain books, some o
 
 How I wish I had crawled Google Books. By the way, don't crawl PG! They support full downloads in extremely-comressed formats; be a good citizen and do it the polite way. Also, talk about a worthwhile charity: www.gutenberg.org/donate 
 
-There are non-book things in the PG archive; they are ignored. 
+There are non-book things in the PG archive; these scripts ignore them. 
 
 <b>About the EPub format, and the version these scripts make: </b>
 
-The EPub format is open, but there are many flavors. It's basically a zip archive that contains some bibliographic XML files, and an HTML doc tree. The goal is to have a format that loads on the maximum number of platforms, supports search, and is "fairly pretty".
+The EPub format is open, but there are many flavors. An EPub file is a zip archive that contains some bibliographic XML files, and an HTML doc tree. If you work with EPub's much at all, one of the most helpful operations is just unzipping it, and examining the parts in a text editor. My goal here is to make EPubs that load on the maximum number of platforms, support search, and are "fairly pretty".
 
 There are several EPub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
 
@@ -36,31 +36,25 @@ There are several EPub format checkers, and they're helpful, but they don't solv
 
 -- I have used several online and downloadable EPub format checkers, which are comparable to the browsers-- they generate bug reports that I can respond to, but they're not readers, and don't always lead to fixes that add support. These include: EPUB-Checker and some web sites. 
 
-So, the main goal of this EPub generator is multi-platform support, and presentation of a maximum amount of bibliographic data, for the sake of search and browsing. The beauty of the books in the reader is a TBA. 
+So, the goals of this EPub generator are multi-platform support and widely-readble bibliographic data XML formats. The beauty of the books in the reader is a TBA. 
 
-I do not have automated testing for this.
+I do not have automated testing for this. I need it. 
 
 <b>About the covers and formatting:</b>
 
 It helps, when you've got a little set of books in your reader, for the books to have cover images-- basically, icons. So the scripts make covers. EPub supports having a cover HTML page, but the sketchiness of CSS support means it's better to just make a single JPG cover image. 
 
-The cover JPGs my scripts make are fabulously ugly-- deliberately. I am emulating the "Library Binding"s I saw in university libraries: monochrome vinyl hardbacks with computer-printed stickers: functional, sturdy, cheap, ugly. I use OpenCV to make the JPGs: it works. I use OpenCV's "Hershy" font, which is the one included, and so, so ugly. Kerning? Bah. Word wrap? Aspirational.
+The scripts use OpenCV to paste together the cover images. The background is a pastel-tinted image of an old book cover. On that, I paste a big black-and-white label with title, author(s), and the PG ID number. Then I add one image, either of the book's cover (if there is one), or any image from the book. If neither is available, I use an image chosen randomly from another PG book. 
 
-When the PG data has a scan of a book's cover, it almost never has a legible Author/Title. The covers can be elegant, but usually in a generic way, and they're usually really beat-up. If a cover image can be automatically identified (maybe 15% of the titles), I use it. If there are any other JPG or PNG attached to the book, I choose one at random, otherwise I use a randomly-chosen image from a different PG book. I have a collection ~20 "book front" images that I tint to some a random pastel shade, paste on a black on white Author/Title label, paste on the from-the-book image, and that's the cover.png. Image + color + title + author + image => memorable.
+Which, of course, is super ugly-- but I love ugly old books, obviously. I'm trying for the "Library Bindings" you see in university libraries, with the brutal font labels printed on dot-matrix printers from the 80s. 
 
-Also, I'm a used-bookstore guy. I *love* elderly books. Though the dust is less tolerable than it used to be. No dust in this project!
-
-Page formatting is mostly TBA. Most readers do a fine job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML page formatting is something to avoid. Attempts to embed images usually fight with the refonting and remargining and just make a mess. I intend to look into this more; it seems like low-hanging fruit. 
+Inside the books, page formatting is mostly TBA. Most readers do an OK job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML/CSS page formatting is something to avoid. Attempts to embed images usually just make a mess. I intend to look into this more; it seems like low-hanging fruit. Some widely-implemented subset of CSS? 
 
 <b>About Organizing your University-Scale Library: </b>
 
-If you have 50 books, or 500, you can organize them informally, but 65,000 is another matter-- it's a library so big that you can't know what's in it. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal but not a good library experience. 
+If you have 50 books, or 500, you can organize them informally, but 45,000 is another matter-- it's a library so big that you'll never know what's in it. For comparison, public school libraries in the US usually have around 12,000 books. A big university library will have 100,000, and will employ dozens of people to maintain itself. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal, but not a good library experience. PG maintains a set of XML bibliographic records, but still: this is a big job. Librarians get advanced degrees about sorting this many books. 
 
-PG maintains a set of XML bibliographic records, and they're pretty good about Author/Title/Subject, really Author(Translator,Second Author,Editor)/Title(Subtitle,Subsubtitle)/Subject(LOC classification)/Date(of generation). Librarians get advanced degrees about sorting this many books! 
-
-The Library Of Congress (of the United States) publishes a well-documented sorting regime, though it is rather parochial. The Dewey Decimal System is proprietary, owned by OCLC, so I'm not using that. PG often includes LOC classification, but not always. PG often includes ISBN numbers, but I don't think you can use those to organize, though I'm sure there would be a way to use them to find bibliographic data. 
-
-Amazon has much better similarity data for books, and is probably worth a crawl for the sake of gathering that. TBD! 
+The CaLibre program has excellent search and organization, and automated scanning and integration of new documents, but loading 45,000 books into it takes days, and starting it with the loaded database is not a good experience. But, once I load the EPubs I've made and got the database running, I can do topic searches, which is kind of amazing: I own 115 books about pirates. 
 
 I'd like to generate an HTML library tree as a user interface: WIP. 
 
@@ -78,7 +72,7 @@ There are folders:
 4) data: directory of other data files, mainly the Library of Congress classifications, to be used when I start making my library interface.
 5) formats: text files with samples of the different XML formats, along with text about my guesses about what they mean/do/get used for
 6) getData: instructions and helper files for retreiving PG data sets
-7) The Python files in the root directory are the scripts themselves.
+7) The Python files in the root directory are the scripts themselves. They have internal comments that describewhat they do. 
 8) The other files in root are template/input XML and HTML files-- book parts. 
   
 <b>Future Work</b>
