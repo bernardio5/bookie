@@ -64,6 +64,8 @@ I am aware of the Kiwix project, and respect it. I'm kind of working in parallel
 
 Project Gutenberg is about the preservation of public-domain texts, which are mostly old books from the United States, and so, sadly, largely written and illustrated by flaming sexist bigots. Seriously, Punch Magazine: uugh. The scripts don't scan for content. The cover generator therefore does kick out a fair amount of racist awfulness. I'm sorry about that. 
 
+Also, there are many books advocating emancipation: stern content, for which the cover generator will fail to make an appropriate cover. This is not deliberate, and not a statement, and I don't like it. Preventing it would require a topic check, which would be more code than I've written so far. 
+
 <b>Project organization</b>
 There are folders: 
 1) classes: Python base classes: author, book, a direcotry scanner, 
