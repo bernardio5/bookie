@@ -20,15 +20,15 @@ There are non-book things in the PG archive; these scripts ignore them.
 
 <b>About the EPub format, and the version these scripts make: </b>
 
-The EPub format is open, but there are many flavors. An EPub file is a zip archive that contains some bibliographic XML files, and an HTML doc tree. If you work with EPub's much at all, one of the most helpful operations is just unzipping it, and examining the parts in a text editor. My goal here is to make EPubs that load on the maximum number of platforms, support search, and are "fairly pretty".
+The ePub format is open, but there are many flavors. An ePub file is a zip archive that contains some bibliographic XML files, and an HTML doc tree. If you work with ePub's much at all, one of the most helpful operations is just unzipping it, and examining the parts in a text editor. My goal here is to make ePubs that load on the maximum number of platforms, support search, and are "fairly pretty".
 
-There are several EPub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
+There are several ePub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
 
 -- Apple Books, which is not great at dealing with much of the CSS formatting in the PG collection. Seriously Apple: unit tests maybe? But Apple at least is willing to try to let you use EPubs, and when they do load, provide a graceful reading experience, esp. on iPad minis!
 
 -- Kindles mostly will not load epubs. Most Kindles will view web pages, so don't blame me-- Amazon is trying to force you to buy public-domain data in their propritary, ever-mutating, eyeball-tracking, arbitrarily-revokable Kindle format. Yes, there are Kindle-exporting tools: nah. 
 
--- CaLibre is great because you can single-operation add a directory full of EPubs, whereupon it automatically generates a searchable library database from embedded data. It also can act as a web server for your collection, which has excellent support for browsing. CaLibre, as of 2019, does not do a great job of handling book collections the size of PG, but it is lovely software for a lot of reasons. 
+-- CaLibre is great because you can single-operation add a directory full of ePubs, whereupon it automatically generates a searchable library database from embedded data. It also can act as a web server for your collection, which has excellent support for browsing. CaLibre, as of 2019, does not do a great job of handling book collections the size of PG, but it is lovely software for a lot of reasons. 
 
 -- Web browsers are nice because they have debuggers that throw errors that I can get rid of, but the reading experiences they provide are not great. I've tested in Edge, Chrome, Safari, and Firefox. 
 
@@ -54,7 +54,7 @@ Inside the books, page formatting is mostly TBA. Most readers do an OK job if yo
 
 If you have 50 books, or 500, you can organize them informally, but 45,000 is another matter-- it's a library so big that you'll never know what's in it. For comparison, public school libraries in the US usually have around 12,000 books. A big university library will have 100,000, and will employ dozens of people to maintain itself. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal, but not a good library experience. PG maintains a set of XML bibliographic records, but still: this is a big job. Librarians get advanced degrees about sorting this many books. 
 
-The CaLibre program has excellent search and organization, and automated scanning and integration of new documents, but loading 45,000 books into it takes days, and starting it with the loaded database is not a good experience. But, once I load the EPubs I've made and got the database running, I can do topic searches, which is kind of amazing: I own 115 books about pirates. 
+The CaLibre program has excellent search and organization, and automated scanning and integration of new documents, but loading 45,000 books into it takes a few days, and starting it with the loaded database is not a good experience. But, once I load the ePubs I've made and got the database running, I can do topic searches, which is kind of amazing. Apparently, I own 182 books about pirates. 
 
 I'd like to generate an HTML library tree as a user interface: WIP. 
 
@@ -64,7 +64,7 @@ I am aware of the Kiwix project, and respect it. I'm kind of working in parallel
 
 Project Gutenberg is about the preservation of public-domain texts, which are mostly old books from the United States, and so, sadly, largely written and illustrated by flaming sexist bigots. Seriously, Punch Magazine: uugh. The scripts don't scan for content. The cover generator therefore does kick out a fair amount of racist awfulness. I'm sorry about that. 
 
-Also, there are many books advocating emancipation: stern content, for which the cover generator will fail to make an appropriate cover. This is not deliberate, and not a statement, and I don't like it. Preventing it would require a topic check, which would be more code than I've written so far. 
+Also, there are many books of stern and serious content, for instance, slave narratives. The cover generator can fail to make an appropriate cover. This is not deliberate, and not a statement, and I don't like it. Preventing it would require a topic check, which would be more code than I've written so far. 
 
 <b>Project organization</b>
 There are folders: 
