@@ -8,13 +8,13 @@
 class paths: 
     def __init__(self):
         # where you put this archive
-        self.baseDir = "D:\\nomad\\controlled\\bookie\\"
+        self.baseDir = "D:\\nomad\\mine\\bookie\\"
 
         # root dir of the cover images
         self.coversDir =  self.baseDir + "covers\\"
 
         # dir of clip art to use when no cover image is found
-        self.clipDir =  self.baseDir + "clipArt\\"
+        self.clipDir =  "D:\\library\\clipart\\"
 
         # dir holding misc data and template files
         self.dataDir =  self.baseDir + "data\\"

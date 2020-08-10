@@ -3,10 +3,13 @@ import sys
 
 from c_paths import paths
 
-# reads LOC categories from the LCC.txt file
+# reads LOC categories from the topics.txt file
+# but this one doesn't give the broad categories-- the meanings of the first two letters. 
 
 # Each line in the file is two strings: a classification string, 
 # a space, then a human-readable topic name
+
+# the clasification string's first letter is 
 
 class LOCsubject:
     def __init__(self):
@@ -33,7 +36,8 @@ class LOCsubject:
         indentation = lastDash-firstDash
                 
 
-    def owns(self, ):
+    # given a subject description string, return -1 for can't find, or an index? what. 
+    def owns(self, string):
 
 
 
