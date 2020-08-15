@@ -66,22 +66,6 @@ from classes.scanner import scanner
 # there are enough microtopic numbers.
 # there are enough author numbers
 
-class callNumber:
-    def __init__(self):
-        self.LOC = ""
-        self.micro = 0
-        self.author = 0
-        self.boa = 0
-
-    # the nth distrubted number of count, distributed into 1-4095
-    def scaler(nth, count):
-
-    # init from string of form LOC-micro#-author#-boa
-    def parse(): 
-
-    # parsable string from self data
-    def parsable(): 
-
 
 
 class lightAuthor:
