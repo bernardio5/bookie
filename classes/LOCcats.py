@@ -13,6 +13,9 @@ from classes.scanner import scanner
 # each LOC mark is a first letter, a second letter or a number, then a text description.
 
 # there are two files: LOCfamilies, 517 lines, and LOCtopics, 43123 lines
+# but the topics list is oddly gappy, so let's just use the subjects in the books.
+
+# how to sort? 
 
 # the allLOCsubjects class makes a tree: 25 first-letter "orders". 
 #   each order contains the two-letter combinations in that section: "families"
@@ -26,8 +29,8 @@ from classes.scanner import scanner
 # (what about multiple editions? what about re-scans?)
 
 # E and F are different: they use numbers, and the numbers are of an outline. 
-# I've manually tagged them as level 1,2,3, corresponding to family, topic, and SUBTOPIC
-# and even a few SUBSUBTOPICS! sheeeit. 
+# I've manually tagged them as level 1,2,3,4 corresponding to family, topic, and SUBTOPIC
+# There are not many subtopics, like, 9. I'm just treating them as topics. 
 
 
 # differences from brick & mortar libraries
@@ -43,15 +46,11 @@ from classes.scanner import scanner
 # -- init the orders in one pass & set marks
 # -- second pass, make families in orders & set those marks
 
-# load the topics from LOCtopics
-# -- init into arrays in families
-# this is the "topic tree"
-
 # step through books
 # -- make a book, then a minibook
 # -- save minibook in array indexed by gutenID
 # -- for each topic
-# -- -- find topic (or add new) 
+# -- -- find topic or add new
 
 # traverse topic tree; set marks for all topics; these are orderfamily-topicnumber
 
@@ -61,7 +60,12 @@ from classes.scanner import scanner
 # -- -- -- find topic in the tree; add to topic list for that book
 # -- -- -- add book to topic
 
-# for all topics, 
+# for each family
+# -- process topics to enable easier lookups?
+# -- alphabetize topics by least-common word? 
+# -- group by ? make links by? 
+# -- nat lang actions? 
+
 # -- sort books by author, then title. 
 # -- make a mark for each book in the tpic
 # -- copy those marks into the gid-indexed book list
@@ -86,17 +90,25 @@ class LOCminiBook:
     	self.authors = []
     	self.title = ""
     	self.topics = []
-        self.genusMarks = []
-        self.callnumbers = [] # one for each author,topic 
-        self.gutenID = 0
+        self.family = ""
+        self.gutenId = 0
+        self.valid = false
 
     def makeFromBigBook(self, gid, bbRecPath):
-        bb = book()
-        bb.readGbXML(gid, xmlfile)
-
-    def addCall(self, callnumber):
-
-
+        booky = book()
+        booky.readGbXML(gid, bbRecPath)
+        if (booky.langOK() and booky.scanGBDir()==0):
+            self.gutenId = booky.gutenId
+            self.title = booky.title
+            for s in booky.subjects:
+                self.topics = s
+                if (s.contains("LCC:")):
+                    pts = s.split(':')
+                    self.family = pts[1]
+                    self.valid = true
+            for a in booky.auths:
+                self.topic = a.name
+        # to do: author link? multiple LCC: ? 
 
 
 
@@ -132,7 +144,7 @@ class LOCauthor:
 
 
 # one per text-described topic in two-letter genus
-class LOCGenus: 
+class LOCTopic: 
     def __init__(self, line):
  		mark = "AB.F00F" # mark of owner Family + self's number
         description = "-" # text description of self
@@ -148,24 +160,17 @@ class LOCGenus:
 
 
 # one per two-letter LOC classification (+number, for E & F)
-class LOCFamily: 
+class LOCfamily: 
     def __init__(self, line):
-    	mark = "AB"  # the letters of
-    	description = "-" # text description of
-        geni = [] # list of genuses in the family
-        name = "-" # name string for humans
-        thisid = "-" # string used for matching
-        nextid = "-" # for E and F
-        isSimple = True
-        indentation = 0
+    	mark = line[0:2]  # the letters of
+    	description = [3:] # text description of
+
     # given a subject description string, return -1 for can't find, or an index? what. 
     def matches(self, string):
-
 
 # topic line format: mark string, colon, space, remainder of line is topic
 # AC: China -- Politics and government -- To 221 B.C.
     def initFromLOCtopic(self,string):
-
 
 # format for LOCcategories initial string + space + topic string
 # A References & Periodicals
@@ -181,52 +186,50 @@ class LOCFamily:
 
 
 
+
 # one per single-letter LOC classification
-class LOCOrder:
+class LOCorder:
     def __init__(self, line):
-    	mark = "A"  # the letter
-        description = "-" # text description of 
+    	mark = line[0:1]
+        description = line[2:] # text description of this order
         families = [] # list of families in 
     # given a subject description string, return -1 for can't find, 
     # or an index into families 
-    def matches(self, LOCtopic):
-    def initFromLOCtopic(self,string):
+
+    def addFamily(self, line):
+        fam = LOCfamily(line)
+
+    def matches(self, tp):
+        if (self.mark==tp[0:1]):
+            return true
+        return false
+
+    def addBook(self, bk):
+        for fm in self.families:
+            if (bk.)
 
 
 
-
+# all of the orders/families/topics; all of the books. 
 class LOCtree:
-    def __init__(self):
-        self.lineCounter = 0
-        self.orders = []
-        thePaths = paths()
-        with open(thePaths.LOCpath) as f:
-            content = f.readlines()
-            self.lineCounter = len(content)
-            for ln in content:
-                sb = subject()
-                sb.init(ln)
-                self.subjects.append(sb)
+    def __init__(self):        
+        self.thePaths = paths()
+        file = open(“testfile.txt”, “r”) 
+        lines = file.readlines() 
+        for ln in lines:
+            if ln[1] == ' ':
+                ord = LOCorder(ln)
+            else: 
+                ord.addFamily(ln)
 
 # topic line format: mark string, colon, space, remainder of line is topic
 # AC: China -- Politics and government -- To 221 B.C.
-    def initFromLOCtopics(self, path):
-        # read into line array, det what each line defines, create thus
+    def addBook(self, book):
+        for s in book.topics:
+            f = s[0]
+            ind = place of s[0] in abc
 
 
-# format for LOCcategories initial string + space + topic name
-# A References & Periodicals
-# AC Collections, Series, & Collected Works  
-# string length==1 => order name
-# string length==2, second char is letter => genus name
-# string length>1, second char is number => E/F genus name
-#   topic name begins with -, --, --- => family, genus,  
-    def initFromLOCcategories(self, path):
-        # read into line array, det what each line makes, thus thus
-
-
-# find genus in tree, add if not found 
-    def addBook(self, minibook):
 
 
         
@@ -238,16 +241,13 @@ class LOCtree:
 class library:
     def __init__(self):
         self.scanner = scanner()
-        thePaths = paths()
-        self.covers = os.listdir(thePaths.coversDir)
-        self.clips = os.listdir(thePaths.clipDir)
-
-
-    def readAll(self):
+        self.thePaths = paths()
+        self.theTree = LOCtree()
+        self.gidList = []
+    # traverse all books, a copy for each book topic
+    def buildCats(self):
         notDone = True
-        ctr = 1000  # set to not 1 to start in the middle of the list
-        nco = len(self.covers)
-        ncl = len(self.clips)
+        ctr = 0
         self.scanner.skipTo(ctr)
         while notDone:
             ctr = ctr +1
@@ -256,9 +256,24 @@ class library:
                 notDone = False
             pt = self.scanner.getNextPath()
             if (len(pt)>0 and not (".delete" in pt)):
-                booky = book()
-                booky.readGbXML(self.scanner.gbID, pt)
-                if (booky.langOK() and booky.scanGBDir()==0):
+                # read in the book if you can
+                minibook = LOCminiBook()
+                minibook.makeFromBigBook(booky)
+                if (minibook.valid):
+                    self.gidList.append(minibook)
+                    self.theTree.addBook(minibook)
+
+
+    def recitation(self):
+        notDone = True
+
+        while notDone:
+            ctr = ctr +1
+            # when debugging, this line stops after book 120
+            if (ctr>1100): # comment out to do all books
+                notDone = False
+            pt = self.scanner.getNextPath()
+            if (len(pt)>0 and not (".delete" in pt)):
                     #if (ctr%30==0):
                     #    print(ctr, ":", booky.gutenId)
                     coverImg = self.covers[ctr%nco]
@@ -269,12 +284,15 @@ class library:
                 notDone = False
 
 
+
+
 print("defined")
 
 # everything defines ok; run it
 def main():
     lb = library()
-    lb.readAll()
+    lb.buildCats()
+    lb.recitation()
 
 if __name__ == "__main__":   
     main() 

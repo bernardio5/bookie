@@ -65,6 +65,23 @@ class book:
             return False
         return True
 
+    def isValid(self):
+        if not self.langOK():
+            return False
+        if (self.type!="Text"):
+            print("not a Text", self.gutenId)
+            return False
+        if (self.txtPath=="-" and self.htmPath=="-"):
+            print("no text", self.gutenId)
+            return False # no book! skip
+        if (len(self.title)<1):
+            print("no titla", self.title)
+            return False # no title? skip
+        if (self.scanGBDir()==0):  # SIDE EFFECT BAD
+            return True
+        print("GB scan failed")
+        return False
+
     # make a book report for runtime monitoring
     def printSelf(self, ctr):
         try:
@@ -96,12 +113,13 @@ class book:
     def makeGBGDir(self): 
         thePaths = paths()
         res = thePaths.contentDir
-        lng = len(self.gutenId); 
+        idStr = str(self.gutenId)
+        lng = len(idStr)
         if (lng==1):
             res += "0\\"
         for i in range(0,lng-1):
-            res += self.gutenId[i] + "\\"
-        res += self.gutenId;
+            res += idStr[i] + "\\"
+        res += idStr;
         return res
 
     # safe for using as a file name or directory name or HTML URL component
@@ -118,7 +136,7 @@ class book:
         self.gutenId = gid
         self.subjects.append("GB# " + str(gid))
         self.gbgDir = self.makeGBGDir()
-        self.txtPath = self.gbgDir + "\\" + self.gutenId + ".txt"
+        self.txtPath = self.gbgDir + "\\" + str(self.gutenId) + ".txt"
         tree = ET.parse(xmlfile) # create element tree object 
         root = tree.getroot()  # get root element 
         for rec in root:
@@ -238,11 +256,11 @@ class book:
             return 4 # no dir
         if (self.type=="Sound"):
             return 5 # is sound
-        self.txtPath = self.gbgDir + "\\" + self.gutenId + ".txt"
-        htPth = self.gbgDir + "\\" + self.gutenId + "-h\\"
-        htmPath1 = htPth + self.gutenId + "-h.htm"
-        htmPath2 = htPth + self.gutenId + "-h.html"
-        htmPath3 = htPth + self.gutenId + "-h.xhtml"# jeez pick one, kk?
+        self.txtPath = self.gbgDir + "\\" + str(self.gutenId) + ".txt"
+        htPth = self.gbgDir + "\\" + str(self.gutenId) + "-h\\"
+        htmPath1 = htPth + str(self.gutenId) + "-h.htm"
+        htmPath2 = htPth + str(self.gutenId) + "-h.html"
+        htmPath3 = htPth + str(self.gutenId) + "-h.xhtml"# jeez pick one, kk?
         self.imgPath = htPth + "images"
         scan = os.listdir(self.gbgDir)
         if (not os.path.isfile(self.txtPath)):
@@ -251,7 +269,7 @@ class book:
                 suf = fn[-4:]
                 if (suf==".txt"):
                     self.txtPath = self.gbgDir + "\\" + fn
-                    self.type = "Text"
+                    self.type = "Text" 
         else:
             self.type = "Text"
         self.htmPath = "-"
@@ -292,7 +310,7 @@ class book:
             for fn in self.imgs:
                 if (".png" in fn) or ("jpg" in fn) or ("jpeg" in fn):
                     fromPt = self.imgPath + "\\" + fn
-                    toPt = clipDir + self.gutenId + "_" + fn
+                    toPt = clipDir + str(self.gutenId) + "_" + fn
                     if os.path.isfile(fromPt):
                         copyfile(fromPt, toPt)
     # only needs to run once a year or so, right?
@@ -328,7 +346,7 @@ class book:
             suj = ET.SubElement(metadata, "dc:subject")
             suj.text = aut.wikiLink
         description = ET.SubElement(metadata, "dc:description")
-        description.text = self.description + " www.gutenberg.org/ebooks/" + self.gutenId
+        description.text = self.description + " www.gutenberg.org/ebooks/" + str(self.gutenId)
         date = ET.SubElement(metadata, "dc:date")
         date.text = "2015-08-12T04:00:00+00:00"
         publisher = ET.SubElement(metadata, "dc:publisher")
@@ -571,7 +589,7 @@ class book:
             y += fsp
             cv2.putText(txti,aut3,(x, y), font,fsc, fco, fln)
         y += fsp
-        cv2.putText(txti,"www.gutenberg.org/ebooks/"+self.gutenId,(x, y), font,fsc, fco, fln)
+        cv2.putText(txti,"www.gutenberg.org/ebooks/"+str(self.gutenId),(x, y), font,fsc, fco, fln)
         cropTxt = txti[0:y+10, 0:500]
         newWd = covWd -40
         ysz = int((newWd / 500.0) * (y+10.0))
@@ -724,10 +742,10 @@ class book:
     def makeEpub(self, coverPt, clipPt):
         # self.printSelf()
         if (self.type!="Text"):
-            # print("not a Text", self.gutenId)
+            print("not a Text", self.gutenId)
             return 0
         if (self.txtPath=="-" and self.htmPath=="-"):
-            # print("no text", self.gutenId)
+            print("no text", self.gutenId)
             return 0 # no book! skip
         if (len(self.title)<1):
             return 0 # no title? fuck you
@@ -764,10 +782,10 @@ class book:
         self.writeNCX()
         self.writenavx()
         # write index! 
-        bookPath = thePaths.outputDir + self.safeFn(self.bookTag()) + ".epub"
-        if (os.path.isfile(bookPath)):
-            os.remove(bookPath)
-        zipf = zipfile.ZipFile(bookPath, 'a', zipfile.ZIP_DEFLATED)
+        self.bookPath = thePaths.outputDir + self.safeFn(self.bookTag()) + ".epub"
+        if (os.path.isfile(self.bookPath)):
+            os.remove(self.bookPath)
+        zipf = zipfile.ZipFile(self.bookPath, 'a', zipfile.ZIP_DEFLATED)
         zipf.write("scratch/mimetype", "mimetype", zipfile.ZIP_STORED)
         zipf.write("scratch/META-INF/container.xml", "META-INF/container.xml", zipfile.ZIP_DEFLATED)
         src_files = os.listdir("scratch/OEBPS")
@@ -777,5 +795,5 @@ class book:
         for file in src_files:
             zipf.write("scratch/OEBPS/images/" + file, "OEBPS/images/"+file, zipfile.ZIP_DEFLATED)
         zipf.close()
-
+        return 1
 #  zip -Xr9Dq D:/library/pythonic/pubs/The_Declaration_of_Independenc.epub . -i D:/library/pythonic/scratch/*

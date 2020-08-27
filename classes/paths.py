@@ -32,3 +32,6 @@ class paths:
         # "new CaLibre" dir, where we store all the newly-made epubs
         # one subdirectory for each unique author or translator
         self.outputDir = "F:\\newCal\\"
+
+        # where the HTML tree goes
+        self.htmlDir = "F:\\libHtml\\"
