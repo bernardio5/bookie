@@ -1,4 +1,4 @@
-A References & Periodicals
+A References/Periodicals
 AC Collections, Series, & Collected Works  
 AE Encyclopedias  
 AG Dictionaries and other general reference works  
@@ -84,7 +84,7 @@ HS Societies: Secret, Benevolent, etc.
 HT Communities, Classes, and Races 
 HV Sociology and Criminology 
 HX Socialism, Communism, and Anarchism
-J Legislative and Executive Papers  
+J Government Papers  
 JA Political Science  
 JC Political Theory  
 JF Political Institutions  
@@ -119,7 +119,7 @@ LC Special Aspects
 LD Educational Institutions - United States  
 LE Educational Institutions - America (except United States)  
 LF Educational Institutions - Europe  
-LG Educational Institutions - Asia, Africa, Indian Ocean islands, Australia, New Zealand, Pacific islands  
+LG Educational Institutions - Asia, Africa, Pacific   
 LH School magazines and papers  
 LJ Student Societies  
 LT Textbooks
@@ -134,7 +134,7 @@ ND Painting
 NE Print Media 
 NK Decorative Arts
 NX General Arts
-P Philology & Linguistics  
+P Language/Literature  
 PA Greek and Latin Language and Literature  
 PB Modern and Celtic Languages  
 PC Romance Languages  
@@ -145,7 +145,7 @@ PG Slavic, Baltic, & Albanian Languages
 PH Uralic & Basque Language  
 PJ Oriental Languages and Literatures  
 PK Indo-Iranian Languages and literatures  
-PL Languages and Literatures of Eastern Asia, Africa, Oceania  
+PL Languages of Eastern Asia, Africa, Oceania  
 PM Hyperborean, Indian, and Artificial Languages  
 PN Literature
 PQ French, Italian, Spanish, & Portuguese Literature  
@@ -191,7 +191,7 @@ SK Hunting sports
 T Technology
 TA Engineering & Civil Engineering 
 TC Hydraulic & Ocean Engineering 
-TD Environmental Technology & Sanitary Engineering 
+TD Environmental Technology 
 TE Highway Engineering 
 TF Railroad Engineering 
 TG Bridges 
@@ -206,7 +206,7 @@ TS Manufactures
 TT Handicrafts 
 TX Home Economics
 U Military Science 
-UA Armies: Organization, Distribution, Military Situation 
+UA Army logistics 
 UB Military administration 
 UC Maintenance and Transportation 
 UD Infantry 
@@ -215,7 +215,7 @@ UF Artillery
 UG Military Engineering & Air Forces
 UH Other Services
 V Naval Science 
-VA Navies: Organization, distribution, naval situation 
+VA Naval logistics 
 VB Naval administration 
 VC Naval maintenance 
 VD Naval seamen 
@@ -223,7 +223,7 @@ VE Marines
 VF Naval ordnance 
 VG Minor services of navies 
 VK Navigation. Merchant marine 
-VM Naval architecture. Shipbuilding. Marine engineering
-Z Writing, Paleographies, Books, Libraries, & Bibliographies 
+VM Warship building
+Z Writing/Libraries
 ZA Information Resources
 99 Unclassified

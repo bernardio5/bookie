@@ -34,6 +34,11 @@ class author:
         tg = self.authTag()
         return pt + tg + ".html"
 
+    def htmlRelativePath(self):
+        nm = self.authTag()
+        fs = nm[0:1]
+        return "authors/" + fs + "/" + nm + ".html"
+
 
     # CalLibre uses one dir per author
     def calDir(self):
