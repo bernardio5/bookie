@@ -68,12 +68,6 @@ class book:
     def isValid(self):
         if not self.langOK():
             return False
-        if (self.type!="Text"):
-            print("not a Text", self.gutenId)
-            return False
-        if (self.txtPath=="-" and self.htmPath=="-"):
-            print("no text", self.gutenId)
-            return False # no book! skip
         if (len(self.title)<1):
             print("no titla", self.title)
             return False # no title? skip

@@ -1,0 +1,57 @@
+
+
+
+
+
+
+have books, books have metatdata
+have web pages, eh, parse
+
+
+1 put records in book dirs: title auths subjs 
+scan books, 
+	for each auth, add to auth rec = book id title link
+	for each title, add to title rec in AB = brutal title link
+	for each subj, add to subj rec in tree/single/doub
+
+	create topics
+	title 
+
+
+authors dirs is root/authors/first/firstsecond/
+    first contains two-letter pages
+    firstsecond contains author pages
+
+auth rec:
+	first line: gid name birth death link tag
+	following: bookId title relLink 
+	no sorting
+
+authors 2-rec
+	first line: two characters
+	following: tag/link #books name  
+	sorted by name
+
+
+
+titles dirs root/topics/A/AB/
+	A contains two-letter pages
+	AB contains topic pages
+
+title records
+	first line: bookId brutalTitle
+	second line: full text origianl title
+	third: authors/
+
+title 2-rec
+	first line: two chars
+	following: rellink title
+	ffl sorted by title
+
+
+
+subjects dirs subjects/a/ab/topic
+
+
+or, you could just wait a little longer. 
+

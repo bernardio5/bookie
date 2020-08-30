@@ -8,6 +8,82 @@ from classes.book import book
 from classes.scanner import scanner
 
 
+# as LOCcats, but with state stored in files in the directory tree
+
+
+
+
+
+class LOCtitleSet:
+    def __init__(self):
+        self.books = []
+
+    def add(self, minib):
+        self.books.append(minib.duplicate())
+
+    def count(self):
+        return len(self.books)
+
+    # sort, binary search: premature optimization
+    def lookupTitle(self, title):
+        for ts in self.books:
+            if ts.full==title:
+                return ts
+
+    def lookupID(self, gid):
+        for ts in self.books:
+            if ts.gutenId==gid:
+                return ts
+
+    def makeGIDHTML(self):
+        for bk in self.books:
+            bk.makeHTML()
+
+    def makeTitleHTML(self):
+        # sort books by brutalTitleAB
+        firsts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        fl = len(firsts)
+        thePaths = paths()
+        for i in range(0, fl):
+            letter = firsts[i:i+1]
+            pt = thePaths.htmlDir + "\\titles\\" + letter + ".html"
+            file = open(pt, "w") 
+            file.write("<!DOCTYPE html>")
+            file.write("<html>")
+            file.write("<body>")
+            file.write('<h3>Page for ' + letter + ' titles:</h3><table><tr>')
+            ctr = 0;
+            for j in range(0,fl):
+                letter2 = firsts[j:j+1]
+                file.write('<td><a href="' + letter + '/' + letter + letter2 + '.html">' + letter+letter2 + '</a></td>')
+                if ctr%6==5:
+                    file.write('</tr><tr>')
+                ctr = ctr+1
+            file.write("</tr></table></body></html>")
+            file.close() 
+        self.books.sort(key = lambda x: x.brutalTitleAB)
+        oldMark = "INIT"
+        file = 0
+        for bk in self.books:
+            if len(bk.titlePath)>0:
+                if (bk.brutalTitleAB != oldMark):
+                    if oldMark!="INIT":
+                        file.write("</body>")
+                        file.write("</html>")
+                        file.close() 
+                    oldMark = bk.brutalTitleAB
+                    if not os.path.exists(bk.titlePath):
+                        os.makedirs(bk.titlePath)
+                    pt = bk.titlePath  + bk.brutalTitleAB + ".html"
+                    file = open(pt, "w") 
+                    file.write("<!DOCTYPE html>")
+                    file.write("<html>")
+                    file.write("<body>")
+                    file.write('<h3>Titles Page for ' + bk.brutalTitleAB + ':</h3>')
+                file.write('<a href="../../' + bk.htmlRelativePath + '">' + bk.title + '</a><br/>' )
+
+
+
 
 # will have one of these per book, stored in a gid-indexed array,
 # and, multiply, in the order/fam/gen tree
@@ -151,141 +227,6 @@ class LOCminiBook:
         file.close() 
 
 
-
-
-
-class LOCtitleService:
-    def __init__(self):
-        self.books = []
-
-    def add(self, minib):
-        self.books.append(minib.duplicate())
-
-    def count(self):
-        return len(self.books)
-
-    # sort, binary search: premature optimization
-    def lookupTitle(self, title):
-        for ts in self.books:
-            if ts.full==title:
-                return ts
-
-    def lookupID(self, gid):
-        for ts in self.books:
-            if ts.gutenId==gid:
-                return ts
-
-    def makeGIDHTML(self):
-        for bk in self.books:
-            bk.makeHTML()
-
-    def makeTitleHTML(self):
-        # sort books by brutalTitleAB
-        firsts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-        fl = len(firsts)
-        thePaths = paths()
-        for i in range(0, fl):
-            letter = firsts[i:i+1]
-            pt = thePaths.htmlDir + "\\titles\\" + letter + ".html"
-            file = open(pt, "w") 
-            file.write("<!DOCTYPE html>")
-            file.write("<html>")
-            file.write("<body>")
-            file.write('<h3>Page for ' + letter + ' titles:</h3><table><tr>')
-            ctr = 0;
-            for j in range(0,fl):
-                letter2 = firsts[j:j+1]
-                file.write('<td><a href="' + letter + '/' + letter + letter2 + '.html">' + letter+letter2 + '</a></td>')
-                if ctr%6==5:
-                    file.write('</tr><tr>')
-                ctr = ctr+1
-            file.write("</tr></table></body></html>")
-            file.close() 
-        self.books.sort(key = lambda x: x.brutalTitleAB)
-        oldMark = "INIT"
-        file = 0
-        for bk in self.books:
-            if len(bk.titlePath)>0:
-                if (bk.brutalTitleAB != oldMark):
-                    if oldMark!="INIT":
-                        file.write("</body>")
-                        file.write("</html>")
-                        file.close() 
-                    oldMark = bk.brutalTitleAB
-                    if not os.path.exists(bk.titlePath):
-                        os.makedirs(bk.titlePath)
-                    pt = bk.titlePath  + bk.brutalTitleAB + ".html"
-                    file = open(pt, "w") 
-                    file.write("<!DOCTYPE html>")
-                    file.write("<html>")
-                    file.write("<body>")
-                    file.write('<h3>Titles Page for ' + bk.brutalTitleAB + ':</h3>')
-                file.write('<a href="../../' + bk.htmlRelativePath + '">' + bk.title + '</a><br/>' )
-
-
-
-class LOCauthorSet:
-    def __init__(self):
-        # maybe something more efficient, maybe just sit on yr hands.
-        self.auths = []
-        for i in range(0,36):
-            self.auths.append([])
-
-    def add(self, aut, gid):
-        firsts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-        uppr = aut.name.upper()
-        fc = firsts.find(uppr[0:1])
-        if (fc==-1):
-            print("AUTHOR NOT SORTABLE")
-            return
-        for a in self.auths[fc]:
-            if a.matches(aut):
-                a.workIds.append(gid)
-                print('adding to', a.name)
-                return
-        newAut = aut.duplicate()
-        newAut.workIds = [gid]
-        self.auths[fc].append(newAut)
-        print('added new author', newAut.name)
-
-    def makeHTMLs(self, titleService):
-        firsts = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-        fl = len(firsts)
-        thePaths = paths()
-        for i in range(0, fl):
-            letter = firsts[i:i+1]
-            pt = thePaths.htmlDir + "\\authors\\" + letter + ".html"
-            file = open(pt, "w") 
-            file.write("<!DOCTYPE html>")
-            file.write("<html>")
-            file.write("<body>")
-            file.write('<h3>Page for ' + letter + ' authors</h3>')
-            file.write('<h4>Authors:</h4>')
-            for at in self.auths[i]:
-                file.write('<a href="' + letter + '/' + at.authTag() + '.html">' + at.name + '</a><br/>')
-            file.write("</body>")
-            file.write("</html>")
-            file.close() 
-            pt = thePaths.htmlDir + "\\authors\\" + letter + "\\"
-            if not os.path.exists(pt):
-                os.makedirs(pt)
-            for at in self.auths[i]:
-                htpt = at.htmlPath()
-                file = open(htpt, "w") 
-                file.write("<!DOCTYPE html>")
-                file.write("<html>")
-                file.write("<body>")
-                file.write('<h3>Author Page for ' + at.name + '</h3>')
-                file.write('<h4>' + at.birth + "-" + at.death + '</h4>')
-                file.write('<h4><a href="' + at.wikiLink + '">Wikipedia page' + '</a></h4>')
-                file.write('<h4>Books:</h4>')
-                thePaths = paths()
-                for bid in at.workIds:
-                    minib = titleService.lookupID(bid)
-                    file.write('<a href="../../' + minib.htmlRelativePath + '">' + bid + ':' + minib.title + '</a></br>')
-                file.write("</body>")
-                file.write("</html>")
-                file.close() 
 
 
 # one per text-described topic in two-letter genus
