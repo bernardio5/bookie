@@ -9,7 +9,7 @@ In the repo you will be able to find:
 2) Code that takes a "book" object and loads the book's content (txt, HTML)
 3) Code that outputs "book" objects as "epub"-formatted files
 4) Docs discussing the data formats involved
-5) Notes on organization
+5) Code that makes an HTML document tree that links books, subjects, and authors. 
 6) Notes on the polite way to get the data
 
 Project Gutenberg (PG) hosts a collection of ~50,000 public-domain books, some of them good. They're doing fine, but as the recent action against the Internet Archive shows, all centralized, publically-visible, public-domain collections are one massive lawsuit from the "Writer's Guild" away from obliteration. 
@@ -46,7 +46,7 @@ It helps, when you've got a little set of books in your reader, for the books to
 
 The scripts use OpenCV to paste together the cover images. The background is a pastel-tinted image of an old book cover. On that, I paste a big black-and-white label with title, author(s), and the PG ID number. Then I add one image, either of the book's cover (if there is one), or any image from the book. If neither is available, I use an image chosen randomly from another PG book. 
 
-Which, of course, is super ugly-- but I love ugly old books, obviously. I'm trying for the "Library Bindings" you see in university libraries, with the brutal font labels printed on dot-matrix printers from the 80s. The repo has a testCover.jpg in root; I'm telling you: it's just what I had in mind. 
+Which, of course, is super ugly-- but I love ugly old books, obviously. I'm trying for the "Library Bindings" you see in university libraries, with the brutal font labels printed on dot-matrix printers from the 80s. The repo has a testCover.jpg in root; I'm telling you: it's just what I had in mind. I save low-quality JPEG images; the PNG's were 500k, which was most of the data in most of the books; the JPGs are ~20k. It halved the size of the book set. 
 
 I have not taken on page-formatting in book texts. Most readers do an OK job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML/CSS page formatting is something to avoid. Attempts to embed images usually just make a mess. I intend to look into this more; it seems like low-hanging fruit. Some widely-implemented subset of CSS? 
 
@@ -54,7 +54,11 @@ I have not taken on page-formatting in book texts. Most readers do an OK job if 
 
 If you have 50 books, or 500, you can organize them informally, but 50k is another matter-- it's a library so big that you'll never know what's in it. For comparison, public school libraries in the US usually have around 12,000 books. A university library will have 100,000, and will employ dozens of people to maintain itself. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal, but not a good library experience. PG maintains a set of XML bibliographic records, but still: this is a big job. Librarians get advanced degrees about sorting this many books. 
 
-The Calibre program has excellent search and organization, and automated scanning and integration of new documents, but loading 50k books into it takes a few days, and starting it with the loaded database is not a good experience. But, once I load the ePubs I've made and got the database running, I can do topic searches, which is kind of amazing. Apparently, I own 182 books about pirates. 
+The Calibre program has excellent search and organization, and automated scanning and integration of new documents, but loading 50k books into it takes a few days, and starting it with the loaded database is not a good experience. 
+
+I've written code that uses the GB books and metadata to make an HTML tree that links authors, books, titles, and subjects. The Library of Congress LCC/LCSH data in the GB metadata is the basis of the subject organization, and then, well, authors and titles. The goal here is a directory that you can drop onto a home server, that is just HTML, no javascript, no PHP, no database, just HTML: got that. I need to make the pages a little prettier. 
+
+I'd also like to cull the books some. I don't care about the periodicals, the children's lit, the sermons, the defenses of slavery, etc. 
 
 <b>About the racism</b>
 
@@ -82,9 +86,7 @@ There are folders:
 1) Code that removes more of the CSS formatting in PG HTML files, and generally makes better main book texts. Removing the CSS is a priority; about 30% of EPubs with CSS fail to load in one reader or other, esp. Apple Books. 
 2) Code/Knowledge for mining and converting books from the Internet Archive & other sources, esp. books identified as being in the public domain.
 3) OCR experimentation for converting page images to text to ePub. It seems like research on this mostly petered out 5-10y ago: fine, the utilities should work pretty well now. 
-4) An HTML library interface that uses the LOC data to make a map of books, so you can wander the stacks. It looks like you could have the whole library in a 30GB directory, so with a Node server, it could go on most phones, a Raspberry Pi, a dongle on your router, etc. 
-I'm imagining a "Little Free 50k Library" that is just a solar-powered Pi server, or a library kiosk that is a sign on a desk with a crappy old laptop under it. 
-5) Thinking about our world, in which ordinary citizens can own 50,000 books. : ) 
+4) Thinking about our world, in which ordinary citizens can own 50,000 books. : ) 
 
 
 
