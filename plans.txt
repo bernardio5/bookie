@@ -18,10 +18,6 @@ scan books,
 	title 
 
 
-authors dirs is root/authors/first/firstsecond/
-    first contains two-letter pages
-    firstsecond contains author pages
-
 auth rec:
 	first line: gid name birth death link tag
 	following: bookId title relLink 

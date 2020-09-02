@@ -171,7 +171,8 @@ class book:
                         if (len(vals[0])>26):
                             subjText = vals[0][25:] + subjText 
                 if (subjText!=": "):
-                    self.subjects.append(subjText)
+                    self.subjects.append(self.safeString(subjText))
+
             if (tg == "creator"):
                 try:
                     self.auth = author()
@@ -183,7 +184,7 @@ class book:
                             vals = list(gchild.attrib.values())
                             self.auth.wikiLink = vals[0]
                         if (gctg == "name"):
-                            self.auth.name = gchild.text 
+                            self.auth.name = self.safeString(gchild.text)
                         if (gctg == "birthdate"):
                             self.auth.birth = gchild.text 
                         if (gctg == "deathdate"):
@@ -201,7 +202,7 @@ class book:
                             vals = list(gchild.attrib.values())
                             self.auth.wikiLink = vals[0]
                         if (gctg == "name"):
-                            self.auth.name = gchild.text
+                            self.auth.name = self.safeString(gchild.text)
                         if (gctg == "birthdate"):
                             self.auth.birth = gchild.text 
                         if (gctg == "deathdate"):
@@ -302,7 +303,7 @@ class book:
         # write images
         if (self.imgPath!="-"):
             for fn in self.imgs:
-                if (".png" in fn) or ("jpg" in fn) or ("jpeg" in fn):
+                if (".png" in fn) or ("jpg" in fn) or ("jpeg" in fn) or (".PNG" in fn) or ("JPG" in fn) or ("JPEG" in fn):
                     fromPt = self.imgPath + "\\" + fn
                     toPt = clipDir + str(self.gutenId) + "_" + fn
                     if os.path.isfile(fromPt):
@@ -374,8 +375,8 @@ class book:
         anItem.set("media-type", "application/xhtml+xml")
         anItem = ET.SubElement(manifest, "item")
         anItem.set('id', "coverImg")
-        anItem.set('href', "cover.png")
-        anItem.set("media-type", "image/png")
+        anItem.set('href', "cover.jpg")
+        anItem.set("media-type", "image/jpg")
         anItem = ET.SubElement(manifest, "item")
         anItem.set('id', "css")
         anItem.set('href', "stylesheet.css")
@@ -603,18 +604,20 @@ class book:
             clipImg = cv2.merge((rchan,rchan,rchan))
             clpx = int(covWd/2)
             clpy = int( clpx *(clHt/clWd))
-            reszClp = cv2.resize(clipImg, (clpx, clpy)) 
+            clpSx = int(clpx*1.5)
+            clpSy = int(clpy*1.5)
+            reszClp = cv2.resize(clipImg, (clpSx, clpSy))
             centerx = clpx 
             centery = (((covHt - 20) - ysz) / 2.0) + (ysz +20)
             maxClipHt = covHt - ysz -50; 
-            if (clpy>maxClipHt):
-                clpy = maxClipHt
-            stx = int(centerx - (clpx/2.0))
-            sty = int(centery - (clpy/2.0))
-            resultImg[sty:sty+clpy, stx:stx+clpx] = reszClp[0:clpy, 0:clpx] # paste clip first
+            if (clpSy>maxClipHt):
+                clpSy = maxClipHt
+            stx = int(centerx - (clpSx/2.0))
+            sty = int(centery - (clpSy/2.0))
+            resultImg[sty:sty+clpSy, stx:stx+clpSx] = reszClp[0:clpSy, 0:clpSx] # paste clip first        resultImg[20:20+ysz, 20:20+newWd] = reszTxt # then text block
         resultImg[20:20+ysz, 20:20+newWd] = reszTxt # then text block
-        resPath = thePaths.scratchDir + "OEBPS\\cover.png"
-        cv2.imwrite(resPath, resultImg)
+        resPath = thePaths.scratchDir + "OEBPS\\cover.jpg"
+        cv2.imwrite(resPath, resultImg, [int(cv2.IMWRITE_JPEG_QUALITY), 20])
         
 
     # epub supports an HTML cover page; this make that out of the cover image
@@ -630,7 +633,7 @@ class book:
         meta.set('content', "true")
         body = ET.SubElement(html, "body")
         img =ET.SubElement(body, "img")
-        img.set("src", "cover.png")
+        img.set("src", "cover.jpg")
         tree = ET.ElementTree(html)
         thePaths = paths()
         tree.write(thePaths.scratchDir + "OEBPS\\title.xhtml")
@@ -789,5 +792,24 @@ class book:
         for file in src_files:
             zipf.write("scratch/OEBPS/images/" + file, "OEBPS/images/"+file, zipfile.ZIP_DEFLATED)
         zipf.close()
+        booksize = os.path.getsize(self.bookPath)
+        #if b>6000000
+        #    return 0 # too big 
+        return 1
+#  zip -Xr9Dq D:/library/pythonic/pubs/The_Declaration_of_Independenc.epub . -i D:/library/pythonic/scratch/*
+
+
+    def checkEpub(self):
+        # self.printSelf()
+        if (self.type!="Text"):
+            print("not a Text", self.gutenId)
+            return 0
+        if (self.txtPath=="-" and self.htmPath=="-"):
+            print("no text", self.gutenId)
+            return 0 # no book! skip
+        if (len(self.title)<1):
+            return 0 # no title? no
+        if (self.txtPath=="-" and self.htmPath=="-"):
+            return 0 # no data, I guess. 
         return 1
 #  zip -Xr9Dq D:/library/pythonic/pubs/The_Declaration_of_Independenc.epub . -i D:/library/pythonic/scratch/*

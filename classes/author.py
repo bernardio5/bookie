@@ -14,9 +14,18 @@ class author:
         thePaths = paths()
         self.calPath = thePaths.outputDir
 
-
     def authTag(self):
-        nm = self.name.replace(" ","_")
+        safe = self.name
+        #notalloweds = "\\/:*?><|"
+        safe = safe.replace('\\', '_')
+        safe = safe.replace('/', '_')
+        safe = safe.replace(':', ';')
+        safe = safe.replace('*', '.')
+        safe = safe.replace('?', 'P')
+        safe = safe.replace('>', ')')
+        safe = safe.replace('<', '(')
+        safe = safe.replace('|', '_')
+        nm = safe.replace(" ","_")
         nm += "_" + self.gutenId 
         return nm
 
@@ -49,6 +58,13 @@ class author:
         t1 = self.authTag()
         t2 = other.authTag()
         if (t1==t2):
+            return True
+        return False
+
+    def lessThan(self, other):
+        t1 = self.authTag()
+        t2 = other.authTag()
+        if (t1<t2):
             return True
         return False
 
