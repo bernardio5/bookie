@@ -1,0 +1,292 @@
+@charset "utf-8";
+@namespace epub "http://www.idpf.org/2007/ops";
+
+body{
+	hyphens: auto;
+	adobe-hyphenate: auto;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-epub-hyphens: auto;
+}
+
+p{
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	text-indent: 1em;
+}
+
+hr{
+	border: none;
+	border-top: 1px solid;
+	height: 0;
+	margin-top: 1.5em;
+	margin-right: auto;
+	margin-bottom: 1.5em;
+	margin-left: auto;
+	width: 25%;
+}
+
+q::before,
+q::after{
+	content: "";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+	font-variant: small-caps;
+	hyphens: none;
+	adobe-text-layout: optimizeSpeed; /* For Nook */
+	adobe-hyphenate: none;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-epub-hyphens: none;
+	page-break-after: avoid;
+	page-break-inside: avoid;
+	text-align: center;
+	margin-top: 3em;
+	margin-right: 0;
+	margin-bottom: 3em;
+	margin-left: 0;
+}
+
+blockquote + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p,
+header + p,
+hr + p,
+ol + p,
+ul + p,
+table + p,
+p.first-child,
+p:first-child{
+	text-indent: 0;
+}
+
+cite{
+	font-style: normal;
+}
+
+
+
+blockquote cite{
+	display: block;
+	font-style: italic;
+	text-align: right;
+}
+
+blockquote cite i{
+	font-style: normal;
+}
+
+b,
+strong{
+	font-variant: small-caps;
+	font-weight: normal;
+}
+
+header{
+	break-after: avoid;	
+	page-break-after: avoid;
+	break-inside: avoid;	
+	page-break-inside: avoid;
+	hyphens: none;
+	adobe-text-layout: optimizeSpeed; /* For Nook */
+	adobe-hyphenate: none;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-epub-hyphens: none;
+	text-align: center;
+}
+
+article > header + *,
+section > header + *{
+	margin-top: 3em;
+}
+
+section.epub-type-titlepage img{
+	display: block;
+	width: 100%;
+	margin-top: 3em;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+}
+
+a.epub-type-noteref{
+	font-size: .75em;
+	font-style: normal !important;
+	vertical-align: super;
+}
+
+section.epub-type-footnotes > ol > li{
+	margin-top: 1em;
+	margin-right: 0;
+	margin-bottom: 1em;
+	margin-left: 0;
+}
+
+section.epub-type-colophon,
+section.epub-type-imprint{
+	text-align: center;
+}
+
+section.epub-type-colophon header,
+section.epub-type-imprint header{
+	line-height: 0;
+	margin-top: 3em;
+}
+
+section.epub-type-colophon h2,
+section.epub-type-imprint h2{
+	display: none;
+}
+
+img.epub-type-z3998-publisher-logo{
+	max-width: 25%;
+}
+
+section.epub-type-colophon p,
+section.epub-type-imprint p{
+	margin-top: 1em;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+	text-indent: 0;
+}
+
+section.epub-type-imprint p{
+	font-size: .75em;
+	text-align: justify;
+	width: 75%;
+}
+
+section.epub-type-colophon p + p::before{
+	border-top: 1px solid;
+	content: "";
+	display: block;
+	margin-top: auto;
+	margin-right: auto;
+	margin-bottom: 1em;
+	margin-left: auto;
+	width: 25%;
+}
+
+section.epub-type-colophon a{
+	font-variant: small-caps;
+}
+
+section.epub-type-imprint a,
+section.epub-type-colophon a{
+	hyphens: none;
+	adobe-text-layout: optimizeSpeed; /* For Nook */
+	adobe-hyphenate: none;
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-epub-hyphens: none;
+}
+
+section.epub-type-copyright-page p{
+	margin-top: 1em;
+	margin-right: auto;
+	margin-bottom: 1em;
+	margin-left: auto;
+	text-indent: 0;
+}
+
+section.epub-type-copyright-page blockquote p{
+	font-style: italic;
+	text-align: left;
+	text-indent: 0;
+}
+
+section.epub-type-copyright-page blockquote p span{
+	display: block;
+	padding-left: 1em;
+	text-indent: -1em;
+}
+
+section.epub-type-copyright-page blockquote br{
+	display: none;
+}
+
+@supports(display: flex){
+	section.epub-type-imprint{
+		align-content: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		min-height: calc(98vh - 3em);
+		padding-top: 3em;
+	}
+
+	section.epub-type-imprint header{
+		margin-bottom: 2em;
+		margin-top: 0;
+	}
+
+	img.epub-type-z3998-publisher-logo{
+		max-width: 25vw;
+	}
+}
+/* For legacy reading systems */
+article,
+aside,
+figure,
+figcaption,
+footer,
+header,
+main,
+nav,
+section{
+	display: block;
+}
+
+/* Epub2 compatibility CSS */
+img.epub-type-z3998-publisher-logo{
+	width: 222px; /* This gets scaled up by 2px when adding the white outside path during the build process */
+}
+
+/* Give PNGs a white background for night mode compatibility... */
+img.epub-type-se-image-color-depth-black-on-transparent{
+	background: #fff !important; /* `!important` is required to make sure readers respect the BG color */
+}
+
+/* Except our house PNGs, which were rendered from SVGs with a white stroke... */
+.epub-type-titlepage img.epub-type-se-image-color-depth-black-on-transparent,
+img.epub-type-se-image-color-depth-black-on-transparent.epub-type-z3998-publisher-logo{
+	background: transparent !important;
+}
+
+/* And except in Apple Books, where we can target night mode specifically */
+:root[__ibooks_internal_theme] img.epub-type-se-image-color-depth-black-on-transparent{
+	background: transparent !important;
+}
+
+/* Enable night mode in Apple Books */
+:root[__ibooks_internal_theme*="Night"] img.epub-type-se-image-color-depth-black-on-transparent,
+:root[__ibooks_internal_theme*="Gray"] img.epub-type-se-image-color-depth-black-on-transparent{
+	filter: invert(100%);
+}
+
+/* Help preserve poetry formatting after Kobo adds its special <span>s */
+.epub-type-z3998-poem p span.koboSpan,
+.epub-type-z3998-song p span.koboSpan,
+.epub-type-z3998-verse p span.koboSpan{
+	display: inline !important;
+	text-indent: 0 !important;
+	padding-left: 0 !important;
+}
+
+/* Vertical align any MathML images we might have */
+img.mathml{
+	vertical-align: middle;
+}

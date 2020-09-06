@@ -8,7 +8,7 @@ class LOCtopic:
     def __init__(self):
         self.doubleMark = "AB"
         self.mark = "AB.F00F" # mark of owner Family + self's number
-        self.description = "F00F" # text description of self
+        self.description = "about stuff" # text description of self
         self.books = [] # all the books in the topic
         self.dirPath = "\\"     
         self.htmlRelativePath = ""
@@ -47,8 +47,11 @@ class LOCtopic:
     def setStdMark(self):
         desc = self.brutalDescription()
         thePaths = paths()
-        self.dirPath = thePaths.htmlDir + "topics\\" + self.doubleMark + "\\"     
-        self.mark = self.doubleMark + "." + desc[0:5]
+        self.dirPath = thePaths.htmlDir + "topics\\" + self.doubleMark + "\\"  
+        ender = 15
+        if len(desc)<ender:
+            ender = len(desc)
+        self.mark = desc[0:ender]
         self.link = self.mark + ".html"
         self.htmlRelativePath = "topics/" + self.doubleMark + "/" + self.mark + ".html"
 
@@ -63,7 +66,7 @@ class LOCtopic:
         notDone = True
         brute = self.brutalDescription()
         othBrute = dupe.brutalDescription()
-        pl = 5
+        pl = 15
         while notDone and pl<len(brute)-3:
             c1 = brute[pl:pl+1]
             c2 = othBrute[pl:pl+1]
@@ -74,9 +77,11 @@ class LOCtopic:
         p2 = pl + 3
         if p2>len(brute):
             p2 = len(brute)
+        if (pl>=p2):
+            pl = p2-1
         thePaths = paths()
         self.dirPath = thePaths.htmlDir + "topics\\" + self.doubleMark + "\\"     
-        self.mark = self.doubleMark + "_" + brute[0:5] + brute[pl:p2]
+        self.mark = brute[0:5] + brute[pl:p2]
         self.link = self.mark + ".html"
         self.htmlRelativePath = "topics/" + self.doubleMark + "/" + self.mark + ".html"
 
@@ -96,7 +101,7 @@ class LOCtopic:
         file.write("<!DOCTYPE html>")
         file.write("<html>")
         file.write("<body>")
-        file.write('<h3> Topic page for:' + self.mark + ':' + self.description + '</h3>')
+        file.write('<h3> Topic page for:' + self.description + '</h3>')
         file.write('<h4><a href="../' + self.doubleMark + '.html">Up to classification ' + self.doubleMark + '</h3>')
         file.write('<h4>' + str(len(self.books)) + ' Book(s):</h4>')
         for bk in self.books:

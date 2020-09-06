@@ -6,11 +6,8 @@ import cv2
 from classes.paths import paths
 from classes.author import author
 
-
-
 # cover experiments
 
-# everything defines ok; run it
 def main():
 	titl1 = "SOME TITLES AND OTH"
 	titl2 = "ER TEXT THAT IS HERE"

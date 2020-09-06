@@ -69,11 +69,10 @@ class book:
         if not self.langOK():
             return False
         if (len(self.title)<1):
-            print("no titla", self.title)
+            print("no title", self.title)
             return False # no title? skip
         if (self.scanGBDir()==0):  # SIDE EFFECT BAD
             return True
-        print("GB scan failed")
         return False
 
     # make a book report for runtime monitoring
@@ -283,14 +282,18 @@ class book:
             # no images? clear that path + set cover img to "none"
             ctr = 0
             spare = -1
+            maxSz = 0
             for fn in mess:
                 self.imgs.append(fn)
+                fnu = fn.upper()
                 # cover, title, frontispiece?
-                if (("over" in fn) or ("ontis" in fn) or ("itle" in fn)):
-                    if ((".png" in fn) or (".jpg" in fn)):
+                if (("COVER" in fnu) or ("FRONT" in fnu) or ("TITLE" in fnu)):
+                    if ((".PNG" in fnu) or (".JPG" in fnu)):
                         self.coverImgPath = ctr
-                if ((".png" in fn) or (".jpg" in fn)):
-                    spare = ctr
+                if ((".PNG" in fnu) or (".JPG" in fnu)):
+                    imgSz = os.path.getsize(self.imgPath + '\\'+ fn)
+                    if (imgSz>maxSz):
+                        spare = ctr
                 ctr = ctr +1
             if (self.coverImgPath==-1 and spare!=-1):
                 self.coverImgPath = spare
@@ -386,13 +389,6 @@ class book:
         anItem.set('href', "nav.xhtml")
         anItem.set('properties', "nav")
         anItem.set("media-type", "application/xhtml+xml")
-#        itemctr = 5
- #       for img in self.imgs:
-  #          anItem = ET.SubElement(manifest, "item")
-   #         anItem.set('href', "images/"+img)
-    #        anItem.set('media-type', "image/jpeg")
-     #       anItem.set("id", "item"+str(itemctr))
-      #      itemctr += 1
         spine = ET.SubElement(package, "spine")
         spine.set('page-progression-direction', "default")
         spine.set('toc', "ncx")
@@ -642,8 +638,32 @@ class book:
 
     def writeContent(self):   
         thePaths = paths()
+        targPath = thePaths.scratchDir + "OEBPS\\content.xhtml"
+        if (self.txtPath!="-"):
+            html = ET.Element("html")
+            html.set("xmlns", "http://www.w3.org/1999/xhtml")
+            head = ET.SubElement(html, "head")
+            title = ET.SubElement(head, "title")
+            title.text = self.title
+            link = ET.SubElement(head, "link")
+            link.set('type', "text/css")
+            link.set('rel', "stylesheet")
+            link.set('href', "stylesheet.css")
+            body = ET.SubElement(html, "body")
+            # body.set("id", "startyStart")  
+            pre = ET.SubElement(body, "pre")
+            pre.set("id", "startyStart") 
+            txf = open(self.txtPath, 'r+')
+            try:
+                wholeText = txf.read()
+                pre.text = wholeText
+                tree = ET.ElementTree(html)
+                tree.write(targPath)
+                tree.write(targPath)
+                return 1
+            except:
+                print("failed text convert; on to HTML")
         if (self.htmPath!="-"):
-            targPath = thePaths.scratchDir + "OEBPS\\content.xhtml"
             content = []
             try: 
                 with open(self.htmPath) as f:
@@ -657,7 +677,7 @@ class book:
                             s1 = content[lnCt].find("/*")
                             s2 = content[lnCt].find("*/")
                             stra = content[lnCt][0:s1] + content[lnCt][s2+2:]
-                            print(self.gutenId, ":fix:", content[lnCt], stra)
+                            # print(self.gutenId, ":fix:", content[lnCt], stra)
                             content[lnCt] = stra
                     if ("<body" in content[lnCt]):
                         content[lnCt].replace("<body",'<body id=<body id="startyStart "')
@@ -669,31 +689,8 @@ class book:
                 if os.path.isfile(self.htmPath):
                     copyfile(self.htmPath, targPath)    
                     return 1
-        if (self.txtPath=="-"):
-            return 0 # no data, I guess. 
-        html = ET.Element("html")
-        html.set("xmlns", "http://www.w3.org/1999/xhtml")
-        head = ET.SubElement(html, "head")
-        title = ET.SubElement(head, "title")
-        title.text = self.title
-        link = ET.SubElement(head, "link")
-        link.set('type', "text/css")
-        link.set('rel', "stylesheet")
-        link.set('href', "stylesheet.css")
-        body = ET.SubElement(html, "body")
-        # body.set("id", "startyStart")  
-        pre = ET.SubElement(body, "pre")
-        pre.set("id", "startyStart") 
-        txf = open(self.txtPath, 'r+')
-        try:
-            wholeText = txf.read()
-            pre.text = wholeText
-            tree = ET.ElementTree(html)
-            tree.write(thePaths.scratchDir + "OEBPS\\content.xhtml")
-        except:
-            return 0
-        return 1
-
+        return 0 # no data, I guess. 
+        
    # yep
     def writenavx(self):  
         thePaths = paths()
@@ -745,6 +742,7 @@ class book:
             print("no text", self.gutenId)
             return 0 # no book! skip
         if (len(self.title)<1):
+            print("no title", self.gutenId)
             return 0 # no title? fuck you
         #clean out all the last book's files  
         thePaths = paths()
@@ -765,9 +763,10 @@ class book:
         htmpath = base + "content.xhtml"
         # write content
         if (self.writeContent()==0):
+            print("write content failed", self.gutenId)
             return 0 # could not convert
         # write images
-        if (self.imgPath!="-"):
+        if (self.imgPath!="-" and self.txtPath!="-"):
             for fn in self.imgs:
                 fromPt =self.imgPath + "\\" + fn
                 toPt = imgdir + "\\" + fn
@@ -793,8 +792,9 @@ class book:
             zipf.write("scratch/OEBPS/images/" + file, "OEBPS/images/"+file, zipfile.ZIP_DEFLATED)
         zipf.close()
         booksize = os.path.getsize(self.bookPath)
-        #if b>6000000
-        #    return 0 # too big 
+        if booksize>2500000:
+            print("too big", self.gutenId)
+            return 0 
         return 1
 #  zip -Xr9Dq D:/library/pythonic/pubs/The_Declaration_of_Independenc.epub . -i D:/library/pythonic/scratch/*
 
@@ -812,4 +812,34 @@ class book:
         if (self.txtPath=="-" and self.htmPath=="-"):
             return 0 # no data, I guess. 
         return 1
-#  zip -Xr9Dq D:/library/pythonic/pubs/The_Declaration_of_Independenc.epub . -i D:/library/pythonic/scratch/*
+
+
+    # get the .txt, ignore other stuff. 
+    def checkForText(self):
+        self.gbgDir = self.makeGBGDir()
+        if (not os.path.isdir(self.gbgDir)):
+            return 4 # no dir
+        if (self.type=="Sound"):
+            return 5 # is sound
+        self.txtPath = self.gbgDir + "\\" + str(self.gutenId) + ".txt"
+        scan = os.listdir(self.gbgDir)
+        if (not os.path.isfile(self.txtPath)):
+            self.txtPath = "-"
+            for fn in scan:
+                suf = fn[-4:]
+                if (suf==".txt"):
+                    self.txtPath = self.gbgDir + "\\" + fn
+                    self.type = "Text" 
+        else:
+            self.type = "Text"        
+        if (self.type!="Text"):
+            print("not a Text", self.gutenId)
+            return 0
+        if self.txtPath=="-":
+            print("no text", self.gutenId)
+            return 0 # no book! skip
+        if (len(self.title)<1):
+            return 0 # no title? no
+        if not self.langOK():
+            return 0
+        return 1

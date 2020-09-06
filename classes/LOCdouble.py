@@ -1,4 +1,3 @@
-
 import os
 
 from classes.paths import paths
@@ -11,24 +10,40 @@ class LOCdouble:
         # oh, nope. marks can be more than 2 chars. 
         spot = line.find(' ')  # the letters of
         self.mark = line[0:spot]
-        self.description =line[(spot+1):]
+        self.description = line[(spot+1):]
         thePaths = paths()
         self.link = self.mark + ".html"
         self.path = thePaths.htmlDir + "\\topics\\" + self.mark + ".html"
         self.subDir = thePaths.htmlDir + "\\topics\\" + self.mark + "\\"
         self.topics = []
 
+
+    def addBook(self, bookTopic, book):
+        newt = LOCtopic()
+        newt.setFromBook(self.mark, bookTopic, book)
+        self.topics = [newt]
+
+
+
     def matches(self, bk):
-        booksMark = bk.lcc[0:2]
-        if (self.mark==booksMark):
-            return True
+        for tp in bk.topics:
+            spot = tp.find(' ')  
+            tmark = tp[0:spot]
+            if (self.mark==tmark):
+                return True
         return False
 
+
+    def topicIn(self, tp):
+        spot = tp.find(' ')  
+        tmark = tp[0:spot]
+        return self.mark==tmark
+
+    # at least one topic in this double. for each one in, 
+    # either add to existing or make new
     def maybeAddBook(self, bk):
-        toAppend = []
-        if (self.matches(bk)):
-            hasMatch = False
-            for tp in bk.topics:
+        for tp in bk.topics:
+            if (self.topicIn(tp)):
                 notAdded = True
                 for tpc in self.topics:
                     if tpc.maybeAddBook(tp, bk):
@@ -37,6 +52,24 @@ class LOCdouble:
                     newt = LOCtopic()
                     newt.setFromBook(self.mark, tp, bk)
                     self.topics.append(newt)
+
+
+    # add book topics in self to existing or new.
+    def maybeAddEFBook(self, tp, bk):    
+        res = False     
+        if (self.topicIn(tp)):    
+            notAdded = True
+            for tpc in self.topics:
+                if tpc.maybeAddBook(tp, bk):
+                    notAdded = False
+                    res = True
+            if notAdded:
+                newt = LOCtopic()
+                newt.setFromBook(self.mark, tp, bk)
+                self.topics.append(newt)
+                res = True
+        return res
+
 
     def bookCount(self):
         tot = 0
@@ -81,11 +114,11 @@ class LOCdouble:
         file.write('<h4><a href="' + self.mark[0:1] + '.html">Up to classification ' + self.mark[0:1] + '</a></h4>')
         file.write('<h4>' + str(self.bookCount()) + ' Book(s) in ' + str(len(self.topics)) + ' Subtopic(s):</h4>')
         file.write('<table>')
-        file.write('<tr><td>Topic ID</td><td>Description</td><td># Books</td></tr>')
+        file.write('<tr><td>Topic Description</td><td># Books</td></tr>')
         
         for sn in self.topics:
             sn.makeHTML()
-            file.write('<tr><td>'+ sn.mark +'</td><td><a href="'+self.mark + "/" + sn.link + '">')
+            file.write('<tr><td><a href="'+self.mark + "/" + sn.link + '">')
             file.write(sn.description + '</td><td>' + str(sn.bookCount()) + '</td></tr>')
         file.write("</body>")
         file.write("</html>")

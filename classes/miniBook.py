@@ -13,7 +13,6 @@ class miniBook:
         self.authors = []
         self.title = ""
         self.topics = []
-        self.lcc = "-"
         self.gutenId = 0
         self.valid = False
         self.dir = ""
@@ -31,7 +30,6 @@ class miniBook:
         res.title = self.title
         for t in self.topics: 
             res.topics.append(t)
-        res.lcc = self.lcc
         res.gutenId = self.gutenId
         res.valid = self.valid
         res.dir = self.dir 
@@ -50,21 +48,27 @@ class miniBook:
                 self.authors.append(a.duplicate())
             self.title = fullbook.title
             self.gutenId = fullbook.gutenId
+            lcc = ""
+            hasLCSH = False
             for s in fullbook.subjects:
-                if (s.find("Juvenile fiction")!=-1):
-                    self.valid = False
-                    return
+                if (s.find("LCC: ")!=-1 and lcc==""):
+                    lcc = s[5:]
+                if (s.find("LCSH: ")!=-1 ):
+                    hasLCSH = True
+            if (hasLCSH and lcc!=""):
+                self.valid = True
             for s in fullbook.subjects:
                 if (s.find("LCC: ")!=-1):
-                    if (self.lcc!="-"):
-                        print("multiple LCCs!")
-                    self.lcc = s[5:]
-                    self.valid = True
+                    lcc = s[5:]
                 if (s.find("LCSH: ")!=-1):
-                    tpc = s[6:]     # self.topics only contains LCSH strings.
+                    tpc = lcc + ' ' + s[6:]     # self.topics only contains LCSH strings.
                     self.topics.append(tpc)
-                    self.valid = True
-                if (s.find("Juvenile fiction")!=-1):
+                su = s.upper()
+                if (su.find("JUVENILE")!=-1):
+                    self.valid = False 
+                if (su.find("CHILDREN")!=-1):
+                    self.valid = False # the adult content is maudlin enough
+                if (su.find("PERIODICAL")!=-1):
                     self.valid = False
             thePaths = paths()
             digits = '%05d' % int(self.gutenId)
@@ -90,19 +94,15 @@ class miniBook:
             self.brutalTitleAB = okwords[0:2]
             self.titlePath = thePaths.htmlDir + "\\titles\\" + self.brutalTitleA + '\\' 
             self.bookTag = fullbook.safeFn(fullbook.bookTag())
-            print(self.gutenId, okwords, self.brutalTitleA, self.brutalTitleAB)
+            # print(self.gutenId, okwords, self.brutalTitleA, self.brutalTitleAB)
             if (self.brutalTitle.find("PUNCHINELLO")!=-1):
-                self.valid = False # seriously: *fuck* those guys
-                print("fuck those guys")
+                self.valid = False 
             if (self.brutalTitle.find("CHARIVARI")!=-1):
                 self.valid = False # seriously: *fuck* those guys
-                print("fuck those guys")
-            if (self.brutalTitle.find("AMERICAN MISSIONARY")!=-1):
-                self.valid = False 
-            if (self.brutalTitle.find("ATLANTIC MONTHLY")!=-1):
+            if (self.brutalTitle.find("MISSIONARY")!=-1):
                 self.valid = False 
             if (fullbook.language.find("en")==-1):
-                self.valid = False # eng only for now
+                self.valid = False # English only for now
 
 
     def brutalLessThan(self, otherB):
@@ -137,14 +137,36 @@ class miniBook:
         if os.path.isfile(fromPt):
             copyfile(fromPt, toPt)
 
+
+    def copyText(self, fullbook): 
+        # print("made pub")
+        targetDir = self.dir
+        if not os.path.exists(targetDir):
+            os.makedirs(targetDir)
+        src_files = os.listdir(targetDir) # clear out dir
+        for fn in src_files:
+            pt = targetDir + "\\" + fn
+            if os.path.isfile(pt):
+                os.remove(pt)
+        # move book to self's HTML dir stack
+        fromPt = fullbook.txtPath
+        self.bookTag = fullbook.safeFn(fullbook.bookTag())
+        toPt = targetDir + "\\" + self.bookTag + ".txt"
+        # print('copying fromto', fromPt, toPt)
+        if os.path.isfile(fromPt):
+            copyfile(fromPt, toPt)
+  
+
     def recitation(self):
         print("      --", self.title)
+
 
     def lister(self, file):
         at = ""
         if (len(self.authors)>0):
             at = self.authors[0].name
         file.write(self.gutenId+', "'+ self.title +'", "' + at + '"\n')
+
 
     def makeHTML(self):
         if not os.path.exists(self.dir):
@@ -155,7 +177,8 @@ class miniBook:
         file.write("<html>")
         file.write("<body>")
         file.write('<img src="cover.jpg"/><br/>')
-        file.write('<h3>Book Page for ' + self.title + ': <a href="' + self.bookTag+ '.epub">Download</a></h3>')
+        file.write('<h3>Book Page for ' + self.title + ':<a href="' + self.bookTag+ '.epub">Download</a></h3>')
+        # file.write('<h4>View: <a href="' +  self.bookTag + '.txt">Link</a></h4>')
         file.write('<h4>Authors:</h4>')
         for at in self.authors:
             fs = at.name[0:1]

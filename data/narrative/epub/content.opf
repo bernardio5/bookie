@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" dir="ltr" prefix="se: http://standardebooks.org/vocab/1.0" unique-identifier="uid" version="3.0" xml:lang="en-US">
+	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+		<meta content="cover.jpg" name="cover"/>
+		<dc:identifier id="uid">url:https://standardebooks.org/ebooks/frederick-douglass/narrative-of-the-life-of-frederick-douglass</dc:identifier>
+		<dc:date>2020-08-31T17:49:45Z</dc:date>
+		<meta property="dcterms:modified">2020-08-31T17:49:45Z</meta>
+		<dc:rights>The source text and artwork in this ebook edition are believed to be in the U.S. public domain. This ebook edition is released under the terms in the CC0 1.0 Universal Public Domain Dedication, available at https://creativecommons.org/publicdomain/zero/1.0/. For full license information see the Uncopyright file included at the end of this ebook.</dc:rights>
+		<meta property="se:built-with">1.5.9</meta>
+		<meta property="se:transform">compatibility</meta>
+		<dc:publisher id="publisher">Standard Ebooks</dc:publisher>
+		<meta property="file-as" refines="#publisher">Standard Ebooks</meta>
+		<meta property="se:url.homepage" refines="#publisher">https://standardebooks.org</meta>
+		<meta property="role" refines="#publisher" scheme="marc:relators">bkd</meta>
+		<meta property="role" refines="#publisher" scheme="marc:relators">mdc</meta>
+		<meta property="role" refines="#publisher" scheme="marc:relators">pbl</meta>
+		<dc:contributor id="type-designer">The League of Moveable Type</dc:contributor>
+		<meta property="file-as" refines="#type-designer">League of Moveable Type, The</meta>
+		<meta property="se:url.homepage" refines="#type-designer">https://www.theleagueofmoveabletype.com</meta>
+		<meta property="role" refines="#type-designer" scheme="marc:relators">tyd</meta>
+		<link href="http://www.idpf.org/epub/a11y/accessibility-20170105.html#wcag-aa" rel="dcterms:conformsTo"/>
+		<meta property="a11y:certifiedBy">Standard Ebooks</meta>
+		<meta property="schema:accessMode">textual</meta>
+		<meta property="schema:accessModeSufficient">textual</meta>
+		<meta property="schema:accessibilityFeature">alternativeText</meta>
+		<meta property="schema:accessibilityFeature">longDescription</meta>
+		<meta property="schema:accessibilityFeature">readingOrder</meta>
+		<meta property="schema:accessibilityFeature">structuralNavigation</meta>
+		<meta property="schema:accessibilityFeature">tableOfContents</meta>
+		<meta property="schema:accessibilityHazard">none</meta>
+		<meta property="schema:accessibilitySummary">This publication conforms to WCAG 2.1 Level AA.</meta>
+		<link href="onix.xml" media-type="application/xml" properties="onix" rel="record"/>
+		<dc:title id="title">Narrative of the Life of Frederick Douglass</dc:title>
+		<meta property="file-as" refines="#title">Narrative of the Life of Frederick Douglass</meta>
+		<dc:subject id="subject-1">Douglass, Frederick, 1818-1895</dc:subject>
+		<dc:subject id="subject-2">African American abolitionists -- Biography</dc:subject>
+		<dc:subject id="subject-3">Abolitionists -- United States -- Biography</dc:subject>
+		<dc:subject id="subject-4">Slaves -- United States -- Biography</dc:subject>
+		<meta property="authority" refines="#subject-1">LCSH</meta>
+		<meta property="term" refines="#subject-1">Unknown</meta>
+		<meta property="authority" refines="#subject-2">LCSH</meta>
+		<meta property="term" refines="#subject-2">sh2007100462</meta>
+		<meta property="authority" refines="#subject-3">LCSH</meta>
+		<meta property="term" refines="#subject-3">sh2007100460</meta>
+		<meta property="authority" refines="#subject-4">LCSH</meta>
+		<meta property="term" refines="#subject-4">sh2010113252</meta>
+		<meta property="se:subject">Autobiography</meta>
+		<meta property="se:subject">Nonfiction</meta>
+		<dc:description id="description">Frederick Douglass describes his youth as a slave in Maryland and his desire to be a free man.</dc:description>
+		<meta id="long-description" property="se:long-description" refines="#description">
+			&lt;p&gt;The &lt;i&gt;Narrative of the Life of Frederick Douglass, An American Slave&lt;/i&gt; was written in 1845, seven years after &lt;a href="https://standardebooks.org/ebooks/frederick-douglass"&gt;Douglass&lt;/a&gt; escaped slavery, and is the first of three autobiographies. It covers his life as a slave, enduring the whips of the overseers and the hopelessness of his circumstances, until his escape to the north and arrival at New Bedford, Massachusetts. The brutalities he witnessed and his slowly growing desire for freedom are presented in the vivid language he was already known for in his antislavery oration.&lt;/p&gt;
+			&lt;p&gt;The eloquence of Douglass’s speeches caused some skeptics to doubt his credibility, believing that a former slave with no education could never speak so well. Thus, part of his motivation for writing the book was to dispel this suspicion and to provide a fuller history than was possible in his lectures. The abolitionists William Lloyd Garrison and Wendell Phillips provided introductions vouching for the truth of Douglass’s words.&lt;/p&gt;
+			&lt;p&gt;The book was an immediate best seller. The fame brought danger to Douglass, who sailed for England shortly after the book’s publication to ensure he would not be apprehended as a fugitive slave. He spent two years touring and lecturing in Great Britain and Ireland before returning to America to continue his abolitionist work. English supporters raised funds to purchase his freedom from his former master.&lt;/p&gt;
+			&lt;p&gt;The slave narrative is an autobiographical genre written by escaped slaves concerning their lives in bondage. Slave narratives not only promoted abolitionism by giving first hand evidence of the cruelty and hypocrisy of slaveholders, but also allowed African Americans to express themselves as intelligent, articulate individuals, deserving of respect and freedom. Douglass’s &lt;i&gt;Narrative&lt;/i&gt; is perhaps the most important example of the genre, on the basis of its literary merits and its impact on the abolitionist movement.&lt;/p&gt;
+		</meta>
+		<dc:language>en-US</dc:language>
+		<dc:source>https://www.gutenberg.org/ebooks/23</dc:source>
+		<dc:source>https://catalog.hathitrust.org/Record/009260192</dc:source>
+		<meta property="se:word-count">40593</meta>
+		<meta property="se:reading-ease.flesch">68.3</meta>
+		<meta property="se:url.encyclopedia.wikipedia">https://en.wikipedia.org/wiki/Narrative_of_the_Life_of_Frederick_Douglass</meta>
+		<meta property="se:url.vcs.github">https://github.com/standardebooks/frederick-douglass_narrative-of-the-life-of-frederick-douglass</meta>
+		<dc:creator id="author">Frederick Douglass</dc:creator>
+		<meta property="file-as" refines="#author">Douglass, Frederick</meta>
+		<meta property="se:url.encyclopedia.wikipedia" refines="#author">https://en.wikipedia.org/wiki/Frederick_Douglass</meta>
+		<meta property="se:url.authority.nacoaf" refines="#author">https://id.loc.gov/authorities/names/n80013236</meta>
+		<meta property="role" refines="#author" scheme="marc:relators">aut</meta>
+		<meta property="role" refines="#author" scheme="marc:relators">ann</meta>
+		<dc:contributor id="writer-of-preface">Wm. Lloyd Garrison</dc:contributor>
+		<meta property="file-as" refines="#writer-of-preface">Garrison, William Lloyd</meta>
+		<meta property="se:name.person.full-name" refines="#writer-of-preface">William Lloyd Garrison</meta>
+		<meta property="se:url.encyclopedia.wikipedia" refines="#writer-of-preface">https://en.wikipedia.org/wiki/William_Lloyd_Garrison</meta>
+		<meta property="se:url.authority.nacoaf" refines="#writer-of-preface">http://id.loc.gov/authorities/names/n80045859</meta>
+		<meta property="role" refines="#writer-of-preface" scheme="marc:relators">wpr</meta>
+		<dc:contributor id="writer-of-introduction-letter">Wendell Phillips</dc:contributor>
+		<meta property="file-as" refines="#writer-of-introduction-letter">Phillips, Wendell</meta>
+		<meta property="se:url.encyclopedia.wikipedia" refines="#writer-of-introduction-letter">https://en.wikipedia.org/wiki/Wendell_Phillips</meta>
+		<meta property="se:url.authority.nacoaf" refines="#writer-of-introduction-letter">http://id.loc.gov/authorities/names/n50011116</meta>
+		<meta property="role" refines="#writer-of-introduction-letter" scheme="marc:relators">win</meta>
+		<dc:contributor id="transcriber-1">An Anonymous Volunteer</dc:contributor>
+		<meta property="file-as" refines="#transcriber-1">Anonymous Volunteer, An</meta>
+		<meta property="role" refines="#transcriber-1" scheme="marc:relators">trc</meta>
+		<dc:contributor id="transcriber-2">David Widger</dc:contributor>
+		<meta property="file-as" refines="#transcriber-2">Widger, David</meta>
+		<meta property="role" refines="#transcriber-2" scheme="marc:relators">trc</meta>
+		<dc:contributor id="producer-1">Mike Bennett</dc:contributor>
+		<meta property="file-as" refines="#producer-1">Bennett, Mike</meta>
+		<meta property="se:url.homepage" refines="#producer-1">https://github.com/mgbennet</meta>
+		<meta property="role" refines="#producer-1" scheme="marc:relators">bkp</meta>
+		<meta property="role" refines="#producer-1" scheme="marc:relators">blw</meta>
+		<meta property="role" refines="#producer-1" scheme="marc:relators">cov</meta>
+		<meta property="role" refines="#producer-1" scheme="marc:relators">mrk</meta>
+		<meta property="role" refines="#producer-1" scheme="marc:relators">pfr</meta>
+		<meta property="role" refines="#producer-1" scheme="marc:relators">tyg</meta>
+		<dc:contributor id="producer-2">Vince Rice</dc:contributor>
+		<meta property="file-as" refines="#producer-2">Rice, Vince</meta>
+		<meta property="se:url.homepage" refines="#producer-2">https://www.brokenandsaved.com</meta>
+		<meta property="role" refines="#producer-2" scheme="marc:relators">pfr</meta>
+	</metadata>
+	<manifest>
+		<item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+		<item href="images/logo.png" id="logo.png" media-type="image/png"/>
+		<item href="images/titlepage.png" id="titlepage.png" media-type="image/png"/>
+		<item href="toc.xhtml" id="toc.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+		<item href="css/core.css" id="core.css" media-type="text/css"/>
+		<item href="css/local.css" id="local.css" media-type="text/css"/>
+		<item href="images/cover.jpg" id="cover.jpg" media-type="image/jpeg" properties="cover-image"/>
+		<item href="text/appendix.xhtml" id="appendix.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-1.xhtml" id="chapter-1.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-2.xhtml" id="chapter-2.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-3.xhtml" id="chapter-3.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-4.xhtml" id="chapter-4.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-5.xhtml" id="chapter-5.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-6.xhtml" id="chapter-6.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-7.xhtml" id="chapter-7.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-8.xhtml" id="chapter-8.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-9.xhtml" id="chapter-9.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-10.xhtml" id="chapter-10.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/chapter-11.xhtml" id="chapter-11.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/colophon.xhtml" id="colophon.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/endnotes.xhtml" id="endnotes.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/halftitle.xhtml" id="halftitle.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/imprint.xhtml" id="imprint.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/letter-from-wendell-phillips-esq.xhtml" id="letter-from-wendell-phillips-esq.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/preface.xhtml" id="preface.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/titlepage.xhtml" id="titlepage.xhtml" media-type="application/xhtml+xml"/>
+		<item href="text/uncopyright.xhtml" id="uncopyright.xhtml" media-type="application/xhtml+xml"/>
+	</manifest>
+	<spine toc="ncx">
+		<itemref idref="titlepage.xhtml"/>
+		<itemref idref="imprint.xhtml"/>
+		<itemref idref="preface.xhtml"/>
+		<itemref idref="letter-from-wendell-phillips-esq.xhtml"/>
+		<itemref idref="halftitle.xhtml"/>
+		<itemref idref="chapter-1.xhtml"/>
+		<itemref idref="chapter-2.xhtml"/>
+		<itemref idref="chapter-3.xhtml"/>
+		<itemref idref="chapter-4.xhtml"/>
+		<itemref idref="chapter-5.xhtml"/>
+		<itemref idref="chapter-6.xhtml"/>
+		<itemref idref="chapter-7.xhtml"/>
+		<itemref idref="chapter-8.xhtml"/>
+		<itemref idref="chapter-9.xhtml"/>
+		<itemref idref="chapter-10.xhtml"/>
+		<itemref idref="chapter-11.xhtml"/>
+		<itemref idref="appendix.xhtml"/>
+		<itemref idref="endnotes.xhtml"/>
+		<itemref idref="colophon.xhtml"/>
+		<itemref idref="uncopyright.xhtml"/>
+	</spine>
+	<guide>
+		<reference href="text/titlepage.xhtml" title="Titlepage" type="title-page text"/>
+		<reference href="text/imprint.xhtml" title="Imprint" type="imprint"/>
+		<reference href="text/preface.xhtml" title="Preface" type="preface"/>
+		<reference href="text/letter-from-wendell-phillips-esq.xhtml" title="Letter from Wendell Phillips, Esq." type="z3998:letter"/>
+		<reference href="text/halftitle.xhtml" title="Half Title" type="halftitlepage"/>
+		<reference href="text/chapter-1.xhtml" title="Narrative of the Life of Frederick Douglass" type="bodymatter"/>
+		<reference href="text/appendix.xhtml" title="Appendix" type="appendix"/>
+		<reference href="text/endnotes.xhtml" title="Endnotes" type="footnotes"/>
+		<reference href="text/colophon.xhtml" title="Colophon" type="colophon"/>
+		<reference href="text/uncopyright.xhtml" title="Uncopyright" type="copyright page"/>
+	</guide>
+</package>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+	<head>
+		<meta content="url:https://standardebooks.org/ebooks/frederick-douglass/narrative-of-the-life-of-frederick-douglass" name="dtb:uid"/>
+	</head>
+	<docTitle>
+		<text>Table of Contents</text>
+	</docTitle>
+	<navMap id="navmap">
+		<navPoint id="navpoint-1" playOrder="1">
+			<navLabel>
+				<text>Titlepage</text>
+			</navLabel>
+			<content src="text/titlepage.xhtml"/>
+		</navPoint>
+		<navPoint id="navpoint-2" playOrder="2">
+			<navLabel>
+				<text>Imprint</text>
+			</navLabel>
+			<content src="text/imprint.xhtml"/>
+		</navPoint>
+		<navPoint id="navpoint-3" playOrder="3">
+			<navLabel>
+				<text>Preface</text>
+			</navLabel>
+			<content src="text/preface.xhtml"/>
+		</navPoint>
+		<navPoint id="navpoint-4" playOrder="4">
+			<navLabel>
+				<text>Letter from Wendell Phillips, Esq.</text>
+			</navLabel>
+			<content src="text/letter-from-wendell-phillips-esq.xhtml"/>
+		</navPoint>
+		<navPoint id="navpoint-5" playOrder="5">
+			<navLabel>
+				<text>Narrative of the Life of Frederick Douglass, an American Slave</text>
+			</navLabel>
+			<content src="text/halftitle.xhtml"/>
+			<navPoint id="navpoint-6" playOrder="6">
+				<navLabel>
+					<text>I</text>
+				</navLabel>
+				<content src="text/chapter-1.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-7" playOrder="7">
+				<navLabel>
+					<text>II</text>
+				</navLabel>
+				<content src="text/chapter-2.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-8" playOrder="8">
+				<navLabel>
+					<text>III</text>
+				</navLabel>
+				<content src="text/chapter-3.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-9" playOrder="9">
+				<navLabel>
+					<text>IV</text>
+				</navLabel>
+				<content src="text/chapter-4.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-10" playOrder="10">
+				<navLabel>
+					<text>V</text>
+				</navLabel>
+				<content src="text/chapter-5.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-11" playOrder="11">
+				<navLabel>
+					<text>VI</text>
+				</navLabel>
+				<content src="text/chapter-6.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-12" playOrder="12">
+				<navLabel>
+					<text>VII</text>
+				</navLabel>
+				<content src="text/chapter-7.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-13" playOrder="13">
+				<navLabel>
+					<text>VIII</text>
+				</navLabel>
+				<content src="text/chapter-8.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-14" playOrder="14">
+				<navLabel>
+					<text>IX</text>
+				</navLabel>
+				<content src="text/chapter-9.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-15" playOrder="15">
+				<navLabel>
+					<text>X</text>
+				</navLabel>
+				<content src="text/chapter-10.xhtml"/>
+			</navPoint>
+			<navPoint id="navpoint-16" playOrder="16">
+				<navLabel>
+					<text>XI</text>
+				</navLabel>
+				<content src="text/chapter-11.xhtml"/>
+			</navPoint>
+		</navPoint>
+		<navPoint id="navpoint-17" playOrder="17">
+			<navLabel>
+				<text>Appendix</text>
+			</navLabel>
+			<content src="text/appendix.xhtml"/>
+		</navPoint>
+		<navPoint id="navpoint-18" playOrder="18">
+			<navLabel>
+				<text>Endnotes</text>
+			</navLabel>
+			<content src="text/endnotes.xhtml"/>
+		</navPoint>
+		<navPoint id="navpoint-19" playOrder="19">
+			<navLabel>
+				<text>Colophon</text>
+			</navLabel>
+			<content src="text/colophon.xhtml"/>
+		</navPoint>
+		<navPoint id="navpoint-20" playOrder="20">
+			<navLabel>
+				<text>Uncopyright</text>
+			</navLabel>
+			<content src="text/uncopyright.xhtml"/>
+		</navPoint>
+	</navMap>
+</ncx>

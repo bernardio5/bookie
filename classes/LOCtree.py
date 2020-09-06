@@ -21,6 +21,7 @@ class LOCtree:
         self.thePaths = paths()
         self.singles = []
         file = open(self.thePaths.dataDir + "LOCfams.txt", "r") 
+        # make all singles and all doubles not in e or f
         lines = file.readlines() 
         for ln in lines:
             if ln[1] == ' ':

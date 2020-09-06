@@ -40,7 +40,7 @@ class authorSet:
         for a in self.auths[fc]:
             if a.matches(aut):
                 a.workIds.append(gid)
-                print('adding to', a.name)
+                # print('adding to', a.name)
                 return
         newAut = aut.duplicate()
         newAut.workIds = [gid]
@@ -52,7 +52,7 @@ class authorSet:
                 self.auths[fc].insert(i, newAut)
                 return
         self.auths[fc].append(newAut)
-        print('added new author', newAut.name)
+        # print('added new author', newAut.name)
 
     def makeHTMLs(self, aTitleSet):
         pt = self.thePaths.htmlDir + "authors\\"
