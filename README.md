@@ -20,7 +20,7 @@ There are non-book things in the PG archive; these scripts ignore them.
 
 <b>About the ePub format, and the version these scripts make: </b>
 
-The ePub format is open, but there are many flavors. An ePub file is a zip archive that contains some bibliographic XML files, and an HTML doc tree. If you work with ePub's much at all, you learn a lot right away by just taking a book, renaming it to end with .zip, unzipping it, and examining the parts in a text editor. My goal here is to make ePubs that load on the maximum number of platforms, support search, and are "fairly pretty".
+The ePub format is open, but there are many flavors. An ePub file is a zip archive that contains some bibliographic XML files, and an HTML doc tree. If you work with ePub's much at all, you can learn a lot right away by just taking a book, renaming it to end with .zip, unzipping it, and examining the parts in a text editor. My goal here is to make ePubs that load on the maximum number of platforms, support search, and are "fairly pretty".
 
 ePub's are compressed, so an ePub containing text and some images is generally 30%-50% smaller than a simple ASCII text file containing only the text. 
 
@@ -52,15 +52,19 @@ Which, of course, is super ugly-- but I love ugly old books, obviously. I'm tryi
 
 I have not taken on page-formatting in book texts. Most readers do an OK job if you just give them plain text with maybe paragraph markers. Most readers let users set the font and margins, so, usually, HTML/CSS page formatting is something to avoid. Attempts to embed images usually just make a mess. I intend to look into this more; it seems like low-hanging fruit. Some widely-implemented subset of CSS? 
 
+I'm experimenting with just embedding the text files, and avaiding HTML tags as much as possible. Line endings are interfering with page flow, but at least the text is visible and has minimal formatting garbage (that your TTS reader will read aloud).
+
 <b>About Organizing your University-Scale Library: </b>
 
 If you have 50 books, or 500, you can organize them informally, but 50k is another matter-- it's a library so big that you'll never know what's in it. For comparison, public school libraries in the US usually have around 12,000 books. A university library will have 100,000, and will employ dozens of people to maintain itself. The PG books are organized by a number that is basically the order in which they were added, which is fine for automated traversal, but not a good library experience. PG maintains a set of XML bibliographic records, but still: this is a big job. Librarians get advanced degrees about sorting this many books. 
 
-The Calibre program has excellent search and organization, and automated scanning and integration of new documents, but loading 50k books into it takes a few days, and starting it with the loaded database is not a good experience. 
+Kiwix and Calibre are two desktop programs that handle this very dataset well enough. I'm not breaking new ground with work here on organizing books. Project Gutenberg has a web site, after all. 
 
-I've written code that uses the GB books and metadata to make an HTML tree that links authors, books, titles, and subjects. The Library of Congress LCC/LCSH data in the GB metadata is the basis of the subject organization, and then, well, authors and titles. The goal here is a directory that you can drop onto a home server, that is just HTML, no javascript, no PHP, no database, just HTML: got that. I need to make the pages a little prettier. 
+But: I want the data to be easier to share. The "libraryMaker.py" file in this repo makes plain-HTML pages for each book, topic, and author in the library, giving you an index.html at the head of an HTML document tree that lets you search by author, title, or subject just by following links. No database, no PHP, just drop the directory set wherever you like and you own the books and can search them. 
 
-I'd also like to cull the books some. I don't care about the periodicals, the children's lit, the sermons, the defenses of slavery, etc. 
+libraryMaker skips everything that's not text, documents marked "juvenile" or "periodical", and books larger than 3MB; these are just my personal preferences. The resulting directory tree is 14.5GB. I now have the entire tree on a Raspberry Pi, which serves a 34,000-book searchable library through NGINX. Not perfect, but not bad. 
+
+Better topic searching is for sure possible: word clouds, full-text searches, NLP.
 
 <b>About the racism</b>
 
@@ -70,10 +74,10 @@ Also, there are many books with serious content (for instance, slave narratives)
 
 <b>Project organization</b>
 There are folders: 
-1) classes: Python base classes: author, book, a directory scanner, code that parses the GB XML records, code that makes ePubs.
+1) classes: Python base classes: author, book, a directory scanner, code that parses the GB XML records, code that makes ePubs, classes that support LOC classifications. 
 2) clipart: One of the scripts crawls the GB book data and copies image files out to a "clipart" directory. This is a sample, so you don't have to run that script before making books. All the images are from PG, and in the public domain. 
-3) covers: Black-and-white images of old book covers, ready to be tinted and pasted on by the cover-generator
-4) data: templates and other data files; the Library of Congress classifications, to be used when I start making my library interface
+3) covers: Black-and-white images of old book covers, ready to be tinted and pasted on by the cover-generator, again from PG itself
+4) data: templates and other data files; the Library of Congress classifications
 5) formats: text files with samples of the different XML formats, along with text about my guesses about what they mean/do/get used for
 6) getData: instructions and helper files for retreiving PG data sets
 7) scratch: the directory in which the epubs are assembled. As checked in, it contains the parts of the last book I made.
