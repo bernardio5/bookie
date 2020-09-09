@@ -20,7 +20,9 @@ There are non-book things in the PG archive; these scripts ignore them.
 
 <b>About the ePub format, and the version these scripts make: </b>
 
-The ePub format is open, but there are many flavors. An ePub file is a zip archive that contains some bibliographic XML files, and an HTML doc tree. If you work with ePub's much at all, one of the most helpful operations is just unzipping it, and examining the parts in a text editor. My goal here is to make ePubs that load on the maximum number of platforms, support search, and are "fairly pretty".
+The ePub format is open, but there are many flavors. An ePub file is a zip archive that contains some bibliographic XML files, and an HTML doc tree. If you work with ePub's much at all, you learn a lot right away by just taking a book, renaming it to end with .zip, unzipping it, and examining the parts in a text editor. My goal here is to make ePubs that load on the maximum number of platforms, support search, and are "fairly pretty".
+
+ePub's are compressed, so an ePub containing text and some images is generally 30%-50% smaller than a simple ASCII text file containing only the text. 
 
 There are several ePub format checkers, and they're helpful, but they don't solve the problem entirely. My complete list of checkers and target viewing platforms is TBA, but does include:
 
@@ -30,7 +32,7 @@ There are several ePub format checkers, and they're helpful, but they don't solv
 
 -- Calibre is great because you can single-operation add a directory full of ePubs, whereupon it automatically generates a searchable library database from embedded data. It also can act as a web server for your collection, which has excellent support for browsing. CaLibre, as of 2019, does not do a great job of handling book collections the size of PG, but it is excellent software for a lot of reasons. Very good error messages!
 
--- Web browsers are nice because they have debuggers that throw errors that I can get rid of, but the reading experiences they provide are not great. I've tested in Edge, Chrome, Safari, and Firefox. 
+-- Web browsers USED TO BE helpful. In Spring of 2020, all web browsers simultaneously stopped loading epubs. Again, this is very much a decision by the men who control the internet to make data less free. 
 
 -- There are other e-book readers, but I don't own them. 
 
