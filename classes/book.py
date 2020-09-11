@@ -379,7 +379,7 @@ class book:
         anItem = ET.SubElement(manifest, "item")
         anItem.set('id', "coverImg")
         anItem.set('href', "cover.jpg")
-        anItem.set("media-type", "image/jpg")
+        anItem.set("media-type", "image/jpeg")
         anItem = ET.SubElement(manifest, "item")
         anItem.set('id', "css")
         anItem.set('href', "stylesheet.css")
