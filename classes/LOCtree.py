@@ -50,10 +50,10 @@ class LOCtree:
         targ = self.thePaths.htmlDir + "index.html"
         file = open(targ, "w") 
         file.write("<!DOCTYPE html>")
-        file.write("<html>")
+        file.write('<html><head><link rel="stylesheet" href="styles.css"></head>')
         file.write("<body>")
         file.write("<h2>A library of " + bookCt + " volumes:</h2>")
-        file.write("<h3>Subjects</h3><table><tr>")
+        file.write("<h3>Sorted by Subject:</h3><table><tr>")
         ctr = 0
         for sn in self.singles:
             sn.makeHTML()
@@ -62,7 +62,7 @@ class LOCtree:
             if (ctr%3==2):
                 file.write('</tr><tr>')
             ctr =ctr+1
-        file.write("</tr></table><h3>Authors</h3><table><tr>")
+        file.write('</tr></table><h3>by First Letter of Author\'s Surname:</h3><table class="letTab"><tr>')
         ctr = 0
         abc  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         abln = len(abc)
@@ -72,7 +72,7 @@ class LOCtree:
             if (ctr%6==5):
                 file.write('</tr><tr>')
             ctr =ctr+1
-        file.write("</tr></table><h3>Titles</h3><table><tr>")
+        file.write('</tr></table><h3>by First Letter of Title:</h3><table class="letTab"><tr>')
         ctr = 0
         for i in range(0, abln):
             lt = abc[i:i+1]

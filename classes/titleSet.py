@@ -54,7 +54,7 @@ class titleSet:
             pt = thePaths.htmlDir + "\\titles\\" + letter + ".html"
             file = open(pt, "w") 
             file.write("<!DOCTYPE html>")
-            file.write("<html>")
+            file.write('<html><head><link rel="stylesheet" href="../styles.css"></head>')
             file.write("<body>")
             file.write('<h3>Page for ' + letter + ' titles:</h3><table><tr>')
             ctr = 0;
@@ -81,7 +81,7 @@ class titleSet:
                     pt = bk.titlePath  + bk.brutalTitleAB + ".html"
                     file = open(pt, "w") 
                     file.write("<!DOCTYPE html>")
-                    file.write("<html>")
+                    file.write('<html><head><link rel="stylesheet" href="../../styles.css"></head>')
                     file.write("<body>")
                     file.write('<h3>Titles Page for ' + bk.brutalTitleAB + ':</h3>')
                 file.write('<a href="../../' + bk.htmlRelativePath + '">' + bk.title + '</a><br/>' )

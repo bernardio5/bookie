@@ -70,9 +70,9 @@ class LOCsingle:
     def makeHTML(self):
         file = open(self.path, "w") 
         file.write("<!DOCTYPE html>")
-        file.write("<html>")
+        file.write('<html><head><link rel="stylesheet" href="../styles.css"></head>')
         file.write("<body>")
-        file.write('<h3>' + self.mark + ':' + self.description + '</h3>')
+        file.write('<h3>Topic Set ' + self.mark + ':' + self.description + '</h3>')
         file.write('<table>')
         file.write('<tr><td>Topic ID</td><td>Description</td><td># Books</td></tr>')
         for sn in self.doubles:

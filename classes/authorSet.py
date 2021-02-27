@@ -65,7 +65,7 @@ class authorSet:
             pt = self.thePaths.htmlDir + "\\authors\\" + letter + ".html"
             file = open(pt, "w") 
             file.write("<!DOCTYPE html>")
-            file.write("<html>")
+            file.write('<html><head><link rel="stylesheet" href="../styles.css"></head>')
             file.write("<body>")
             file.write('<h3>Page for ' + letter + ' authors</h3>')
             file.write('<h4>Authors:</h4>')
@@ -82,7 +82,7 @@ class authorSet:
                 htpt = at.htmlPath()
                 file = open(htpt, "w") 
                 file.write("<!DOCTYPE html>")
-                file.write("<html>")
+                file.write('<html><head><link rel="stylesheet" href="../../styles.css"></head>')
                 file.write("<body>")
                 file.write('<h3>Author Page for ' + at.name + '</h3>')
                 file.write('<h4>' + at.birth + "-" + at.death + '</h4>')

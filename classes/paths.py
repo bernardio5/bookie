@@ -27,7 +27,7 @@ class paths:
         self.recordsDir = "D:\\library\\gutenbergRecs\\cache\\epub\\"
 
         # root dir of all of the Gutenberg content. It's big! Had to buy a new drive. 
-        self.contentDir = "E:\\gbg\\"
+        self.contentDir = "F:\\gbg\\"
 
         # "new CaLibre" dir, where we store all the newly-made epubs
         # one subdirectory for each unique author or translator

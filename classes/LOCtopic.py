@@ -99,10 +99,9 @@ class LOCtopic:
         htpt = self.dirPath + self.link
         file = open(htpt, "w") 
         file.write("<!DOCTYPE html>")
-        file.write("<html>")
-        file.write("<body>")
+        file.write('<html><link rel="stylesheet" href="../../styles.css"><body>')
         file.write('<h3> Topic page for:' + self.description + '</h3>')
-        file.write('<h4><a href="../' + self.doubleMark + '.html">Up to classification ' + self.doubleMark + '</h3>')
+        file.write('<h4><a href="../' + self.doubleMark + '.html">Up to classification ' + self.doubleMark + '</a></h3>')
         file.write('<h4>' + str(len(self.books)) + ' Book(s):</h4>')
         for bk in self.books:
             file.write('<a href="../../' + bk.htmlRelativePath + '">')

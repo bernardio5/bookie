@@ -9,7 +9,8 @@ import random
 import sys
 
 from classes.paths import paths
-from classes.book import book
+# from classes.book import book
+from classes.ttyBook import ttyBook
 from classes.miniBook import miniBook
 from classes.titleSet import titleSet
 from classes.authorSet import authorSet
@@ -32,15 +33,16 @@ class library:
         nco = len(self.covers)
         ncl = len(self.clips)
         notDone = True
-        ctr = 1
+        ctr = 1 # skip the first 2000; older scans=>low-quality? 
         self.scanner.skipTo(ctr)
         while notDone:
             ctr = ctr +1
-            #if (ctr>2000): # comment out to do all books
+            # if (ctr>1200): # comment out to do all books, ~61k
             #    notDone = False
             pt = self.scanner.getNextPath()
             if (len(pt)>0 and not (".delete" in pt)):
-                fullbook = book()
+                # fullbook = book()
+                fullbook = ttyBook()
                 fullbook.readGbXML(self.scanner.gbID, pt)
                 if (fullbook.gutenId=="9998"): 
                     notDone = False
@@ -53,9 +55,10 @@ class library:
                             print("topic: " + t)
                         coverImg = self.covers[ctr%nco]
                         clipImg = self.clips[(ctr+500)%ncl]
-                        # if (fullbook.checkEpub()==1):
-                        if (fullbook.makeEpub(coverImg, clipImg)==1):
-                            minibook.arrangeBigBook(fullbook)
+                        # if (fullbook.makeEpub(coverImg, clipImg)==1):
+                        if (fullbook.makeTxt(coverImg, clipImg)==1):
+                            # minibook.arrangeBigBook(fullbook)
+                            minibook.arrangeTTYBook(fullbook)
                             self.bookList.add(minibook)
                             self.theTree.addBook(minibook)
                             for aut in fullbook.auths:

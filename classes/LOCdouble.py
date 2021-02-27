@@ -106,8 +106,7 @@ class LOCdouble:
         if not os.path.exists(self.subDir):
             os.makedirs(self.subDir)
         file.write("<!DOCTYPE html>")
-        file.write("<html>")
-        file.write('<link rel="stylesheet" href="styles.css">')
+        file.write('<html><head><link rel="stylesheet" href="../styles.css"></head>')
         file.write("<body>")
 
         file.write('<h3>' + self.mark + ':' + self.description + '</h3>')
